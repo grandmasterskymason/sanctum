@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --danger: #c0392b;
+            --success: #27ae60;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100vh; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            height: 50px;
+            opacity: 0.9;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245, 245, 245, 0.5);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .page-subtitle {
+            color: rgba(245, 245, 245, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: transparent;
+            border: 1px solid transparent;
+            color: rgba(245, 245, 245, 0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .tab:hover {
+            color: var(--gold);
+        }
+
+        .tab.active {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: rgba(201, 162, 39, 0.3);
+            color: var(--gold);
+        }
+
+        .tab-count {
+            background: rgba(201, 162, 39, 0.2);
+            color: var(--gold);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            margin-left: 0.5rem;
+        }
+
+        .application-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .application-card {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .application-header:hover {
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .applicant-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .applicant-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: #f5f5f5;
+        }
+
+        .applicant-meta {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .application-status {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2px;
+        }
+
+        .status-pending {
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .status-approved {
+            background: rgba(39, 174, 96, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .status-rejected {
+            background: rgba(192, 57, 43, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(192, 57, 43, 0.3);
+        }
+
+        .application-details {
+            display: none;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .application-details.expanded {
+            display: block;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .detail-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        .detail-value {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.9);
+        }
+
+        .detail-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .detail-text {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.8);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-approve {
+            background: rgba(39, 174, 96, 0.15);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .btn-approve:hover {
+            background: rgba(39, 174, 96, 0.25);
+            box-shadow: 0 0 20px rgba(39, 174, 96, 0.2);
+        }
+
+        .btn-reject {
+            background: rgba(192, 57, 43, 0.15);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .btn-reject:hover {
+            background: rgba(192, 57, 43, 0.25);
+            box-shadow: 0 0 20px rgba(192, 57, 43, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+        }
+
+        .loading {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .expand-icon {
+            font-size: 1.2rem;
+            color: var(--gold-dim);
+            transition: transform 0.2s ease;
+        }
+
+        .application-header.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .tabs {
+                flex-wrap: wrap;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="/"><img src="/assets/logo.jpg" alt="Skymasons" class="logo"></a>
+            <span class="header-title">Applications</span>
+        </div>
+        <nav class="nav-links">
+            <a href="/" class="nav-link">Dashboard</a>
+            <a href="/settings" class="nav-link">Settings</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Membership Applications</h1>
+        <p class="page-subtitle">Review and approve applications from prospective members.</p>
+
+        <div class="tabs">
+            <button class="tab active" data-status="pending">
+                Pending<span class="tab-count" id="pending-count">0</span>
+            </button>
+            <button class="tab" data-status="approved">
+                Approved<span class="tab-count" id="approved-count">0</span>
+            </button>
+            <button class="tab" data-status="rejected">
+                Rejected<span class="tab-count" id="rejected-count">0</span>
+            </button>
+            <button class="tab" data-status="all">
+                All
+            </button>
+        </div>
+
+        <div id="loading" class="loading-container">
+            <div class="loading"></div>
+            <p>Loading applications...</p>
+        </div>
+
+        <div id="empty-state" class="empty-state hidden">
+            <div class="empty-icon">📋</div>
+            <p>No applications found.</p>
+        </div>
+
+        <div id="application-list" class="application-list hidden"></div>
+    </div>
+
+    <script>
+        let applications = [];
+        let currentFilter = 'pending';
+
+        // Elements
+        const loadingEl = document.getElementById('loading');
+        const emptyEl = document.getElementById('empty-state');
+        const listEl = document.getElementById('application-list');
+        const tabs = document.querySelectorAll('.tab');
+
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.status;
+                renderApplications();
+            });
+        });
+
+        // Fetch applications
+        async function fetchApplications() {
+            try {
+                const response = await fetch('/api/applications', { credentials: 'include' });
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = '/login?next=/applications';
+                        return;
+                    }
+                    throw new Error('Failed to fetch applications');
+                }
+                const data = await response.json();
+                applications = data.applications || [];
+                updateCounts();
+                renderApplications();
+            } catch (err) {
+                console.error('Error fetching applications:', err);
+                loadingEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                emptyEl.innerHTML = '<div class="empty-icon">⚠</div><p>Failed to load applications.</p>';
+            }
+        }
+
+        // Update tab counts
+        function updateCounts() {
+            const pending = applications.filter(a => a.status === 'pending').length;
+            const approved = applications.filter(a => a.status === 'approved').length;
+            const rejected = applications.filter(a => a.status === 'rejected').length;
+
+            document.getElementById('pending-count').textContent = pending;
+            document.getElementById('approved-count').textContent = approved;
+            document.getElementById('rejected-count').textContent = rejected;
+        }
+
+        // Render applications
+        function renderApplications() {
+            loadingEl.classList.add('hidden');
+
+            let filtered = applications;
+            if (currentFilter !== 'all') {
+                filtered = applications.filter(a => a.status === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                listEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+            listEl.classList.remove('hidden');
+            listEl.innerHTML = filtered.map(app => renderApplicationCard(app)).join('');
+
+            // Add click handlers for expansion
+            listEl.querySelectorAll('.application-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const card = header.parentElement;
+                    const details = card.querySelector('.application-details');
+                    header.classList.toggle('expanded');
+                    details.classList.toggle('expanded');
+                });
+            });
+
+            // Add action handlers
+            listEl.querySelectorAll('.btn-approve').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    approveApplication(btn.dataset.id);
+                });
+            });
+
+            listEl.querySelectorAll('.btn-reject').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    rejectApplication(btn.dataset.id);
+                });
+            });
+        }
+
+        // Render single application card
+        function renderApplicationCard(app) {
+            const data = app.data || {};
+            const name = data.name || {};
+            const address = data.address || {};
+            const fullName = [name.first, name.middle, name.last].filter(Boolean).join(' ');
+            const submittedDate = new Date(app.submitted_at).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric'
+            });
+
+            const statusClass = `status-${app.status}`;
+            const statusText = app.status.charAt(0).toUpperCase() + app.status.slice(1);
+
+            const isPending = app.status === 'pending';
+
+            return `
+                <div class="application-card" data-id="${app.id}">
+                    <div class="application-header">
+                        <div class="applicant-info">
+                            <div class="applicant-name">${escapeHtml(fullName)}</div>
+                            <div class="applicant-meta">
+                                Invited by ${escapeHtml(app.invited_by || 'Unknown')} · Applied ${submittedDate}
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span class="application-status ${statusClass}">${statusText}</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                    </div>
+                    <div class="application-details">
+                        <div class="detail-section">
+                            <h3 class="detail-section-title">Personal Information</h3>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Full Name</span>
+                                    <span class="detail-value">${escapeHtml(fullName)}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Birth Date</span>
+                                    <span class="detail-value">${escapeHtml(data.birth_date || 'N/A')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value">${escapeHtml(data.email || 'N/A')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Phone (Signal)</span>
+                                    <span class="detail-value">${escapeHtml(data.phone || 'N/A')}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3 class="detail-section-title">Address</h3>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Street</span>
+                                    <span class="detail-value">${escapeHtml(address.street || 'N/A')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">City</span>
+                                    <span class="detail-value">${escapeHtml(address.city || 'N/A')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">State/Province</span>
+                                    <span class="detail-value">${escapeHtml(address.state || 'N/A')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Postal Code</span>
+                                    <span class="detail-value">${escapeHtml(address.zip || 'N/A')}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <h3 class="detail-section-title">Contribution</h3>
+                            <div class="detail-item">
+                                <span class="detail-label">Financial Contribution</span>
+                                <span class="detail-value">${formatContribution(data.contribution)}</span>
+                            </div>
+                        </div>
+
+                        ${data.dietary || data.focus || data.roles || data.health ? `
+                        <div class="detail-section">
+                            <h3 class="detail-section-title">Additional Information</h3>
+                            ${data.dietary ? `
+                            <div class="detail-item" style="margin-bottom: 1rem;">
+                                <span class="detail-label">Dietary Requirements</span>
+                                <p class="detail-text">${escapeHtml(data.dietary)}</p>
+                            </div>
+                            ` : ''}
+                            ${data.focus ? `
+                            <div class="detail-item" style="margin-bottom: 1rem;">
+                                <span class="detail-label">Personal Focus</span>
+                                <p class="detail-text">${escapeHtml(data.focus)}</p>
+                            </div>
+                            ` : ''}
+                            ${data.roles ? `
+                            <div class="detail-item" style="margin-bottom: 1rem;">
+                                <span class="detail-label">Roles & Contributions</span>
+                                <p class="detail-text">${escapeHtml(data.roles)}</p>
+                            </div>
+                            ` : ''}
+                            ${data.health ? `
+                            <div class="detail-item" style="margin-bottom: 1rem;">
+                                <span class="detail-label">Health Considerations</span>
+                                <p class="detail-text">${escapeHtml(data.health)}</p>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+
+                        ${isPending ? `
+                        <div class="action-buttons">
+                            <button class="btn btn-approve" data-id="${app.id}">Approve Application</button>
+                            <button class="btn btn-reject" data-id="${app.id}">Reject Application</button>
+                        </div>
+                        ` : `
+                        <div class="detail-section">
+                            <h3 class="detail-section-title">Decision</h3>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">${app.status === 'approved' ? 'Approved' : 'Rejected'} By</span>
+                                    <span class="detail-value">${escapeHtml(app.approved_by || 'Unknown')}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Date</span>
+                                    <span class="detail-value">${app.approved_at ? new Date(app.approved_at).toLocaleDateString() : 'N/A'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper functions
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatContribution(value) {
+            const map = {
+                'yes': 'Yes, can contribute',
+                'no': 'No, cannot contribute at this time',
+                'financial_assistance': 'May need financial assistance'
+            };
+            return map[value] || value || 'N/A';
+        }
+
+        // Approve application
+        async function approveApplication(id) {
+            if (!confirm('Are you sure you want to approve this application?')) return;
+
+            try {
+                const response = await fetch(`/api/applications/${id}/approve`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Failed to approve');
+                }
+
+                alert('Application approved! The applicant can now complete their registration.');
+                fetchApplications();
+
+            } catch (err) {
+                console.error('Error approving:', err);
+                alert('Failed to approve application: ' + err.message);
+            }
+        }
+
+        // Reject application
+        async function rejectApplication(id) {
+            if (!confirm('Are you sure you want to reject this application? This cannot be undone.')) return;
+
+            try {
+                const response = await fetch(`/api/applications/${id}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Failed to reject');
+                }
+
+                alert('Application rejected.');
+                fetchApplications();
+
+            } catch (err) {
+                console.error('Error rejecting:', err);
+                alert('Failed to reject application: ' + err.message);
+            }
+        }
+
+        // Initialize
+        fetchApplications();
+    </script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step beyond the Threshold — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100vh; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem;
+            gap: 6rem;
+        }
+
+        .logo-section { flex: 0 0 auto; }
+
+        .logo {
+            width: 280px;
+            height: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 60px rgba(201, 162, 39, 0.15));
+            transition: all 0.5s ease;
+        }
+
+        .logo:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 80px rgba(201, 162, 39, 0.25));
+        }
+
+        .login-section { flex: 0 0 auto; text-align: center; }
+
+        .threshold-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            text-shadow: 0 0 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .login-box {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            padding: 2.5rem 3rem;
+            min-width: 320px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(201, 162, 39, 0.05);
+        }
+
+        .field-group { margin-bottom: 1.5rem; text-align: left; }
+
+        .field-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 2px;
+            color: #f5f5f5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .field-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.1);
+        }
+
+        .field-input::placeholder { color: rgba(245, 245, 245, 0.2); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .submit-btn:hover {
+            background: rgba(201, 162, 39, 0.2);
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+        }
+
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .error-message {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 2px;
+            color: #e74c3c;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.visible { display: block; }
+
+        .forgot-link {
+            display: block;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(201, 162, 39, 0.5);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-link:hover { color: var(--gold); }
+
+        .footer-whisper {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .container { flex-direction: column; gap: 3rem; }
+            .logo { width: 180px; }
+            .threshold-text { font-size: 0.9rem; margin-bottom: 2rem; }
+            .login-box { padding: 2rem; min-width: 280px; }
+        }
+
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        .loading.visible { display: inline-block; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .btn-content { display: flex; align-items: center; justify-content: center; }
+
+        .init-loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gold-dim);
+        }
+
+        .init-loading .loading { display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <img src="/assets/logo.jpg" alt="Skymasons" class="logo">
+        </div>
+
+        <div class="login-section">
+            <h1 class="threshold-text">Step beyond the Threshold</h1>
+
+            <div class="login-box" id="init-box">
+                <div class="init-loading">
+                    <span class="loading visible"></span>
+                    <p style="margin-top: 1rem;">Preparing the threshold...</p>
+                </div>
+            </div>
+
+            <form class="login-box" id="login-form" style="display: none;" method="POST" action="">
+                <div class="field-group">
+                    <label class="field-label" for="uid_field">Skymason</label>
+                    <input type="text" id="uid_field" name="uid_field" class="field-input" autocomplete="username" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="password">Key</label>
+                    <input type="password" id="password" name="password" class="field-input" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="btn-content">
+                        <span id="btn-text">Enter</span>
+                        <span class="loading" id="loading"></span>
+                    </span>
+                </button>
+
+                <div class="error-message" id="error-message"></div>
+
+                <a href="https://auth.skymasons.xyz/if/flow/password-recovery/" class="forgot-link">Forgotten your key?</a>
+            </form>
+        </div>
+    </div>
+
+    <p class="footer-whisper">Per aspera ad astra</p>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = urlParams.get('next') || '/';
+
+        const initBox = document.getElementById('init-box');
+        const form = document.getElementById('login-form');
+        const errorDiv = document.getElementById('error-message');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const loading = document.getElementById('loading');
+
+        // Check for error passed back from Authentik
+        if (urlParams.has('error') || window.location.hash.includes('error')) {
+            initBox.style.display = 'none';
+            form.style.display = 'block';
+            errorDiv.textContent = 'Invalid credentials. Please try again.';
+            errorDiv.classList.add('visible');
+        }
+
+        async function initLogin() {
+            try {
+                // Start the outpost flow to get the auth URL
+                const startUrl = '/outpost.goauthentik.io/start?rd=' + encodeURIComponent(window.location.origin + nextUrl);
+                
+                // Fetch with redirect:manual to get the redirect URL
+                const response = await fetch(startUrl, { 
+                    credentials: 'include',
+                    redirect: 'manual'
+                });
+
+                // In redirect:manual mode, we can't read the Location header due to security
+                // But the cookies are set, so let's follow the redirect chain differently
+                
+                // Make a second request that follows redirects
+                const fullResponse = await fetch(startUrl, { 
+                    credentials: 'include',
+                    redirect: 'follow'
+                });
+
+                // The final URL should be the Authentik login page
+                const authUrl = fullResponse.url;
+                console.log('Auth URL:', authUrl);
+
+                if (authUrl && authUrl.includes('auth.skymasons.xyz')) {
+                    // Set form action to the auth URL
+                    form.action = authUrl;
+                    initBox.style.display = 'none';
+                    form.style.display = 'block';
+                } else {
+                    throw new Error('Could not determine auth URL');
+                }
+
+            } catch (error) {
+                console.error('Init error:', error);
+                
+                // Fallback: redirect to outpost directly
+                window.location.href = '/outpost.goauthentik.io/start?rd=' + encodeURIComponent(window.location.origin + nextUrl);
+            }
+        }
+
+        // Handle form submission - show loading and let it submit
+        form.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            btnText.textContent = 'Entering...';
+            loading.classList.add('visible');
+            errorDiv.classList.remove('visible');
+        });
+
+        // Start initialization
+        initLogin();
+    </script>
+</body>
+</html>

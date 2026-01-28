@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --smoke: #1a1a1a;
+            --order-color: #c9a227;
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            background: var(--black-deep);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .header-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .header-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-link:hover .nav-icon { opacity: 1; }
+
+        .main {
+            flex: 1;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            margin-top: 110px; margin-left: auto;
+            width: 100%; margin-right: auto;
+        }
+
+        .apply-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .order-icon {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            color: var(--order-color);
+        }
+
+        .apply-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .apply-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .application-form {
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 4px;
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .agreement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .agreement-item:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .agreement-item.checked {
+            border-color: rgba(39, 174, 96, 0.4);
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .agreement-checkbox {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 2px solid rgba(201, 162, 39, 0.4);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            margin-top: 2px;
+        }
+
+        .agreement-item.checked .agreement-checkbox {
+            background: rgba(39, 174, 96, 0.3);
+            border-color: #27ae60;
+        }
+
+        .agreement-checkbox::after {
+            content: '';
+            display: none;
+        }
+
+        .agreement-item.checked .agreement-checkbox::after {
+            content: '✓';
+            display: block;
+            color: #27ae60;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .agreement-text {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .message-field {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            color: #f5f5f5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        .message-field:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .message-field::placeholder {
+            color: rgba(245, 245, 245, 0.3);
+            font-style: italic;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .btn-cancel {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-submit {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.85rem 2rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--order-color);
+            color: var(--order-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: rgba(201, 162, 39, 0.25);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+        }
+
+        .status-message.success {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            color: #27ae60;
+        }
+
+        .status-message.error {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+
+        .loading-state, .error-state {
+            text-align: center;
+            padding: 4rem;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .footer {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-whisper {
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.15);
+        }
+
+        @media (max-width: 600px) {
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 1.5rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-cancel, .btn-submit {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="/" class="header-logo">
+                <img src="/assets/logo.jpg" alt="Skymasons">
+                <span class="header-title" id="header-title">Apply</span>
+            </a>
+            <div class="header-right">
+                <a href="https://brothers.skymasons.xyz/settings/user" title="Edit Profile">
+                    <img src="https://brothers.skymasons.xyz/avatar/guest/32" alt="Profile" class="user-avatar" id="user-avatar">
+                </a>
+                <a href="https://auth.skymasons.xyz/if/flow/sanctum-logout/" class="header-btn">Depart</a>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <a href="https://sanctum.skymasons.xyz/" class="nav-link active">
+                <span class="nav-icon">&#9678;</span>
+                <span>Sanctum</span>
+            </a>
+            <a href="https://palaver.skymasons.xyz/apps/spreed" class="nav-link">
+                <span class="nav-icon">&#11041;</span>
+                <span>Palaver</span>
+            </a>
+            <a href="https://astrologue.skymasons.xyz/apps/calendar" class="nav-link">
+                <span class="nav-icon">&#10022;</span>
+                <span>Astrologue</span>
+            </a>
+            <a href="https://archives.skymasons.xyz/apps/files" class="nav-link">
+                <span class="nav-icon">&#9671;</span>
+                <span>Archives</span>
+            </a>
+            <a href="https://nexus.skymasons.xyz/apps/contacts" class="nav-link" style="display:none">
+                <span class="nav-icon">&#9672;</span>
+                <span>Nexus</span>
+            </a>
+            <a href="https://brothers.skymasons.xyz/apps/contacts" class="nav-link">
+                <span class="nav-icon">&#9876;</span>
+                <span>Brothers</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div id="loading-state" class="loading-state">
+            <p>Loading...</p>
+        </div>
+
+        <div id="error-state" class="error-state hidden">
+            <p>Order not found</p>
+            <a href="orders.html" class="header-back" style="margin-top: 1rem; display: inline-block;">Browse Orders</a>
+        </div>
+
+        <div id="apply-content" class="hidden">
+            <div class="apply-header">
+                <div class="order-icon" id="order-icon"></div>
+                <h1 class="apply-title">Apply to <span id="order-name"></span></h1>
+                <p class="apply-subtitle">Complete the following to submit your application</p>
+            </div>
+
+            <form class="application-form" id="application-form">
+                <div class="form-section">
+                    <h2 class="section-title">Agreements</h2>
+                    <div id="agreements-container">
+                        <!-- Agreements will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Message to the Order (Optional)</h2>
+                    <textarea class="message-field" id="application-message" placeholder="Share why you wish to join this Order, or any message for its members..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="#" class="btn-cancel" id="cancel-btn">Cancel</a>
+                    <button type="submit" class="btn-submit" id="submit-btn" disabled>Submit Application</button>
+                </div>
+
+                <div class="status-message hidden" id="status-message"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-whisper">Per aspera ad astra</p>
+    </footer>
+
+    <script>
+        let currentUser = null;
+        let currentOrder = null;
+        let agreements = {};
+
+        // Get order ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('id');
+
+        if (!orderId) {
+            showError();
+        }
+
+        // Set up back links
+        // back-link removed - element doesn't exist
+        document.getElementById('cancel-btn').href = `order.html?id=${orderId}`;
+
+        // Fetch user info first
+        fetch('/api/userinfo', { credentials: 'include' })
+            .then(r => r.json())
+            .then(data => {
+                currentUser = {
+                    username: data.username,
+                    name: data.name,
+                    groups: data.groups ? data.groups.split('|') : []
+                };
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById('user-avatar').src = 'https://brothers.skymasons.xyz/avatar/' + encodeURIComponent(data.username) + '/32';
+                }
+                loadOrder();
+            })
+            .catch(() => {
+                loadOrder();
+            });
+
+        function loadOrder() {
+            fetch(`/api/orders/${orderId}`, { credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Not found');
+                    return r.json();
+                })
+                .then(order => {
+                    currentOrder = order;
+                    
+                    // Check if already member or pending (case-insensitive)
+                    const usernameLower = (currentUser?.username || '').toLowerCase();
+                    const isMember = order.members && currentUser && order.members.some(function(m) { return m.toLowerCase() === usernameLower; });
+                    const isPending = order.pending && currentUser && order.pending.some(function(p) { return p.toLowerCase() === usernameLower; });
+                    
+                    if (isMember || isPending) {
+                        // Redirect back to order page
+                        window.location.href = `order.html?id=${orderId}`;
+                        return;
+                    }
+                    
+                    renderApplication(order);
+                })
+                .catch(() => {
+                    showError();
+                });
+        }
+
+        function showError() {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('error-state').classList.remove('hidden');
+        }
+
+        function renderApplication(order) {
+            // Set order color
+            if (order.color) {
+                document.documentElement.style.setProperty('--order-color', order.color);
+            }
+
+            document.getElementById('order-icon').textContent = order.icon || '⬡';
+            document.getElementById('order-name').textContent = order.name;
+            document.title = `Apply to ${order.name} — Skymasons`;
+
+            // Load custom agreements or use defaults
+            const customAgreements = order.applicationForm?.agreements || [];
+            const container = document.getElementById('agreements-container');
+            
+            if (customAgreements.length === 0) {
+                // Use default agreements
+                const defaults = [
+                    { id: 1, text: 'I agree to uphold the values and principles of the Skymasons, conducting myself with integrity and respect toward all members.' },
+                    { id: 2, text: 'I understand that discussions and materials shared within this Order are confidential and shall not be shared outside the brotherhood.' },
+                    { id: 3, text: 'I commit to actively participating in Order activities and contributing to the collective growth of the brotherhood.' }
+                ];
+                defaults.forEach(a => {
+                    agreements['agreement_' + a.id] = false;
+                    container.innerHTML += createAgreementHTML(a);
+                });
+            } else {
+                customAgreements.forEach(a => {
+                    agreements['agreement_' + a.id] = false;
+                    container.innerHTML += createAgreementHTML(a);
+                });
+            }
+
+            // Set up agreement toggles
+            document.querySelectorAll('.agreement-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const key = item.dataset.agreement;
+                    agreements[key] = !agreements[key];
+                    item.classList.toggle('checked', agreements[key]);
+                    updateSubmitButton();
+                });
+            });
+
+            // Show content
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('apply-content').classList.remove('hidden');
+        }
+        
+        function createAgreementHTML(agreement) {
+            return `
+                <div class="agreement-item" data-agreement="agreement_${agreement.id}">
+                    <div class="agreement-checkbox"></div>
+                    <div class="agreement-text">${agreement.text}</div>
+                </div>
+            `;
+        }
+
+        function updateSubmitButton() {
+            const allAgreed = Object.values(agreements).every(v => v);
+            document.getElementById('submit-btn').disabled = !allAgreed;
+        }
+
+        // Handle form submission
+        document.getElementById('application-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const statusMessage = document.getElementById('status-message');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const response = await fetch(`/api/orders/${orderId}/apply`, {
+                    credentials: 'include',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: document.getElementById('application-message').value,
+                        agreements: agreements
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Application failed');
+                }
+                
+                statusMessage.textContent = 'Application submitted successfully! Redirecting...';
+                statusMessage.className = 'status-message success';
+                statusMessage.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+                
+            } catch (err) {
+                statusMessage.textContent = 'Failed to submit application. Please try again.';
+                statusMessage.className = 'status-message error';
+                statusMessage.classList.remove('hidden');
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed an Order — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Samaritan&family=Noto+Sans+Thaana&family=Noto+Sans+Runic&family=Noto+Sans+Symbols+2&family=Noto+Sans+Math&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --smoke: #1a1a1a;
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background: var(--black-deep);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .header-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .header-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-link:hover .nav-icon { opacity: 1; }
+
+/* Main Content */
+        .main {
+            flex: 1;
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 110px; margin-left: auto;
+            width: 100%; margin-right: auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        /* Form */
+        .form {
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 4px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 2px;
+            color: #f5f5f5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-input::placeholder {
+            color: rgba(245, 245, 245, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 0.8rem;
+            color: rgba(245, 245, 245, 0.3);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        /* Emblem Picker */
+        .emblem-picker {
+            position: relative;
+        }
+
+        .emblem-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .emblem-trigger:hover {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .emblem-trigger.active {
+            border-color: var(--gold);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .emblem-trigger-icon {
+            font-family: "Noto Sans Symbols 2", "Noto Sans Math", "Noto Sans Runic", "Noto Sans Samaritan", "Noto Sans Thaana", "Segoe UI Symbol", "Apple Symbols", sans-serif;
+            font-size: 1.5rem;
+            min-width: 2rem;
+            text-align: center;
+        }
+
+        .emblem-trigger-text {
+            flex: 1;
+            font-family: Cormorant Garamond, serif;
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        .emblem-trigger-arrow {
+            color: var(--gold-dim);
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+
+        .emblem-trigger.active .emblem-trigger-arrow {
+            transform: rotate(180deg);
+        }
+
+        .emblem-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--charcoal);
+            border: 1px solid var(--gold);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            max-height: 350px;
+            overflow: hidden;
+        }
+
+        .emblem-dropdown.active {
+            display: block;
+        }
+
+        .emblem-block-select {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            background: var(--black);
+            border: none;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            color: #f5f5f5;
+            font-family: Cormorant Garamond, serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .emblem-block-select:focus {
+            outline: none;
+        }
+
+        .emblem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+            gap: 0.25rem;
+            padding: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            background: var(--black);
+        }
+
+        .emblem-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .emblem-grid::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        .emblem-grid::-webkit-scrollbar-thumb {
+            background: rgba(201, 162, 39, 0.3);
+            border-radius: 3px;
+        }
+
+        .emblem-grid-item {
+            font-family: "Noto Sans Symbols 2", "Noto Sans Math", "Noto Sans Runic", "Noto Sans Samaritan", "Noto Sans Thaana", "Segoe UI Symbol", "Apple Symbols", sans-serif;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: var(--charcoal);
+            border: 1px solid transparent;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .emblem-grid-item:hover {
+            border-color: rgba(201, 162, 39, 0.5);
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .emblem-grid-item.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.2);
+        }
+
+        .emblem-grid-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .emblem-custom-btn {
+            width: 100%;
+            padding: 0.6rem;
+            background: transparent;
+            border: none;
+            border-top: 1px solid rgba(201, 162, 39, 0.2);
+            color: var(--gold-dim);
+            font-family: Cinzel, serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .emblem-custom-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+
+        .emblem-custom-btn.active {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+
+        .emblem-custom-input {
+            display: none;
+            padding: 0.5rem;
+            background: var(--black);
+            border-top: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .emblem-custom-input.active {
+            display: block;
+        }
+
+        .emblem-custom-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .emblem-custom-prefix {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--gold-dim);
+        }
+
+        .emblem-custom-field {
+            flex: 1;
+            padding: 0.5rem 0.6rem;
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 3px;
+            color: #f5f5f5;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .emblem-custom-field:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .emblem-custom-apply {
+            padding: 0.5rem 0.75rem;
+            background: rgba(201, 162, 39, 0.2);
+            border: 1px solid var(--gold);
+            border-radius: 3px;
+            color: var(--gold);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .emblem-custom-apply:hover {
+            background: rgba(201, 162, 39, 0.3);
+        }
+
+        .emblem-custom-error {
+            margin: 0.4rem 0 0 0;
+            font-size: 0.75rem;
+            color: #e74c3c;
+            min-height: 1em;
+        }
+
+
+        
+
+        
+
+
+        /* Color Picker Dropdown */
+/* Color Picker Dropdown */
+        .color-picker-dropdown {
+            position: relative;
+        }
+
+        .color-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .color-trigger:hover {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .color-trigger.active {
+            border-color: var(--gold);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .color-trigger-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .color-trigger-text {
+            flex: 1;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        .color-trigger-arrow {
+            color: var(--gold-dim);
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+
+        .color-trigger.active .color-trigger-arrow {
+            transform: rotate(180deg);
+        }
+
+        .color-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--charcoal);
+            border: 1px solid var(--gold);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            z-index: 100;
+            padding: 0.5rem;
+        }
+
+        .color-dropdown.active {
+            display: block;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.35rem;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .color-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .color-grid::-webkit-scrollbar-track {
+            background: var(--black);
+        }
+
+        .color-grid::-webkit-scrollbar-thumb {
+            background: rgba(201, 162, 39, 0.3);
+            border-radius: 3px;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 2px solid transparent;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            z-index: 1;
+        }
+
+        .color-swatch.selected {
+            border-color: #fff;
+            box-shadow: 0 0 0 1px var(--black), 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Admission Toggle */
+        .admission-toggle {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .admission-option {
+            flex: 1;
+            padding: 1rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .admission-option:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+        }
+
+        .admission-option.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .admission-option input {
+            display: none;
+        }
+
+        .admission-option-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .admission-option-desc {
+            font-size: 0.8rem;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+        }
+
+        /* Toggle Switch */
+        .chat-toggle {
+            margin-bottom: 1rem;
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 44px;
+            height: 24px;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: rgba(201, 162, 39, 0.5);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: rgba(201, 162, 39, 0.2);
+            border-color: var(--gold);
+        }
+
+        .toggle-switch input:checked + .toggle-slider::after {
+            background: var(--gold);
+            left: 22px;
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        .chat-name-wrapper {
+            margin-top: 0.75rem;
+            transition: opacity 0.2s ease, max-height 0.2s ease;
+        }
+
+        .chat-name-wrapper.hidden {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        /* Invite Members */
+        .invite-section {
+            position: relative;
+        }
+
+        .invite-input-wrapper {
+            position: relative;
+        }
+
+        .invite-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .invite-dropdown.active {
+            display: block;
+        }
+
+        .invite-dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background 0.15s ease;
+        }
+
+        .invite-dropdown-item:hover {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .invite-dropdown-item-avatar {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .invite-dropdown-item-name {
+            font-size: 0.9rem;
+            color: #f5f5f5;
+        }
+
+        .invite-dropdown-item-username {
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.4);
+            margin-left: auto;
+        }
+
+        .invite-dropdown-empty {
+            padding: 1rem;
+            text-align: center;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .invited-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .invited-member {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--gold-light);
+        }
+
+        .invited-member-remove {
+            background: none;
+            border: none;
+            color: rgba(245, 245, 245, 0.4);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+            transition: color 0.15s ease;
+        }
+
+        .invited-member-remove:hover {
+            color: #e74c3c;
+        }
+
+        /* Preview */
+        .preview-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .preview-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.5);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .preview-card {
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .preview-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-desc {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+            font-style: italic;
+        }
+
+        /* Submit */
+        .form-actions {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .btn-submit {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 1rem 3rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-submit:hover {
+            background: rgba(201, 162, 39, 0.25);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .form-error {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-whisper {
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.15);
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 1.5rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .form {
+                padding: 1.5rem;
+            }
+
+            .admission-toggle {
+                flex-direction: column;
+            }
+        }
+
+        /* Application Builder */
+        .agreements-builder {
+            margin-bottom: 1rem;
+        }
+
+        .agreement-builder-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .agreement-builder-content {
+            flex: 1;
+        }
+
+        .agreement-builder-content textarea {
+            min-height: 70px;
+            font-size: 0.9rem;
+        }
+
+        .agreement-remove-btn {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: rgba(231, 76, 60, 0.6);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+
+        .agreement-remove-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .add-agreement-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1rem;
+            background: transparent;
+            border: 1px dashed rgba(201, 162, 39, 0.4);
+            color: var(--gold-dim);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        .add-agreement-btn:hover {
+            background: rgba(201, 162, 39, 0.05);
+            border-color: var(--gold);
+            border-style: solid;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="/" class="header-logo">
+                <img src="/assets/logo.jpg" alt="Skymasons">
+                <span class="header-title">Seed an Order</span>
+            </a>
+            <div class="header-right">
+                <a href="https://brothers.skymasons.xyz/settings/user" title="Edit Profile">
+                    <img src="https://brothers.skymasons.xyz/avatar/guest/32" alt="Profile" class="user-avatar" id="user-avatar">
+                </a>
+                <a href="https://auth.skymasons.xyz/if/flow/sanctum-logout/" class="header-btn">Depart</a>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <a href="https://sanctum.skymasons.xyz/" class="nav-link active">
+                <span class="nav-icon">&#9678;</span>
+                <span>Sanctum</span>
+            </a>
+            <a href="https://palaver.skymasons.xyz/apps/spreed" class="nav-link">
+                <span class="nav-icon">&#11041;</span>
+                <span>Palaver</span>
+            </a>
+            <a href="https://astrologue.skymasons.xyz/apps/calendar" class="nav-link">
+                <span class="nav-icon">&#10022;</span>
+                <span>Astrologue</span>
+            </a>
+            <a href="https://archives.skymasons.xyz/apps/files" class="nav-link">
+                <span class="nav-icon">&#9671;</span>
+                <span>Archives</span>
+            </a>
+            <a href="https://nexus.skymasons.xyz/apps/contacts" class="nav-link" style="display:none">
+                <span class="nav-icon">&#9672;</span>
+                <span>Nexus</span>
+            </a>
+            <a href="https://brothers.skymasons.xyz/apps/contacts" class="nav-link">
+                <span class="nav-icon">&#9876;</span>
+                <span>Brothers</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Seed a New Order</h1>
+            <p class="page-subtitle">Create a brotherhood within the Skymasons</p>
+        </div>
+
+        <form class="form" id="create-form">
+            <div class="form-group">
+                <label class="form-label" for="name">Order Name</label>
+                <input type="text" class="form-input" id="name" name="name" placeholder="Order of the..." required maxlength="50">
+                <p class="form-hint">Choose a meaningful name for your Order</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-input form-textarea" id="description" name="description" placeholder="What is the purpose of this Order?" maxlength="2000"></textarea>
+                <p class="form-hint">Describe what this Order stands for</p>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="category">Category</label>
+                <select class="form-input" id="category" name="category" required>
+                    <option value="social" selected>Social</option>
+                    <option value="governance">Governance</option>
+                    <option value="events">Events</option>
+                    <option value="collaboration">Collaboration</option>
+                    <option value="study">Study</option>
+                    <option value="practice">Practice</option>
+                    <option value="service">Service</option>
+                    <option value="creative">Creative</option>
+                    <option value="regional">Regional</option>
+                    <option value="discussion">Discussion</option>
+                </select>
+                <p class="form-hint">What type of Order is this?</p>
+            </div>
+
+                                    <div class="form-group">
+                <label class="form-label">Emblem</label>
+                
+                <div class="emblem-picker" id="emblem-picker">
+                    <!-- Trigger button -->
+                    <button type="button" class="emblem-trigger" id="emblem-trigger">
+                        <span class="emblem-trigger-icon" id="emblem-trigger-icon">⬡</span>
+                        <span class="emblem-trigger-text">Select Emblem</span>
+                        <span class="emblem-trigger-arrow">▾</span>
+                    </button>
+                    
+                    <!-- Dropdown panel -->
+                    <div class="emblem-dropdown" id="emblem-dropdown">
+                        <!-- Block selector -->
+                        <select class="emblem-block-select" id="emblem-block-select">
+                            <option value="0x0370-0x03FF">Greek and Coptic</option>
+                            <option value="0x0780-0x07BF">Thaana</option>
+                            <option value="0x0800-0x083F">Samaritan</option>
+                            <option value="0x16A0-0x16FF">Runic</option>
+                            <option value="0x2000-0x206F">General Punctuation</option>
+                            <option value="0x2200-0x22FF">Mathematical Operators</option>
+                            <option value="0x2300-0x23FF">Miscellaneous Technical</option>
+                            <option value="0x2580-0x259F">Block Elements</option>
+                            <option value="0x25A0-0x25FF" selected>Geometric Shapes</option>
+                            <option value="0x2600-0x26FF">Miscellaneous Symbols</option>
+                            <option value="0x2700-0x27BF">Dingbats</option>
+                            <option value="0x2B00-0x2BFF">Misc. Symbols & Arrows</option>
+                        </select>
+                        
+                        <!-- Character grid -->
+                        <div class="emblem-grid" id="emblem-grid"></div>
+                        
+                        <!-- Custom button -->
+                        <button type="button" class="emblem-custom-btn" id="emblem-custom-btn">Custom Code</button>
+                        
+                        <!-- Custom input (hidden by default) -->
+                        <div class="emblem-custom-input" id="emblem-custom-input">
+                            <div class="emblem-custom-row">
+                                <span class="emblem-custom-prefix">U+</span>
+                                <input type="text" class="emblem-custom-field" id="emblem-custom-field" placeholder="2B21" maxlength="6">
+                                <button type="button" class="emblem-custom-apply" id="emblem-custom-apply">✓</button>
+                            </div>
+                            <p class="emblem-custom-error" id="emblem-custom-error"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hidden input for form submission -->
+                <input type="hidden" name="icon" id="icon-value" value="⬡">
+            </div>
+
+
+                        <div class="form-group">
+                <label class="form-label">Color</label>
+                
+                <div class="color-picker-dropdown" id="color-picker-dropdown">
+                    <!-- Trigger button -->
+                    <button type="button" class="color-trigger" id="color-trigger">
+                        <span class="color-trigger-swatch" id="color-trigger-swatch" style="background: #c9a227;"></span>
+                        <span class="color-trigger-text">Select Color</span>
+                        <span class="color-trigger-arrow">▾</span>
+                    </button>
+                    
+                    <!-- Dropdown panel -->
+                    <div class="color-dropdown" id="color-dropdown">
+                        <div class="color-grid" id="color-grid">
+                            <!-- Golds & Metallics -->
+                            <div class="color-swatch selected" data-color="#c9a227" style="background: #c9a227;" title="Gold"></div>
+                            <div class="color-swatch" data-color="#d4af37" style="background: #d4af37;" title="Metallic Gold"></div>
+                            <div class="color-swatch" data-color="#c0c0c0" style="background: #c0c0c0;" title="Silver"></div>
+                            <div class="color-swatch" data-color="#b8860b" style="background: #b8860b;" title="Dark Gold"></div>
+                            <div class="color-swatch" data-color="#cd7f32" style="background: #cd7f32;" title="Bronze"></div>
+                            <div class="color-swatch" data-color="#b87333" style="background: #b87333;" title="Copper"></div>
+                            
+                            <!-- Reds -->
+                            <div class="color-swatch" data-color="#e74c3c" style="background: #e74c3c;" title="Red"></div>
+                            <div class="color-swatch" data-color="#c0392b" style="background: #c0392b;" title="Dark Red"></div>
+                            <div class="color-swatch" data-color="#a93226" style="background: #a93226;" title="Crimson"></div>
+                            <div class="color-swatch" data-color="#922b21" style="background: #922b21;" title="Maroon"></div>
+                            <div class="color-swatch" data-color="#641e16" style="background: #641e16;" title="Burgundy"></div>
+                            <div class="color-swatch" data-color="#ff6b6b" style="background: #ff6b6b;" title="Coral Red"></div>
+                            
+                            <!-- Oranges -->
+                            <div class="color-swatch" data-color="#e67e22" style="background: #e67e22;" title="Orange"></div>
+                            <div class="color-swatch" data-color="#d35400" style="background: #d35400;" title="Pumpkin"></div>
+                            <div class="color-swatch" data-color="#ca6f1e" style="background: #ca6f1e;" title="Burnt Orange"></div>
+                            <div class="color-swatch" data-color="#af601a" style="background: #af601a;" title="Rust"></div>
+                            <div class="color-swatch" data-color="#f39c12" style="background: #f39c12;" title="Amber"></div>
+                            <div class="color-swatch" data-color="#ff9f43" style="background: #ff9f43;" title="Peach"></div>
+                            
+                            <!-- Yellows -->
+                            <div class="color-swatch" data-color="#f1c40f" style="background: #f1c40f;" title="Yellow"></div>
+                            <div class="color-swatch" data-color="#f4d03f" style="background: #f4d03f;" title="Sunflower"></div>
+                            <div class="color-swatch" data-color="#fad7a0" style="background: #fad7a0;" title="Cream"></div>
+                            <div class="color-swatch" data-color="#f9e79f" style="background: #f9e79f;" title="Pale Yellow"></div>
+                            <div class="color-swatch" data-color="#d4ac0d" style="background: #d4ac0d;" title="Mustard"></div>
+                            <div class="color-swatch" data-color="#b7950b" style="background: #b7950b;" title="Olive Yellow"></div>
+                            
+                            <!-- Greens -->
+                            <div class="color-swatch" data-color="#27ae60" style="background: #27ae60;" title="Green"></div>
+                            <div class="color-swatch" data-color="#2ecc71" style="background: #2ecc71;" title="Emerald"></div>
+                            <div class="color-swatch" data-color="#1e8449" style="background: #1e8449;" title="Forest"></div>
+                            <div class="color-swatch" data-color="#145a32" style="background: #145a32;" title="Dark Green"></div>
+                            <div class="color-swatch" data-color="#58d68d" style="background: #58d68d;" title="Light Green"></div>
+                            <div class="color-swatch" data-color="#82e0aa" style="background: #82e0aa;" title="Mint"></div>
+                            
+                            <!-- Teals & Cyans -->
+                            <div class="color-swatch" data-color="#1abc9c" style="background: #1abc9c;" title="Teal"></div>
+                            <div class="color-swatch" data-color="#16a085" style="background: #16a085;" title="Dark Teal"></div>
+                            <div class="color-swatch" data-color="#48c9b0" style="background: #48c9b0;" title="Turquoise"></div>
+                            <div class="color-swatch" data-color="#76d7c4" style="background: #76d7c4;" title="Aquamarine"></div>
+                            <div class="color-swatch" data-color="#0e6655" style="background: #0e6655;" title="Deep Teal"></div>
+                            <div class="color-swatch" data-color="#00bcd4" style="background: #00bcd4;" title="Cyan"></div>
+                            
+                            <!-- Blues -->
+                            <div class="color-swatch" data-color="#3498db" style="background: #3498db;" title="Blue"></div>
+                            <div class="color-swatch" data-color="#2980b9" style="background: #2980b9;" title="Strong Blue"></div>
+                            <div class="color-swatch" data-color="#1a5276" style="background: #1a5276;" title="Dark Blue"></div>
+                            <div class="color-swatch" data-color="#154360" style="background: #154360;" title="Navy"></div>
+                            <div class="color-swatch" data-color="#5dade2" style="background: #5dade2;" title="Sky Blue"></div>
+                            <div class="color-swatch" data-color="#85c1e9" style="background: #85c1e9;" title="Light Blue"></div>
+                            
+                            <!-- Purples -->
+                            <div class="color-swatch" data-color="#9b59b6" style="background: #9b59b6;" title="Purple"></div>
+                            <div class="color-swatch" data-color="#8e44ad" style="background: #8e44ad;" title="Violet"></div>
+                            <div class="color-swatch" data-color="#6c3483" style="background: #6c3483;" title="Dark Purple"></div>
+                            <div class="color-swatch" data-color="#4a235a" style="background: #4a235a;" title="Deep Purple"></div>
+                            <div class="color-swatch" data-color="#bb8fce" style="background: #bb8fce;" title="Lavender"></div>
+                            <div class="color-swatch" data-color="#d7bde2" style="background: #d7bde2;" title="Light Purple"></div>
+                            
+                            <!-- Pinks -->
+                            <div class="color-swatch" data-color="#e91e63" style="background: #e91e63;" title="Pink"></div>
+                            <div class="color-swatch" data-color="#c2185b" style="background: #c2185b;" title="Deep Pink"></div>
+                            <div class="color-swatch" data-color="#ad1457" style="background: #ad1457;" title="Magenta"></div>
+                            <div class="color-swatch" data-color="#880e4f" style="background: #880e4f;" title="Dark Magenta"></div>
+                            <div class="color-swatch" data-color="#f48fb1" style="background: #f48fb1;" title="Light Pink"></div>
+                            <div class="color-swatch" data-color="#f8bbd9" style="background: #f8bbd9;" title="Pale Pink"></div>
+                            
+                            <!-- Grays & Neutrals -->
+                            <div class="color-swatch" data-color="#607d8b" style="background: #607d8b;" title="Blue Gray"></div>
+                            <div class="color-swatch" data-color="#455a64" style="background: #455a64;" title="Dark Gray"></div>
+                            <div class="color-swatch" data-color="#37474f" style="background: #37474f;" title="Charcoal"></div>
+                            <div class="color-swatch" data-color="#263238" style="background: #263238;" title="Dark Slate"></div>
+                            <div class="color-swatch" data-color="#90a4ae" style="background: #90a4ae;" title="Light Gray"></div>
+                            <div class="color-swatch" data-color="#b0bec5" style="background: #b0bec5;" title="Silver Gray"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hidden input for form submission -->
+                <input type="hidden" name="color" id="color-value" value="#c9a227">
+            </div>
+
+
+            <div class="form-group">
+                <label class="form-label">Admission</label>
+                <div class="admission-toggle">
+                    <label class="admission-option selected">
+                        <input type="radio" name="admission" value="open" checked>
+                        <div class="admission-option-title">Open</div>
+                        <div class="admission-option-desc">Anyone can join freely</div>
+                    </label>
+                    <label class="admission-option">
+                        <input type="radio" name="admission" value="closed">
+                        <div class="admission-option-title">Closed</div>
+                        <div class="admission-option-desc">Requires your approval</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Chat Room</label>
+                <div class="chat-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" name="createChat" id="create-chat" checked>
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Create a chat room for this Order</span>
+                    </label>
+                </div>
+                <div class="chat-name-wrapper" id="chat-name-wrapper">
+                    <input type="text" class="form-input" id="chat-name" name="chatName" placeholder="Chat room name (defaults to Order name)">
+                    <p class="form-hint">Leave blank to use the Order name</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Invite Members</label>
+                <div class="invite-section">
+                    <div class="invite-input-wrapper">
+                        <input type="text" class="form-input" id="invite-search" placeholder="Search by username...">
+                        <div class="invite-dropdown" id="invite-dropdown"></div>
+                    </div>
+                    <div class="invited-members" id="invited-members"></div>
+                    <p class="form-hint">Invite members to join when the Order is created</p>
+                </div>
+            </div>
+
+                        <div class="form-group" id="application-section">
+                <label class="form-label">Application Form</label>
+                <p class="form-hint" style="margin-bottom: 1rem;">Customize the agreements applicants must accept</p>
+                
+                <div class="agreements-builder" id="agreements-builder">
+                    <div class="agreement-builder-item" data-id="1">
+                        <div class="agreement-builder-content">
+                            <textarea class="form-input agreement-text" placeholder="Agreement text...">I agree to uphold the values and principles of the Skymasons, conducting myself with integrity and respect toward all members.</textarea>
+                        </div>
+                        <button type="button" class="agreement-remove-btn" onclick="removeAgreement(this)">&times;</button>
+                    </div>
+                    <div class="agreement-builder-item" data-id="2">
+                        <div class="agreement-builder-content">
+                            <textarea class="form-input agreement-text" placeholder="Agreement text...">I understand that discussions and materials shared within this Order are confidential and shall not be shared outside the brotherhood.</textarea>
+                        </div>
+                        <button type="button" class="agreement-remove-btn" onclick="removeAgreement(this)">&times;</button>
+                    </div>
+                    <div class="agreement-builder-item" data-id="3">
+                        <div class="agreement-builder-content">
+                            <textarea class="form-input agreement-text" placeholder="Agreement text...">I commit to actively participating in Order activities and contributing to the collective growth of the brotherhood.</textarea>
+                        </div>
+                        <button type="button" class="agreement-remove-btn" onclick="removeAgreement(this)">&times;</button>
+                    </div>
+                </div>
+                
+                <button type="button" class="add-agreement-btn" id="add-agreement-btn">+ Add Agreement</button>
+            </div>
+
+            <div class="preview-section">
+                <h3 class="preview-title">Preview</h3>
+                <div class="preview-card" id="preview-card">
+                    <div class="preview-icon" id="preview-icon" style="color: #c9a227;">⬡</div>
+                    <div class="preview-name" id="preview-name" style="color: #c9a227;">Order Name</div>
+                    <div class="preview-desc" id="preview-desc">Your order description will appear here</div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit" id="submit-btn">Seed Order</button>
+                <p class="form-error" id="form-error" style="display: none;"></p>
+            </div>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-whisper">Per aspera ad astra</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('create-form');
+        const nameInput = document.getElementById('name');
+        const descInput = document.getElementById('description');
+        const previewIcon = document.getElementById('preview-icon');
+        const previewName = document.getElementById('preview-name');
+        const previewDesc = document.getElementById('preview-desc');
+        const previewCard = document.getElementById('preview-card');
+        const formError = document.getElementById('form-error');
+        const submitBtn = document.getElementById('submit-btn');
+
+        let currentUser = null;
+
+
+        // Agreement Builder
+        let agreementCounter = 3;
+        
+        document.getElementById('add-agreement-btn').addEventListener('click', function() {
+            agreementCounter++;
+            const builder = document.getElementById('agreements-builder');
+            const item = document.createElement('div');
+            item.className = 'agreement-builder-item';
+            item.dataset.id = agreementCounter;
+            item.innerHTML = `
+                <div class="agreement-builder-content">
+                    <textarea class="form-input agreement-text" placeholder="Agreement text..."></textarea>
+                </div>
+                <button type="button" class="agreement-remove-btn" onclick="removeAgreement(this)">&times;</button>
+            `;
+            builder.appendChild(item);
+        });
+        
+        function removeAgreement(btn) {
+            const items = document.querySelectorAll('.agreement-builder-item');
+            if (items.length > 1) {
+                btn.closest('.agreement-builder-item').remove();
+            }
+        }
+        
+        function getAgreements() {
+            const agreements = [];
+            document.querySelectorAll('.agreement-builder-item').forEach((item, index) => {
+                const text = item.querySelector('.agreement-text').value.trim();
+                if (text) {
+                    agreements.push({
+                        id: index + 1,
+                        text: text
+                    });
+                }
+            });
+            return agreements;
+        }
+
+        // Fetch user info
+        fetch('/api/userinfo', { credentials: 'include' })
+            .then(r => r.json())
+            .then(data => {
+                currentUser = {
+                    username: data.username,
+                    name: data.name
+                };
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById('user-avatar').src = 'https://brothers.skymasons.xyz/avatar/' + encodeURIComponent(data.username) + '/32';
+                }
+            })
+            .catch(() => {});
+
+        // Emblem Picker
+        const unicodeBlocks = {
+            "0x0370-0x03FF": { name: "Greek and Coptic", start: 0x0370, end: 0x03FF },
+            "0x0780-0x07BF": { name: "Thaana", start: 0x0780, end: 0x07BF },
+            "0x0800-0x083F": { name: "Samaritan", start: 0x0800, end: 0x083F },
+            "0x16A0-0x16FF": { name: "Runic", start: 0x16A0, end: 0x16FF },
+            "0x2000-0x206F": { name: "General Punctuation", start: 0x2000, end: 0x206F },
+            "0x2200-0x22FF": { name: "Mathematical Operators", start: 0x2200, end: 0x22FF },
+            "0x2300-0x23FF": { name: "Miscellaneous Technical", start: 0x2300, end: 0x23FF },
+            "0x2580-0x259F": { name: "Block Elements", start: 0x2580, end: 0x259F },
+            "0x25A0-0x25FF": { name: "Geometric Shapes", start: 0x25A0, end: 0x25FF },
+            "0x2600-0x26FF": { name: "Miscellaneous Symbols", start: 0x2600, end: 0x26FF },
+            "0x2700-0x27BF": { name: "Dingbats", start: 0x2700, end: 0x27BF },
+            "0x2B00-0x2BFF": { name: "Miscellaneous Symbols and Arrows", start: 0x2B00, end: 0x2BFF }
+        };
+
+        const emblemPicker = document.getElementById('emblem-picker');
+        const emblemTrigger = document.getElementById('emblem-trigger');
+        const emblemTriggerIcon = document.getElementById('emblem-trigger-icon');
+        const emblemDropdown = document.getElementById('emblem-dropdown');
+        const emblemBlockSelect = document.getElementById('emblem-block-select');
+        const emblemGrid = document.getElementById('emblem-grid');
+        const emblemCustomBtn = document.getElementById('emblem-custom-btn');
+        const emblemCustomInput = document.getElementById('emblem-custom-input');
+        const emblemCustomField = document.getElementById('emblem-custom-field');
+        const emblemCustomApply = document.getElementById('emblem-custom-apply');
+        const emblemCustomError = document.getElementById('emblem-custom-error');
+        const iconValueInput = document.getElementById('icon-value');
+
+        let selectedEmblem = '\u2B21';
+        let selectedCodePoint = 0x2B21;
+
+        function isPrintableChar(codePoint) {
+            if (codePoint < 0x20) return false;
+            if (codePoint >= 0x7F && codePoint <= 0x9F) return false;
+            if (codePoint >= 0xD800 && codePoint <= 0xDFFF) return false;
+            if (codePoint >= 0xFDD0 && codePoint <= 0xFDEF) return false;
+            if ((codePoint & 0xFFFE) === 0xFFFE) return false;
+            const invisibles = [0x00AD, 0x034F, 0x061C, 0x115F, 0x1160, 0x17B4, 0x17B5, 
+                 0x180B, 0x180C, 0x180D, 0x180E, 0x200B, 0x200C, 0x200D, 
+                 0x200E, 0x200F, 0x202A, 0x202B, 0x202C, 0x202D, 0x202E,
+                 0x2060, 0x2061, 0x2062, 0x2063, 0x2064, 0x206A, 0x206B,
+                 0x206C, 0x206D, 0x206E, 0x206F, 0xFEFF, 0xFFA0,
+                 0x2028, 0x2029, 0x202F, 0x205F];
+            if (invisibles.includes(codePoint)) return false;
+            if (codePoint >= 0x2000 && codePoint <= 0x200A) return false;
+            return true;
+        }
+
+        function toggleDropdown(show) {
+            const isActive = show !== undefined ? show : !emblemDropdown.classList.contains('active');
+            emblemDropdown.classList.toggle('active', isActive);
+            emblemTrigger.classList.toggle('active', isActive);
+            if (isActive) {
+                populateEmblemGrid(emblemBlockSelect.value);
+            }
+        }
+
+        function selectEmblem(char, codePoint, closeDropdown) {
+            if (closeDropdown === undefined) closeDropdown = true;
+            selectedEmblem = char;
+            selectedCodePoint = codePoint;
+            emblemTriggerIcon.textContent = char;
+            iconValueInput.value = char;
+            previewIcon.textContent = char;
+            
+            document.querySelectorAll('.emblem-grid-item').forEach(function(el) {
+                el.classList.toggle('selected', parseInt(el.dataset.codepoint) === codePoint);
+            });
+            
+            if (closeDropdown) {
+                toggleDropdown(false);
+                emblemCustomInput.classList.remove('active');
+                emblemCustomBtn.classList.remove('active');
+            }
+        }
+
+        function populateEmblemGrid(blockKey) {
+            emblemGrid.innerHTML = '';
+            
+            if (!blockKey || !unicodeBlocks[blockKey]) {
+                emblemGrid.innerHTML = '<div class="emblem-grid-empty">Select a block</div>';
+                return;
+            }
+
+            var block = unicodeBlocks[blockKey];
+            var hasChars = false;
+
+            for (var cp = block.start; cp <= block.end; cp++) {
+                if (!isPrintableChar(cp)) continue;
+                
+                hasChars = true;
+                var char = String.fromCodePoint(cp);
+                var item = document.createElement('div');
+                item.className = 'emblem-grid-item';
+                if (cp === selectedCodePoint) {
+                    item.classList.add('selected');
+                }
+                item.textContent = char;
+                item.dataset.codepoint = cp;
+                item.title = 'U+' + cp.toString(16).toUpperCase().padStart(4, '0');
+                
+                (function(c, code) {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        selectEmblem(c, code, true);
+                    });
+                })(char, cp);
+                
+                emblemGrid.appendChild(item);
+            }
+
+            if (!hasChars) {
+                emblemGrid.innerHTML = '<div class="emblem-grid-empty">No displayable characters</div>';
+            }
+        }
+
+        function applyCustomCode() {
+            var hex = emblemCustomField.value.trim().toUpperCase();
+            emblemCustomError.textContent = '';
+            
+            if (!hex) {
+                emblemCustomError.textContent = 'Enter a code';
+                return;
+            }
+            
+            if (!/^[0-9A-F]{1,6}$/.test(hex)) {
+                emblemCustomError.textContent = 'Invalid format (use hex: 0-9, A-F)';
+                return;
+            }
+            
+            var codePoint = parseInt(hex, 16);
+            if (codePoint > 0x10FFFF) {
+                emblemCustomError.textContent = 'Code too large (max: 10FFFF)';
+                return;
+            }
+            
+            if (codePoint >= 0xD800 && codePoint <= 0xDFFF) {
+                emblemCustomError.textContent = 'Invalid (surrogate range)';
+                return;
+            }
+            
+            try {
+                var char = String.fromCodePoint(codePoint);
+                selectEmblem(char, codePoint, true);
+                emblemCustomField.value = '';
+            } catch (e) {
+                emblemCustomError.textContent = 'Invalid code point';
+            }
+        }
+
+        // Event listeners
+        emblemTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleDropdown();
+        });
+
+        emblemBlockSelect.addEventListener('change', function(e) {
+            e.stopPropagation();
+            populateEmblemGrid(this.value);
+        });
+
+        emblemCustomBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isActive = emblemCustomInput.classList.toggle('active');
+            this.classList.toggle('active', isActive);
+            if (isActive) {
+                emblemCustomField.focus();
+            }
+        });
+
+        emblemCustomApply.addEventListener('click', function(e) {
+            e.stopPropagation();
+            applyCustomCode();
+        });
+
+        emblemCustomField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation();
+                applyCustomCode();
+            }
+        });
+
+        emblemCustomField.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!emblemPicker.contains(e.target)) {
+                toggleDropdown(false);
+            }
+        });
+
+        // Initialize grid
+        populateEmblemGrid('0x25A0-0x25FF');
+
+
+        
+
+        // Color Picker Dropdown
+        const colorPickerDropdown = document.getElementById('color-picker-dropdown');
+        const colorTrigger = document.getElementById('color-trigger');
+        const colorTriggerSwatch = document.getElementById('color-trigger-swatch');
+        const colorDropdown = document.getElementById('color-dropdown');
+        const colorGrid = document.getElementById('color-grid');
+        const colorValueInput = document.getElementById('color-value');
+
+        let selectedColor = '#c9a227';
+
+        function toggleColorDropdown(show) {
+            var isActive = show !== undefined ? show : !colorDropdown.classList.contains('active');
+            colorDropdown.classList.toggle('active', isActive);
+            colorTrigger.classList.toggle('active', isActive);
+        }
+
+        function selectColor(color, closeDropdown) {
+            if (closeDropdown === undefined) closeDropdown = true;
+            selectedColor = color;
+            colorTriggerSwatch.style.background = color;
+            colorValueInput.value = color;
+            previewIcon.style.color = color;
+            previewName.style.color = color;
+            previewCard.style.borderColor = color + '40';
+            
+            document.querySelectorAll('.color-swatch').forEach(function(el) {
+                el.classList.toggle('selected', el.dataset.color === color);
+            });
+            
+            if (closeDropdown) {
+                toggleColorDropdown(false);
+            }
+        }
+
+        colorTrigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleColorDropdown();
+        });
+
+        colorGrid.addEventListener('click', function(e) {
+            var swatch = e.target.closest('.color-swatch');
+            if (swatch) {
+                e.stopPropagation();
+                selectColor(swatch.dataset.color, true);
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!colorPickerDropdown.contains(e.target)) {
+                toggleColorDropdown(false);
+            }
+        });
+
+        // Admission toggle
+        document.querySelectorAll('.admission-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.admission-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Chat toggle
+        const createChatCheckbox = document.getElementById('create-chat');
+        const chatNameWrapper = document.getElementById('chat-name-wrapper');
+
+        createChatCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                chatNameWrapper.classList.remove('hidden');
+            } else {
+                chatNameWrapper.classList.add('hidden');
+            }
+        });
+
+        // Invite members functionality
+        const inviteSearch = document.getElementById('invite-search');
+        const inviteDropdown = document.getElementById('invite-dropdown');
+        const invitedMembersContainer = document.getElementById('invited-members');
+        let invitedMembers = [];
+        let searchTimeout = null;
+
+        inviteSearch.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim();
+
+            if (query.length < 2) {
+                inviteDropdown.classList.remove('active');
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                searchUsers(query);
+            }, 300);
+        });
+
+        inviteSearch.addEventListener('focus', function() {
+            if (this.value.trim().length >= 2) {
+                inviteDropdown.classList.add('active');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.invite-input-wrapper')) {
+                inviteDropdown.classList.remove('active');
+            }
+        });
+
+        async function searchUsers(query) {
+            try {
+                const response = await fetch(`/api/users/search?q=${encodeURIComponent(query)}`, { credentials: 'include' });
+                if (!response.ok) throw new Error('Search failed');
+                const users = await response.json();
+                renderUserDropdown(users);
+            } catch (err) {
+                inviteDropdown.innerHTML = '<div class="invite-dropdown-empty">Unable to search users</div>';
+                inviteDropdown.classList.add('active');
+            }
+        }
+
+        function renderUserDropdown(users) {
+            // Filter out already invited users and current user
+            const filtered = users.filter(u =>
+                !invitedMembers.some(m => m.username === u.username) &&
+                (!currentUser || u.username !== currentUser.username)
+            );
+
+            if (filtered.length === 0) {
+                inviteDropdown.innerHTML = '<div class="invite-dropdown-empty">No users found</div>';
+            } else {
+                inviteDropdown.innerHTML = filtered.map(user => `
+                    <div class="invite-dropdown-item" data-username="${user.username}" data-name="${user.name || user.username}">
+                        <div class="invite-dropdown-item-avatar">${(user.name || user.username).charAt(0)}</div>
+                        <span class="invite-dropdown-item-name">${user.name || user.username}</span>
+                        <span class="invite-dropdown-item-username">@${user.username}</span>
+                    </div>
+                `).join('');
+
+                inviteDropdown.querySelectorAll('.invite-dropdown-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        addInvitedMember({
+                            username: this.dataset.username,
+                            name: this.dataset.name
+                        });
+                        inviteSearch.value = '';
+                        inviteDropdown.classList.remove('active');
+                    });
+                });
+            }
+            inviteDropdown.classList.add('active');
+        }
+
+        function addInvitedMember(user) {
+            if (invitedMembers.some(m => m.username === user.username)) return;
+            invitedMembers.push(user);
+            renderInvitedMembers();
+        }
+
+        function removeInvitedMember(username) {
+            invitedMembers = invitedMembers.filter(m => m.username !== username);
+            renderInvitedMembers();
+        }
+
+        function renderInvitedMembers() {
+            invitedMembersContainer.innerHTML = invitedMembers.map(member => `
+                <div class="invited-member">
+                    <span>${member.name}</span>
+                    <button type="button" class="invited-member-remove" data-username="${member.username}">&times;</button>
+                </div>
+            `).join('');
+
+            invitedMembersContainer.querySelectorAll('.invited-member-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    removeInvitedMember(this.dataset.username);
+                });
+            });
+        }
+
+        // Live preview
+        nameInput.addEventListener('input', function() {
+            previewName.textContent = this.value || 'Order Name';
+        });
+
+        descInput.addEventListener('input', function() {
+            previewDesc.textContent = this.value || 'Your order description will appear here';
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            formError.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating...';
+
+            const formData = new FormData(form);
+            const orderData = {
+                name: formData.get('name'),
+                description: formData.get('description'),
+                category: formData.get('category'),
+                icon: formData.get('icon'),
+                color: formData.get('color'),
+                admission: formData.get('admission'),
+                createChat: createChatCheckbox.checked,
+                chatName: formData.get('chatName') || formData.get('name'),
+                inviteMembers: invitedMembers.map(m => m.username),
+                applicationForm: { agreements: getAgreements() }
+            };
+
+            fetch('/api/orders', {
+                credentials: 'include',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(r => {
+                if (!r.ok) throw new Error('Failed to create order');
+                return r.json();
+            })
+            .then(data => {
+                // Redirect to the new order page
+                window.location.href = `order.html?id=${data.id}`;
+            })
+            .catch(err => {
+                formError.textContent = 'Failed to create order. Please try again.';
+                formError.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Seed Order';
+            });
+        });
+    </script>
+</body>
+</html>

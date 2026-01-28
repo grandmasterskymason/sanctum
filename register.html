@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply to Join the Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --danger: #c0392b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100vh; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .logo {
+            height: 50px;
+            opacity: 0.9;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .invite-banner {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .invite-label {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .invite-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+
+        .form-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #f5f5f5;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: rgba(245, 245, 245, 0.6);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+
+        .field-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .field-row .field-group {
+            flex: 1;
+        }
+
+        .field-label {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .field-label.required::after {
+            content: ' *';
+            color: var(--gold);
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            background: var(--black);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 3px;
+            color: #f5f5f5;
+            transition: all 0.2s ease;
+        }
+
+        .field-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.1);
+        }
+
+        .field-input::placeholder {
+            color: rgba(245, 245, 245, 0.3);
+        }
+
+        select.field-input {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a227' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        textarea.field-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            border-radius: 50%;
+            background: var(--black);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: var(--gold);
+        }
+
+        .radio-option input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .radio-label {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .agreement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(10, 10, 10, 0.5);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .agreement-item input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            border-radius: 3px;
+            background: var(--black);
+            cursor: pointer;
+            margin-top: 0.25rem;
+            position: relative;
+        }
+
+        .agreement-item input[type="checkbox"]:checked {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .agreement-item input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--black);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .agreement-content h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .agreement-content p {
+            font-size: 0.95rem;
+            color: rgba(245, 245, 245, 0.7);
+            line-height: 1.5;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: rgba(201, 162, 39, 0.25);
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(245, 245, 245, 0.2);
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(245, 245, 245, 0.4);
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .status-message {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            color: #27ae60;
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(192, 57, 43, 0.1);
+            border: 1px solid rgba(192, 57, 43, 0.3);
+            color: #e74c3c;
+        }
+
+        /* Loading state */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+        }
+
+        .loading {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(201, 162, 39, 0.3);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-text {
+            color: var(--gold-dim);
+            font-size: 1rem;
+        }
+
+        /* Error state */
+        .error-container {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            color: rgba(245, 245, 245, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        /* Success state */
+        .success-container {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Approved state - show enrollment link */
+        .approved-container {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .approved-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .approved-message {
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 600px) {
+            .field-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="/assets/logo.jpg" alt="Skymasons" class="logo">
+        <span class="header-title">Membership Application</span>
+    </header>
+
+    <div class="container">
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-container">
+            <div class="loading"></div>
+            <p class="loading-text">Verifying your invitation...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="error-container hidden">
+            <div class="error-icon">⚠</div>
+            <h2 class="error-title">Invalid Invitation</h2>
+            <p class="error-message" id="error-message">This invitation link is invalid or has expired.</p>
+            <a href="https://skymasons.xyz" class="btn btn-secondary">Return to Skymasons</a>
+        </div>
+
+        <!-- Already Submitted State -->
+        <div id="pending-state" class="success-container hidden">
+            <div class="success-icon">⏳</div>
+            <h2 class="success-title">Application Pending</h2>
+            <p class="success-message">Your application has already been submitted and is awaiting review. You will be notified when a decision is made.</p>
+            <a href="https://skymasons.xyz" class="btn btn-secondary">Return to Skymasons</a>
+        </div>
+
+        <!-- Approved State -->
+        <div id="approved-state" class="approved-container hidden">
+            <div class="success-icon">✓</div>
+            <h2 class="approved-title">Application Approved!</h2>
+            <p class="approved-message">Congratulations! Your application has been approved. Click below to complete your registration and create your account.</p>
+            <a href="#" id="enrollment-link" class="btn btn-primary">Complete Registration</a>
+        </div>
+
+        <!-- Success State (after submission) -->
+        <div id="success-state" class="success-container hidden">
+            <div class="success-icon">✓</div>
+            <h2 class="success-title">Application Submitted</h2>
+            <p class="success-message">Thank you for applying to join the Skymasons. Your application will be reviewed by our members, and you will be notified of the decision.</p>
+            <a href="https://skymasons.xyz" class="btn btn-secondary">Return to Skymasons</a>
+        </div>
+
+        <!-- Application Form -->
+        <div id="form-state" class="hidden">
+            <div class="invite-banner" id="invite-banner">
+                <div class="invite-label">You have been invited by</div>
+                <div class="invite-name" id="inviter-name">—</div>
+            </div>
+
+            <h1 class="form-title">Membership Application</h1>
+            <p class="form-subtitle">Please complete all required fields to submit your application.</p>
+
+            <form id="application-form">
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Personal Information</h2>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label required">First Name</label>
+                            <input type="text" class="field-input" id="first-name" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Middle Name</label>
+                            <input type="text" class="field-input" id="middle-name">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label required">Last Name</label>
+                            <input type="text" class="field-input" id="last-name" required>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label required">Birth Date</label>
+                        <div class="field-row">
+                            <select class="field-input" id="birth-month" required>
+                                <option value="">Month</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select class="field-input" id="birth-day" required>
+                                <option value="">Day</option>
+                            </select>
+                            <select class="field-input" id="birth-year" required>
+                                <option value="">Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Contact Information</h2>
+
+                    <div class="field-group">
+                        <label class="field-label required">Street Address</label>
+                        <input type="text" class="field-input" id="street" required>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label required">City</label>
+                            <input type="text" class="field-input" id="city" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label required">State/Province</label>
+                            <input type="text" class="field-input" id="state" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label required">Postal Code</label>
+                            <input type="text" class="field-input" id="zip" required>
+                        </div>
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label required">Email</label>
+                            <input type="email" class="field-input" id="email" required>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label required">Mobile Number (Signal)</label>
+                            <input type="tel" class="field-input" id="phone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contribution -->
+                <div class="form-section">
+                    <h2 class="section-title">Contribution Commitment</h2>
+                    <p style="color: rgba(245,245,245,0.6); margin-bottom: 1rem;">Are you able to contribute financially to our gatherings and initiatives?</p>
+
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="contribution" value="yes" required>
+                            <span class="radio-label">Yes, I can contribute</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="contribution" value="no">
+                            <span class="radio-label">No, I cannot contribute at this time</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="contribution" value="financial_assistance">
+                            <span class="radio-label">I may need financial assistance</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Additional Information</h2>
+
+                    <div class="field-group">
+                        <label class="field-label">Dietary Requirements</label>
+                        <input type="text" class="field-input" id="dietary" placeholder="Vegetarian, allergies, etc.">
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">Your Focus</label>
+                        <textarea class="field-input" id="focus" placeholder="What personal goals or projects are you currently focused on?"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">Roles & Contributions</label>
+                        <textarea class="field-input" id="roles" placeholder="What skills or contributions can you offer to the community?"></textarea>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label">Health Considerations</label>
+                        <textarea class="field-input" id="health" placeholder="Any health challenges we should be aware of?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Agreements -->
+                <div class="form-section">
+                    <h2 class="section-title">Agreements</h2>
+                    <p style="color: rgba(245,245,245,0.6); margin-bottom: 1.5rem;">Please read and accept each of the following principles:</p>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-responsibility" required>
+                        <div class="agreement-content">
+                            <h4>1. Self-Responsibility</h4>
+                            <p>I take full responsibility for my actions, decisions, and personal growth during this experience. I understand that this is a space for accountability and empowerment, and I commit to showing up fully for myself and the group.</p>
+                        </div>
+                    </div>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-respect" required>
+                        <div class="agreement-content">
+                            <h4>2. Mutual Respect</h4>
+                            <p>I will respect the perspectives, boundaries, and experiences of all participants, fostering a safe and supportive environment for open sharing and growth.</p>
+                        </div>
+                    </div>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-participation" required>
+                        <div class="agreement-content">
+                            <h4>3. Active Participation</h4>
+                            <p>I understand that this is a co-created experience. I will contribute to cooking, cleaning, and other group activities, ensuring the success of the weekend and ongoing community initiatives.</p>
+                        </div>
+                    </div>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-confidentiality" required>
+                        <div class="agreement-content">
+                            <h4>4. Confidentiality</h4>
+                            <p>I commit to keeping all personal information and stories shared within the group confidential to maintain trust and integrity.</p>
+                        </div>
+                    </div>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-financial" required>
+                        <div class="agreement-content">
+                            <h4>5. Financial Contribution</h4>
+                            <p>I agree to contribute as outlined for the weekend and any additional costs discussed and agreed upon during the year.</p>
+                        </div>
+                    </div>
+
+                    <div class="agreement-item">
+                        <input type="checkbox" id="agree-openmind" required>
+                        <div class="agreement-content">
+                            <h4>6. Open-Mindedness</h4>
+                            <p>I will approach all activities, workshops, and interactions with an open mind, willing to learn, grow, and adapt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="https://skymasons.xyz" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Submit Application</button>
+                </div>
+
+                <div class="status-message" id="status-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get the invite token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const itoken = urlParams.get('itoken');
+
+        // State elements
+        const loadingState = document.getElementById('loading-state');
+        const errorState = document.getElementById('error-state');
+        const pendingState = document.getElementById('pending-state');
+        const approvedState = document.getElementById('approved-state');
+        const successState = document.getElementById('success-state');
+        const formState = document.getElementById('form-state');
+        const errorMessage = document.getElementById('error-message');
+        const inviterName = document.getElementById('inviter-name');
+        const enrollmentLink = document.getElementById('enrollment-link');
+
+        // Populate date dropdowns
+        function populateDateDropdowns() {
+            const daySelect = document.getElementById('birth-day');
+            const yearSelect = document.getElementById('birth-year');
+
+            // Days 1-31
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i.toString().padStart(2, '0');
+                option.textContent = i;
+                daySelect.appendChild(option);
+            }
+
+            // Years (current year - 100 to current year - 18)
+            const currentYear = new Date().getFullYear();
+            for (let i = currentYear - 18; i >= currentYear - 100; i--) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        async function validateInvitation() {
+            if (!itoken) {
+                showError('No invitation token provided. You need an invitation link from an existing member to apply.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/invite/validate?token=' + encodeURIComponent(itoken));
+                const data = await response.json();
+
+                if (!response.ok || !data.valid) {
+                    showError(data.message || 'This invitation is invalid or has expired.');
+                    return;
+                }
+
+                // Check application status
+                if (data.application_status === 'pending') {
+                    showPending();
+                    return;
+                }
+
+                if (data.application_status === 'approved' && data.enrollment_url) {
+                    showApproved(data.enrollment_url);
+                    return;
+                }
+
+                // Show form
+                if (data.invited_by) {
+                    inviterName.textContent = data.invited_by;
+                } else {
+                    document.getElementById('invite-banner').classList.add('hidden');
+                }
+
+                loadingState.classList.add('hidden');
+                formState.classList.remove('hidden');
+
+            } catch (err) {
+                console.error('Validation error:', err);
+                showError('Unable to verify your invitation. Please try again later.');
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            loadingState.classList.add('hidden');
+            errorState.classList.remove('hidden');
+        }
+
+        function showPending() {
+            loadingState.classList.add('hidden');
+            pendingState.classList.remove('hidden');
+        }
+
+        function showApproved(url) {
+            enrollmentLink.href = url;
+            loadingState.classList.add('hidden');
+            approvedState.classList.remove('hidden');
+        }
+
+        function showSuccess() {
+            formState.classList.add('hidden');
+            successState.classList.remove('hidden');
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = 'status-message ' + type;
+        }
+
+        // Form submission
+        document.getElementById('application-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = {
+                itoken: itoken,
+                data: {
+                    name: {
+                        first: document.getElementById('first-name').value.trim(),
+                        middle: document.getElementById('middle-name').value.trim(),
+                        last: document.getElementById('last-name').value.trim()
+                    },
+                    birth_date: `${document.getElementById('birth-year').value}-${document.getElementById('birth-month').value}-${document.getElementById('birth-day').value}`,
+                    address: {
+                        street: document.getElementById('street').value.trim(),
+                        city: document.getElementById('city').value.trim(),
+                        state: document.getElementById('state').value.trim(),
+                        zip: document.getElementById('zip').value.trim()
+                    },
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    contribution: document.querySelector('input[name="contribution"]:checked')?.value || '',
+                    dietary: document.getElementById('dietary').value.trim(),
+                    focus: document.getElementById('focus').value.trim(),
+                    roles: document.getElementById('roles').value.trim(),
+                    health: document.getElementById('health').value.trim()
+                },
+                agreements: {
+                    self_responsibility: document.getElementById('agree-responsibility').checked,
+                    mutual_respect: document.getElementById('agree-respect').checked,
+                    active_participation: document.getElementById('agree-participation').checked,
+                    confidentiality: document.getElementById('agree-confidentiality').checked,
+                    financial_contribution: document.getElementById('agree-financial').checked,
+                    open_mindedness: document.getElementById('agree-openmind').checked
+                }
+            };
+
+            try {
+                const response = await fetch('/api/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to submit application');
+                }
+
+                showSuccess();
+
+            } catch (err) {
+                console.error('Submission error:', err);
+                showStatus(err.message || 'Failed to submit application. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+            }
+        });
+
+        // Initialize
+        populateDateDropdowns();
+        validateInvitation();
+    </script>
+</body>
+</html>

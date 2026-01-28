@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sanctum — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --smoke: #1a1a1a;
+            --header-height: 95px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: Cormorant Garamond, serif;
+            background: var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            background: var(--black-deep);
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .header-logo img { height: 36px; width: auto; }
+
+        .header-title {
+            font-family: Cinzel, serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .user-name { color: var(--gold); }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
+        }
+
+        .header-btn {
+            font-family: Cinzel, serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .header-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-link:hover .nav-icon { opacity: 1; }
+
+        /* Dropdown Navigation */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            background: transparent;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .nav-dropdown-trigger:hover,
+        .nav-dropdown.open .nav-dropdown-trigger {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            border-bottom-color: var(--gold);
+        }
+
+        .nav-dropdown-trigger .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-dropdown-trigger:hover .nav-icon { opacity: 1; }
+
+        .nav-dropdown-arrow {
+            font-size: 0.5rem;
+            margin-left: 0.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-dropdown.open .nav-dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            min-width: 200px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-dropdown.open .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-dropdown-category {
+            padding: 0.5rem 1rem 0.25rem;
+            font-family: Cinzel, serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.5);
+        }
+
+        .nav-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            text-decoration: none;
+            font-family: Cormorant Garamond, serif;
+            font-size: 0.95rem;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .nav-dropdown-item:hover {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+
+        .nav-dropdown-item .nav-icon {
+            font-size: 1rem;
+            opacity: 0.7;
+            width: 1.2rem;
+            text-align: center;
+        }
+
+        .nav-dropdown-item:hover .nav-icon { opacity: 1; }
+
+        .nav-dropdown-divider {
+            height: 1px;
+            background: rgba(201, 162, 39, 0.1);
+            margin: 0.5rem 0;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .space-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--black-deep);
+        }
+
+        .dashboard-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 3rem;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+        }
+
+        .dashboard-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-family: Cinzel, serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .main-actions { display: flex; gap: 1rem; }
+
+        .btn-primary {
+            font-family: Cinzel, serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            color: var(--gold);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-primary:hover {
+            background: rgba(201, 162, 39, 0.25);
+            border-color: var(--gold);
+        }
+
+        .btn-secondary {
+            font-family: Cinzel, serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .order-card:hover {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-icon { font-size: 2rem; line-height: 1; }
+
+        .order-name {
+            font-family: Cinzel, serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .order-members {
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+        }
+
+        .order-badge {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-family: Cinzel, serif;
+            font-size: 0.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border-radius: 2px;
+        }
+
+        .order-badge.member {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .order-badge.pending {
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+            border: 1px solid rgba(241, 196, 15, 0.3);
+        }
+
+        .browse-card {
+            background: transparent;
+            border: 1px dashed rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+        }
+
+        .browse-card:hover {
+            background: rgba(201, 162, 39, 0.05);
+            border-style: solid;
+            color: var(--gold);
+        }
+
+        .browse-icon { font-size: 1.5rem; opacity: 0.6; }
+
+        .browse-text {
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        .empty-state-icon { font-size: 3rem; opacity: 0.3; margin-bottom: 1rem; }
+        .empty-state-text { font-style: italic; margin-bottom: 1.5rem; }
+
+        .section { margin-bottom: 3rem; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: Cinzel, serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.7);
+        }
+
+        .section-link {
+            font-size: 0.7rem;
+            color: var(--gold-dim);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .section-link:hover { color: var(--gold); }
+
+        .events-list {
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            border-radius: 4px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+            transition: background 0.2s ease;
+        }
+
+        .event-item:last-child { border-bottom: none; }
+        .event-item:hover { background: rgba(201, 162, 39, 0.03); }
+
+        .event-date {
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            color: var(--gold-dim);
+            min-width: 60px;
+        }
+
+        .event-title { flex: 1; font-size: 0.9rem; color: rgba(245, 245, 245, 0.8); }
+
+        .event-order {
+            font-size: 0.7rem;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+        }
+
+        .events-empty {
+            padding: 2rem;
+            text-align: center;
+            color: rgba(245, 245, 245, 0.3);
+            font-style: italic;
+        }
+
+        .footer {
+            padding: 1rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .footer-whisper {
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.15);
+        }
+
+        .hidden { display: none !important; }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(201, 162, 39, 0.2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Welcome Modal Styles */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .welcome-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .welcome-modal {
+            background: linear-gradient(145deg, var(--charcoal) 0%, var(--black-deep) 100%);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 8px;
+            max-width: 560px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(201, 162, 39, 0.1);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .welcome-overlay.active .welcome-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .welcome-header {
+            padding: 1.5rem 2rem 1rem;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-step {
+            font-family: Cinzel, serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        .welcome-skip {
+            font-family: Cinzel, serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(245, 245, 245, 0.3);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .welcome-skip:hover {
+            color: rgba(245, 245, 245, 0.6);
+        }
+
+        .welcome-content {
+            padding: 2rem;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .welcome-slide {
+            display: none;
+            animation: fadeSlide 0.4s ease;
+        }
+
+        .welcome-slide.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .welcome-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(201, 162, 39, 0.4);
+        }
+
+        .welcome-title {
+            font-family: Cinzel, serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(245, 245, 245, 0.7);
+            max-width: 440px;
+        }
+
+        .welcome-text em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .welcome-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(201, 162, 39, 0.15);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            padding: 0.3rem 0.7rem;
+            border-radius: 3px;
+            font-family: Cinzel, serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            margin: 0.3rem 0;
+        }
+
+        .welcome-footer {
+            padding: 1.25rem 2rem;
+            border-top: 1px solid rgba(201, 162, 39, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .welcome-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .welcome-dot.active {
+            background: var(--gold);
+            box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+        }
+
+        .welcome-dot:hover {
+            background: rgba(201, 162, 39, 0.5);
+        }
+
+        .welcome-nav {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .welcome-btn {
+            font-family: Cinzel, serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .welcome-btn-prev {
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+        }
+
+        .welcome-btn-prev:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .welcome-btn-prev:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .welcome-btn-next {
+            background: rgba(201, 162, 39, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .welcome-btn-next:hover {
+            background: rgba(201, 162, 39, 0.35);
+            box-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+        }
+
+        /* Element highlight for walkthrough */
+        .walkthrough-highlight {
+            position: relative;
+            z-index: 999;
+            animation: pulseHighlight 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseHighlight {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.2); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar { flex-wrap: wrap; }
+            .nav-link { padding: 0.6rem 1rem; font-size: 0.6rem; }
+            .dashboard-content { padding: 1.5rem; }
+            .orders-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .main-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .header-top { padding: 0.75rem 1rem; }
+            .user-info { display: none; }
+            .welcome-modal { width: 95%; }
+            .welcome-content { padding: 1.5rem; min-height: 240px; }
+            .welcome-title { font-size: 1.2rem; }
+            .welcome-text { font-size: 0.9rem; }
+        }
+        /* Chat Rooms Section */
+        .palaver-section {
+            margin-bottom: 2rem;
+        }
+
+        .palaver-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .palaver-title {
+            font-family: Cinzel, serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .palaver-link {
+            font-family: Cinzel, serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.6);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .palaver-link:hover {
+            color: var(--gold);
+        }
+
+        .palaver-rooms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .room-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.15);
+            border-radius: 20px;
+            text-decoration: none;
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .room-chip:hover {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: rgba(201, 162, 39, 0.3);
+            color: var(--gold);
+        }
+
+        .room-chip.has-unread {
+            border-color: var(--gold);
+        }
+
+        .room-icon {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .room-chip:hover .room-icon {
+            opacity: 1;
+        }
+
+        .unread-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: var(--gold);
+            color: var(--black);
+            font-family: Cinzel, serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            border-radius: 9px;
+        }
+
+        .mention-badge {
+            background: #d35400;
+            color: white;
+        }
+
+        .palaver-empty {
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* Orders Dropdown in Nav */
+        .orders-dropdown {
+            position: relative;
+        }
+
+        .orders-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 4px;
+            min-width: 220px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .orders-dropdown.open .orders-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .orders-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            text-decoration: none;
+            font-family: Cormorant Garamond, serif;
+            font-size: 0.95rem;
+            transition: all 0.15s ease;
+        }
+
+        .orders-dropdown-item:hover {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+
+        .orders-dropdown-item .order-icon {
+            font-size: 1rem;
+            width: 1.2rem;
+            text-align: center;
+        }
+
+        .orders-dropdown-footer {
+            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .orders-dropdown-footer a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            color: var(--gold-dim);
+            text-decoration: none;
+            font-family: Cinzel, serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.15s ease;
+        }
+
+        .orders-dropdown-footer a:hover {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+
+        .orders-dropdown-empty {
+            padding: 1rem;
+            text-align: center;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Walkthrough Modal -->
+    <div class="welcome-overlay" id="welcome-overlay">
+        <div class="welcome-modal">
+            <div class="welcome-header">
+                <span class="welcome-step" id="welcome-step">Step 1 of 10</span>
+                <button class="welcome-skip" onclick="closeWelcome()">Skip Tour</button>
+            </div>
+            <div class="welcome-content">
+                <!-- Slide 1: Welcome -->
+                <div class="welcome-slide active" data-slide="1">
+                    <div class="welcome-icon">&#9678;</div>
+                    <h2 class="welcome-title">Welcome to the Sanctum</h2>
+                    <p class="welcome-text">
+                        You have crossed the threshold, <em id="welcome-name">Brother</em>.<br><br>
+                        Within these sacred halls, the mysteries of the Skymasons await. 
+                        Here, seekers gather to share wisdom, forge bonds, and ascend together 
+                        toward the light that dwells among the stars.<br><br>
+                        <em>Per aspera ad astra.</em>
+                    </p>
+                </div>
+
+                <!-- Slide 2: The Brotherhood -->
+                <div class="welcome-slide" data-slide="2">
+                    <div class="welcome-icon">&#9876;</div>
+                    <h2 class="welcome-title">The Brotherhood</h2>
+                    <p class="welcome-text">
+                        At the heart of all things lies <em>The Brotherhood</em> — the central Order 
+                        that unites every Skymason under one celestial banner.<br><br>
+                        All who enter the Sanctum are Brothers of this foundational Order, 
+                        bound by shared purpose and the ancient traditions that guide our path.
+                    </p>
+                </div>
+
+                <!-- Slide 3: Browse Orders -->
+                <div class="welcome-slide" data-slide="3">
+                    <div class="welcome-icon">&#8594;</div>
+                    <h2 class="welcome-title">Discover the Orders</h2>
+                    <p class="welcome-text">
+                        Beyond the Brotherhood exist many <em>Orders</em> — each a constellation 
+                        of Brothers devoted to specific pursuits and mysteries.<br><br>
+                        Use <span class="welcome-highlight">&#8594; Browse All Orders</span> to explore 
+                        these gatherings. Join Orders that resonate with your calling — you may belong 
+                        to as many as your path requires.
+                    </p>
+                </div>
+
+                <!-- Slide 4: Seed Order -->
+                <div class="welcome-slide" data-slide="4">
+                    <div class="welcome-icon">&#10022;</div>
+                    <h2 class="welcome-title">Seed an Order</h2>
+                    <p class="welcome-text">
+                        Should you perceive a purpose not yet manifest, you hold the power to 
+                        <em>seed a new Order</em> into existence.<br><br>
+                        The <span class="welcome-highlight">+ Seed Order</span> button allows you to 
+                        establish a new congregation, defining its purpose and inviting Brothers 
+                        to join your vision.
+                    </p>
+                </div>
+
+                <!-- Slide 5: Palaver -->
+                <div class="welcome-slide" data-slide="5">
+                    <div class="welcome-icon">&#11041;</div>
+                    <h2 class="welcome-title">Palaver</h2>
+                    <p class="welcome-text">
+                        The <span class="welcome-highlight">&#11041; Palaver</span> is where voices 
+                        converge — a space for discourse, counsel, and communion.<br><br>
+                        Each Order maintains its own chamber within Palaver, where members may 
+                        speak freely, share insights, and strengthen the bonds of fellowship.
+                    </p>
+                </div>
+
+                <!-- Slide 6: Astrologue -->
+                <div class="welcome-slide" data-slide="6">
+                    <div class="welcome-icon">&#10022;</div>
+                    <h2 class="welcome-title">Astrologue</h2>
+                    <p class="welcome-text">
+                        The <span class="welcome-highlight">&#10022; Astrologue</span> charts the 
+                        movements of our gatherings through time — a celestial calendar of rites, 
+                        meetings, and sacred occasions.<br><br>
+                        Each Order inscribes its events upon the Astrologue, visible to all who 
+                        share membership in that congregation.
+                    </p>
+                </div>
+
+                <!-- Slide 7: Archives -->
+                <div class="welcome-slide" data-slide="7">
+                    <div class="welcome-icon">&#9671;</div>
+                    <h2 class="welcome-title">Archives</h2>
+                    <p class="welcome-text">
+                        Within the <span class="welcome-highlight">&#9671; Archives</span> rest the 
+                        collected wisdom and documents of each Order.<br><br>
+                        Here, knowledge is preserved and shared — texts, images, and artifacts 
+                        accessible to those who have earned their place within each congregation.
+                    </p>
+                </div>
+
+                <!-- Slide 8: Scrolls -->
+                <div class="welcome-slide" data-slide="8">
+                    <div class="welcome-icon">&#9776;</div>
+                    <h2 class="welcome-title">Scrolls</h2>
+                    <p class="welcome-text">
+                        The <span class="welcome-highlight">&#9776; Scrolls</span> space houses
+                        sacred forms and surveys for the Brotherhood.<br><br>
+                        Here, questionnaires and petitions are crafted — instruments through which
+                        the will of the collective may be discerned and recorded.
+                    </p>
+                </div>
+
+                <!-- Slide 9: Brothers -->
+                <div class="welcome-slide" data-slide="9">
+                    <div class="welcome-icon">&#9876;</div>
+                    <h2 class="welcome-title">Brothers</h2>
+                    <p class="welcome-text">
+                        The <span class="welcome-highlight">&#9876; Brothers</span> directory reveals 
+                        the faces and names of your fellow seekers.<br><br>
+                        Within each Order, you may view the roster of members — those who walk 
+                        beside you on the path toward illumination.
+                    </p>
+                </div>
+
+                <!-- Slide 10: Upcoming Events -->
+                <div class="welcome-slide" data-slide="10">
+                    <div class="welcome-icon">&#9830;</div>
+                    <h2 class="welcome-title">Upcoming Events</h2>
+                    <p class="welcome-text">
+                        Upon your Sanctum dashboard, the <em>Upcoming Events</em> section gathers 
+                        rites and gatherings from all your Orders.<br><br>
+                        These events are drawn from the Astrologue — select 
+                        <em>View Calendar</em> to see the full celestial chart of what awaits.
+                    </p>
+                </div>
+
+                <!-- Slide 11: Profile -->
+                <div class="welcome-slide" data-slide="11">
+                    <div class="welcome-icon">&#9673;</div>
+                    <h2 class="welcome-title">Your Identity</h2>
+                    <p class="welcome-text">
+                        Your <em>profile emblem</em> in the upper corner is the key to your identity 
+                        within the Sanctum.<br><br>
+                        Select it to customise how you appear to your Brothers — your name, 
+                        your visage, and the details you wish to share with those who seek to know you.<br><br>
+                        <em>The journey begins. Welcome, Brother.</em>
+                    </p>
+                </div>
+            </div>
+            <div class="welcome-footer">
+                <div class="welcome-dots" id="welcome-dots"></div>
+                <div class="welcome-nav">
+                    <button class="welcome-btn welcome-btn-prev" id="welcome-prev" onclick="prevSlide()">Previous</button>
+                    <button class="welcome-btn welcome-btn-next" id="welcome-next" onclick="nextSlide()">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <a class="header-logo" onclick="navigateTo('sanctum')">
+                <img src="https://sanctum.skymasons.xyz/assets/logo.jpg" alt="Skymasons">
+                <span class="header-title">The Sanctum</span>
+            </a>
+            <div class="header-right">
+                <span class="user-info">Welcome, <span class="user-name" id="user-name">Brother</span></span>
+                <a href="https://auth.skymasons.xyz/if/admin/" class="header-btn" id="admin-btn" style="display:none;">Admin</a>
+                <a href="/settings.html" title="Edit Profile" id="profile-link">
+                    <img src="https://brothers.skymasons.xyz/avatar/guest/32" alt="Profile" class="user-avatar" id="user-avatar">
+                </a>
+                <a href="https://auth.skymasons.xyz/if/flow/sanctum-logout/" class="header-btn">Depart</a>
+            </div>
+        </div>
+        <nav class="nav-bar" id="nav-bar">
+            <a class="nav-link active" data-space="sanctum" onclick="navigateTo('sanctum')">
+                <span class="nav-icon">&#9678;</span>
+                <span>Sanctum</span>
+            </a>
+            <div class="nav-dropdown orders-dropdown" id="orders-dropdown">
+                <button class="nav-dropdown-trigger" onclick="toggleOrdersDropdown(event)">
+                    <span class="nav-icon">&#11209;</span>
+                    <span>Orders</span>
+                    <span class="nav-dropdown-arrow">▼</span>
+                </button>
+                <div class="nav-dropdown-menu orders-dropdown-menu" id="orders-dropdown-menu">
+                    <div class="orders-dropdown-empty">Loading...</div>
+                </div>
+            </div>
+            <div class="nav-dropdown" id="spaces-dropdown">
+                <button class="nav-dropdown-trigger" onclick="toggleSpacesDropdown(event)">
+                    <span class="nav-icon">&#10070;</span>
+                    <span>Spaces</span>
+                    <span class="nav-dropdown-arrow">▼</span>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <div class="nav-dropdown-category">Communication</div>
+                    <a class="nav-dropdown-item" id="nav-palaver" href="https://palaver.skymasons.xyz/call/xhwti5zq">
+                        <span class="nav-icon">&#11041;</span>
+                        <span>Palaver</span>
+                    </a>
+                    <div class="nav-dropdown-divider"></div>
+                    <div class="nav-dropdown-category">Planning</div>
+                    <a class="nav-dropdown-item" id="nav-astrologue" data-space="astrologue" onclick="navigateTo('astrologue'); closeSpacesDropdown();">
+                        <span class="nav-icon">&#10022;</span>
+                        <span>Astrologue</span>
+                    </a>
+                    <a class="nav-dropdown-item" id="nav-scrolls" data-space="scrolls" onclick="navigateTo('scrolls'); closeSpacesDropdown();">
+                        <span class="nav-icon">&#9776;</span>
+                        <span>Scrolls</span>
+                    </a>
+                    <div class="nav-dropdown-divider"></div>
+                    <div class="nav-dropdown-category">Knowledge</div>
+                    <a class="nav-dropdown-item" id="nav-archives" data-space="archives" onclick="navigateTo('archives'); closeSpacesDropdown();">
+                        <span class="nav-icon">&#9671;</span>
+                        <span>Archives</span>
+                    </a>
+                    <a class="nav-dropdown-item" id="nav-brothers" data-space="brothers" onclick="navigateTo('brothers'); closeSpacesDropdown();">
+                        <span class="nav-icon">&#9876;</span>
+                        <span>Brothers</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-area">
+        <!-- Loading overlay -->
+        <div class="loading-overlay hidden" id="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <!-- Nextcloud iframe (hidden by default) -->
+        <iframe class="space-frame hidden" id="space-frame"></iframe>
+
+        <!-- Dashboard content -->
+        <div class="dashboard-content" id="dashboard-content">
+            <div class="dashboard-inner">
+                <!-- Palaver Rooms Section -->
+                <div class="palaver-section" id="palaver-section">
+                    <div class="palaver-header">
+                        <h2 class="palaver-title">Palaver</h2>
+                        <a href="https://palaver.skymasons.xyz/apps/spreed" class="palaver-link">Open Palaver &#8594;</a>
+                    </div>
+                    <div class="palaver-rooms" id="palaver-rooms">
+                        <span class="palaver-empty">Loading conversations...</span>
+                    </div>
+                </div>
+
+                <div class="main-header">
+                    <h1 class="main-title">Your Orders</h1>
+                    <div class="main-actions" id="main-actions">
+                        <a href="create-order.html" class="btn-primary" id="seed-order-btn">+ Seed Order</a>
+                    </div>
+                </div>
+
+                <div class="orders-grid" id="orders-grid">
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <div class="empty-state-icon">&#9678;</div>
+                        <p class="empty-state-text">You have not joined any Orders yet</p>
+                        <a href="orders.html" class="btn-secondary">Browse Orders</a>
+                    </div>
+                </div>
+
+                <div class="section hidden" id="pending-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Pending Applications</h2>
+                    </div>
+                    <div class="orders-grid" id="pending-grid"></div>
+                </div>
+
+                <a href="orders.html" class="order-card browse-card" id="browse-orders-btn">
+                    <span class="browse-icon">&#8594;</span>
+                    <span class="browse-text">Browse All Orders</span>
+                </a>
+
+                <div class="section" id="events-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Upcoming Events</h2>
+                        <a class="section-link" onclick="navigateTo('astrologue')">View Calendar &#8594;</a>
+                    </div>
+                    <div class="events-list" id="events-list">
+                        <div class="events-empty">No upcoming events</div>
+                    </div>
+                </div>
+
+                <footer class="footer">
+                    <p class="footer-whisper">Per aspera ad astra</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Spaces Dropdown
+        function toggleSpacesDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const dropdown = document.getElementById('spaces-dropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function closeSpacesDropdown() {
+            document.getElementById('spaces-dropdown').classList.remove('open');
+        }
+
+        // Orders Dropdown
+        function toggleOrdersDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const dropdown = document.getElementById('orders-dropdown');
+            dropdown.classList.toggle('open');
+            // Close spaces dropdown if open
+            document.getElementById('spaces-dropdown').classList.remove('open');
+        }
+
+        function closeOrdersDropdown() {
+            document.getElementById('orders-dropdown').classList.remove('open');
+        }
+
+        function populateOrdersDropdown(orders) {
+            const menu = document.getElementById('orders-dropdown-menu');
+            const usernameLower = (window.currentUser?.username || "").toLowerCase();
+            const myOrders = orders.filter(function(order) {
+                return order.members && order.members.some(function(m) { return m.toLowerCase() === usernameLower; });
+            });
+
+            if (myOrders.length === 0) {
+                menu.innerHTML = '<div class="orders-dropdown-empty">No orders joined yet</div>' +
+                    '<div class="orders-dropdown-footer">' +
+                    '<a href="orders.html"><span>&#8594;</span> Browse All Orders</a>' +
+                    '</div>';
+            } else {
+                menu.innerHTML = myOrders.map(order => 
+                    '<a class="orders-dropdown-item" href="order.html?id=' + order.id + '">' +
+                    '<span class="order-icon" style="color:' + (order.color || 'var(--gold)') + '">' + (order.icon || '&#9672;') + '</span>' +
+                    '<span>' + order.name + '</span>' +
+                    '</a>'
+                ).join('') +
+                '<div class="orders-dropdown-footer">' +
+                '<a href="orders.html"><span>&#8594;</span> Browse All Orders</a>' +
+                '</div>';
+            }
+        }
+
+        // Palaver (Chat Rooms) Loading
+        function loadPalaverRooms() {
+            const container = document.getElementById('palaver-rooms');
+            // For now, show a simple link to Palaver
+            // TODO: Add proper Talk API integration for unread counts
+            container.innerHTML = '<a class="room-chip" href="https://palaver.skymasons.xyz/apps/spreed" target="_blank">' +
+                '<span class="room-icon">&#11041;</span>' +
+                '<span>Open Conversations</span>' +
+                '</a>';
+        }
+
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function(event) {
+            const spacesDropdown = document.getElementById("spaces-dropdown");
+            const ordersDropdown = document.getElementById("orders-dropdown");
+            if (spacesDropdown && !spacesDropdown.contains(event.target)) {
+                spacesDropdown.classList.remove("open");
+            }
+            if (ordersDropdown && !ordersDropdown.contains(event.target)) {
+                ordersDropdown.classList.remove("open");
+            }
+        });
+
+        // Close dropdowns on escape key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeSpacesDropdown();
+                closeOrdersDropdown();
+            }
+        });
+
+        // Welcome Walkthrough System
+        let currentSlide = 1;
+        const totalSlides = 11;
+
+        function initWelcome() {
+            // Create dots
+            const dotsContainer = document.getElementById('welcome-dots');
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'welcome-dot' + (i === 1 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+            updateWelcomeUI();
+        }
+
+        function showWelcome() {
+            document.getElementById('welcome-overlay').classList.add('active');
+            initWelcome();
+        }
+
+        function closeWelcome() {
+            document.getElementById('welcome-overlay').classList.remove('active');
+            clearHighlights();
+            // Mark onboarding as complete on server
+            if (window.currentUser?.username) {
+                fetch('/api/onboarding/complete', { method: 'POST', credentials: 'include' }).catch(e => console.error('Failed to save onboarding status:', e));
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateWelcomeUI();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateWelcomeUI();
+            } else {
+                closeWelcome();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateWelcomeUI();
+            }
+        }
+
+        function updateWelcomeUI() {
+            // Update step counter
+            document.getElementById('welcome-step').textContent = 'Step ' + currentSlide + ' of ' + totalSlides;
+
+            // Update slides
+            document.querySelectorAll('.welcome-slide').forEach(slide => {
+                slide.classList.remove('active');
+                if (parseInt(slide.dataset.slide) === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+
+            // Update dots
+            document.querySelectorAll('.welcome-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === currentSlide);
+            });
+
+            // Update buttons
+            document.getElementById('welcome-prev').disabled = currentSlide === 1;
+            document.getElementById('welcome-next').textContent = currentSlide === totalSlides ? 'Begin' : 'Next';
+
+            // Update highlights
+            updateHighlights();
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.walkthrough-highlight').forEach(el => {
+                el.classList.remove('walkthrough-highlight');
+            });
+        }
+
+        function updateHighlights() {
+            clearHighlights();
+            
+            // Highlight relevant elements based on current slide
+            const highlightMap = {
+                3: 'browse-orders-btn',      // Browse Orders
+                4: 'seed-order-btn',         // Seed Order
+                5: 'nav-palaver',            // Palaver
+                6: 'nav-astrologue',         // Astrologue
+                7: 'nav-archives',           // Archives
+                8: 'nav-scrolls',            // Scrolls
+                9: 'nav-brothers',           // Brothers
+                10: 'events-section',        // Upcoming Events
+                11: 'profile-link'           // Profile
+            };
+
+            const elementId = highlightMap[currentSlide];
+            if (elementId) {
+                const el = document.getElementById(elementId);
+                if (el) {
+                    el.classList.add('walkthrough-highlight');
+                }
+            }
+        }
+
+        function checkFirstVisit(username) {
+            // Check if tour=1 param is set (replay tour)
+            if (new URLSearchParams(window.location.search).get("tour") === "1") {
+                history.replaceState({}, "", window.location.pathname);
+                setTimeout(showWelcome, 300);
+                return;
+            }
+            // Check server-side onboarding status
+            fetch("/api/onboarding/status", { credentials: "include" })
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.onboarding_complete) {
+                        setTimeout(showWelcome, 500);
+                    }
+                })
+                .catch(e => console.error("Failed to check onboarding status:", e));
+        }
+
+        // Space URL mappings
+        const spaces = {
+            sanctum: null, // Dashboard, no iframe
+            palaver: 'https://palaver.skymasons.xyz/apps/spreed',
+            astrologue: 'https://astrologue.skymasons.xyz/apps/calendar',
+            archives: 'https://archives.skymasons.xyz/apps/files',
+            nexus: 'https://nexus.skymasons.xyz/apps/contacts',
+            scrolls: 'https://scrolls.skymasons.xyz/apps/forms',
+            brothers: 'https://brothers.skymasons.xyz/apps/contacts'
+        };
+
+        let currentSpace = 'sanctum';
+        const frame = document.getElementById('space-frame');
+        const dashboard = document.getElementById('dashboard-content');
+        const loading = document.getElementById('loading-overlay');
+
+        function navigateTo(space) {
+            if (space === currentSpace) return;
+
+            // Update nav active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.space === space);
+            });
+
+            currentSpace = space;
+
+            // Update URL hash for bookmarking/history
+            history.pushState({ space }, '', space === 'sanctum' ? '/' : '#' + space);
+            updateTitle(space);
+
+            if (space === 'sanctum') {
+                // Show dashboard, hide iframe
+                frame.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+                loading.classList.add('hidden');
+            } else {
+                // Show iframe, hide dashboard
+                dashboard.classList.add('hidden');
+                loading.classList.remove('hidden');
+                frame.classList.remove('hidden');
+
+                // Load the space in iframe
+                frame.src = spaces[space];
+            }
+        }
+
+        function updateTitle(space) {
+            const titles = {
+                sanctum: 'The Sanctum',
+                palaver: 'Palaver — The Sanctum',
+                astrologue: 'Astrologue — The Sanctum',
+                archives: 'Archives — The Sanctum',
+                nexus: 'Nexus — The Sanctum',
+                scrolls: 'Scrolls — The Sanctum',
+                brothers: 'Brothers — The Sanctum'
+            };
+            document.title = (titles[space] || 'The Sanctum') + ' — Skymasons';
+        }
+
+        // Hide loading when iframe loads
+        frame.addEventListener('load', function() {
+            loading.classList.add('hidden');
+        });
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', function(e) {
+            const space = e.state?.space || getSpaceFromHash() || 'sanctum';
+            navigateTo(space);
+        });
+
+        function getSpaceFromHash() {
+            const hash = window.location.hash.slice(1);
+            return spaces.hasOwnProperty(hash) ? hash : null;
+        }
+
+        // Initialize from URL hash
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialSpace = getSpaceFromHash() || 'sanctum';
+            if (initialSpace !== 'sanctum') {
+                navigateTo(initialSpace);
+            }
+        });
+
+        // User info
+        fetch("/api/userinfo", { credentials: 'include' })
+            .then(r => r.json())
+            .then(data => {
+                const displayName = data.name || data.username || 'Brother';
+                if (data.name) {
+                    document.getElementById("user-name").textContent = data.name;
+                } else if (data.username) {
+                    document.getElementById("user-name").textContent = data.username;
+                }
+                // Update welcome modal with user's name
+                document.getElementById("welcome-name").textContent = displayName;
+                
+                if (data.groups && data.groups.includes("authentik Admins")) {
+                    document.getElementById("admin-btn").style.display = "inline-block";
+                }
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById("user-avatar").src = "https://brothers.skymasons.xyz/avatar/" + encodeURIComponent(data.username) + "/32";
+                }
+                window.currentUser = {
+                    username: data.username,
+                    name: data.name,
+                    groups: data.groups ? data.groups.split("|") : []
+                };
+                loadUserOrders();
+                loadPalaverRooms();
+                
+                // Check if this is their first visit
+                if (data.username) {
+                    checkFirstVisit(data.username);
+                }
+            })
+            .catch(() => {});
+
+        function loadUserOrders() {
+            fetch("/api/orders", { credentials: 'include' })
+                .then(r => r.json())
+                .then(data => {
+                    const grid = document.getElementById("orders-grid");
+                    const emptyState = document.getElementById("empty-state");
+                    const pendingSection = document.getElementById("pending-section");
+                    const pendingGrid = document.getElementById("pending-grid");
+                    const allOrders = data.orders || [];
+                    populateOrdersDropdown(allOrders);
+                    const usernameLower = (window.currentUser?.username || "").toLowerCase();
+                    const myOrders = allOrders.filter(function(order) {
+                        return order.members && order.members.some(function(m) { return m.toLowerCase() === usernameLower; });
+                    });
+                    const pendingOrders = allOrders.filter(function(order) {
+                        return order.pending && order.pending.some(function(p) { return p.toLowerCase() === usernameLower; });
+                    });
+                    if (myOrders.length === 0) {
+                        emptyState.style.display = "block";
+                    } else {
+                        grid.innerHTML = "";
+                        myOrders.forEach(order => {
+                            const card = document.createElement("a");
+                            card.href = "order.html?id=" + order.id;
+                            card.className = "order-card";
+                            card.innerHTML = "<span class=\"order-badge member\">Member</span><span class=\"order-icon\">" + (order.icon || "&#9672;") + "</span><span class=\"order-name\">" + order.name + "</span><span class=\"order-members\">" + (order.memberCount || 0) + " members</span>";
+                            if (order.color) {
+                                card.style.borderColor = order.color + "40";
+                                card.querySelector(".order-icon").style.color = order.color;
+                            }
+                            grid.appendChild(card);
+                        });
+                    }
+                    if (pendingOrders.length > 0) {
+                        pendingSection.classList.remove("hidden");
+                        pendingGrid.innerHTML = "";
+                        pendingOrders.forEach(order => {
+                            const card = document.createElement("a");
+                            card.href = "order.html?id=" + order.id;
+                            card.className = "order-card";
+                            card.innerHTML = "<span class=\"order-badge pending\">Pending</span><span class=\"order-icon\">" + (order.icon || "&#9672;") + "</span><span class=\"order-name\">" + order.name + "</span><span class=\"order-members\">Awaiting approval</span>";
+                            if (order.color) {
+                                card.style.borderColor = order.color + "40";
+                                card.querySelector(".order-icon").style.color = order.color;
+                            }
+                            pendingGrid.appendChild(card);
+                        });
+                    }
+                })
+                .catch(err => { console.log("Could not load orders:", err); });
+        }
+
+        // Allow manual trigger of welcome tour (e.g., from a help menu)
+        window.showWelcomeTour = function() {
+            currentSlide = 1;
+            showWelcome();
+        };
+    </script>
+</body>
+</html>
