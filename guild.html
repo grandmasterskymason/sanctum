@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guild — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --smoke: #1a1a1a;
+            --guild-color: #c9a227;
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: bguild-box;
+        }
+
+        html, body {
+            min-height: 100vh;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            width: 100%;
+            background: var(--black-deep);
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .header-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            bguild-radius: 50%;
+            bguild: 2px solid rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            bguild-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .header-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            bguild-top: 1px solid rgba(201, 162, 39, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: "Cinzel", serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            bguild-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            bguild-bottom-color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            bguild-bottom-color: var(--gold);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-link:hover .nav-icon { opacity: 1; }
+
+/* Main Content */
+        .main {
+            flex: 1;
+            margin-top: 110px;
+            padding: 2rem 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        /* Guild Header */
+        .guild-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.15);
+        }
+
+        .guild-icon {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            color: var(--guild-color);
+        }
+
+        .guild-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--guild-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .guild-desc {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: rgba(245, 245, 245, 0.6);
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .guild-desc-wrapper {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .guild-desc-edit-btn {
+            display: none;
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: rgba(201, 162, 39, 0.7);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.7rem;
+            bguild-radius: 3px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+
+        .guild-desc-edit-btn:hover {
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .guild-desc-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.75rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-radius: 4px;
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .guild-desc-textarea:focus {
+            outline: none;
+            bguild-color: var(--gold);
+        }
+
+        .guild-desc-actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .guild-desc-save, .guild-desc-cancel {
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.05em;
+            bguild-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .guild-desc-save {
+            background: var(--guild-color);
+            bguild: none;
+            color: var(--black);
+        }
+
+        .guild-desc-save:hover {
+            background: var(--gold);
+        }
+
+        .guild-desc-cancel {
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--cream);
+        }
+
+        .guild-desc-cancel:hover {
+            bguild-color: var(--gold);
+        }
+
+        .guild-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .guild-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guild-meta-label {
+            color: rgba(245, 245, 245, 0.3);
+        }
+
+        .category-badge {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            background: rgba(201, 162, 39, 0.15);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-radius: 2px;
+            color: var(--gold);
+        }
+
+        .category-edit-select {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.5rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-radius: 2px;
+            color: var(--gold);
+            cursor: pointer;
+        }
+
+        .category-edit-select:focus {
+            outline: none;
+            bguild-color: var(--gold);
+        }
+
+        .category-edit-btn {
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: rgba(201, 162, 39, 0.7);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.65rem;
+            bguild-radius: 2px;
+            cursor: pointer;
+            margin-left: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .category-edit-btn:hover {
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Action Section */
+        .action-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.85rem 2rem;
+            background: rgba(201, 162, 39, 0.15);
+            bguild: 1px solid var(--guild-color);
+            color: var(--guild-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: rgba(201, 162, 39, 0.25);
+        }
+
+        .btn-danger {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            bguild: 1px solid rgba(231, 76, 60, 0.4);
+            color: rgba(231, 76, 60, 0.7);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .btn-danger:hover {
+            background: rgba(231, 76, 60, 0.1);
+            bguild-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .action-status {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+            font-style: italic;
+        }
+
+        .action-status.success {
+            color: #27ae60;
+        }
+
+        .action-status.pending {
+            color: #f1c40f;
+        }
+
+        /* Member Spaces */
+        .spaces-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .space-card {
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-radius: 4px;
+            padding: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .space-card:hover {
+            bguild-color: var(--guild-color);
+            background: rgba(201, 162, 39, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .space-icon {
+            font-size: 1.5rem;
+            color: var(--guild-color);
+            opacity: 0.8;
+        }
+
+        .space-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Invite Section */
+        .invite-section {
+            margin-bottom: 2rem;
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-radius: 4px;
+            padding: 1.5rem;
+        }
+
+        .invite-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .invite-input-wrapper {
+            position: relative;
+        }
+
+        .invite-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 2px;
+            color: #f5f5f5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+        }
+
+        .invite-input:focus {
+            outline: none;
+            bguild-color: var(--gold);
+        }
+
+        .invite-input::placeholder {
+            color: rgba(245, 245, 245, 0.3);
+        }
+
+        .invite-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-top: none;
+            bguild-radius: 0 0 4px 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .invite-dropdown.active {
+            display: block;
+        }
+
+        .invite-dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background 0.15s ease;
+        }
+
+        .invite-dropdown-item:hover {
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        .invite-dropdown-item-avatar {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 162, 39, 0.2);
+            bguild-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .invite-dropdown-item-name {
+            font-size: 0.9rem;
+            color: #f5f5f5;
+        }
+
+        .invite-dropdown-item-username {
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.4);
+            margin-left: auto;
+        }
+
+        .invite-dropdown-empty {
+            padding: 1rem;
+            text-align: center;
+            color: rgba(245, 245, 245, 0.4);
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+
+        .invite-selected {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .invite-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(201, 162, 39, 0.1);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--gold-light);
+        }
+
+        .invite-tag-remove {
+            background: none;
+            bguild: none;
+            color: rgba(245, 245, 245, 0.4);
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .invite-tag-remove:hover {
+            color: #e74c3c;
+        }
+
+        .invite-actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .invite-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            background: rgba(201, 162, 39, 0.15);
+            bguild: 1px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .invite-btn:hover {
+            background: rgba(201, 162, 39, 0.25);
+        }
+
+        .invite-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .invite-status {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .invite-status.success {
+            color: #27ae60;
+        }
+
+        .invite-status.error {
+            color: #e74c3c;
+        }
+
+        /* Members Section */
+        .members-section {
+            margin-bottom: 3rem;
+        }
+
+        .members-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .members-list {
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.1);
+            bguild-radius: 4px;
+        }
+
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .member-item:last-child {
+            bguild-bottom: none;
+        }
+
+        .member-avatar {
+            width: 32px;
+            height: 32px;
+            bguild-radius: 50%;
+            background: rgba(201, 162, 39, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.8);
+        }
+
+        .member-role {
+            font-size: 0.7rem;
+            color: var(--guild-color);
+            font-style: italic;
+        }
+
+        .member-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .member-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.75rem;
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .member-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .member-btn.approve {
+            bguild-color: rgba(39, 174, 96, 0.4);
+            color: rgba(39, 174, 96, 0.7);
+        }
+
+        .member-btn.approve:hover {
+            background: rgba(39, 174, 96, 0.1);
+            bguild-color: #27ae60;
+            color: #27ae60;
+        }
+
+        .member-btn.reject {
+            bguild-color: rgba(231, 76, 60, 0.4);
+            color: rgba(231, 76, 60, 0.7);
+        }
+
+        .member-btn.reject:hover {
+            background: rgba(231, 76, 60, 0.1);
+            bguild-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        /* Rites Section */
+        .rites-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            bguild-top: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .rites-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .rites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .rites-empty {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: rgba(245, 245, 245, 0.3);
+            padding: 1rem 0;
+            grid-column: 1 / -1;
+        }
+
+        .rite-tile {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 8px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .rite-tile:hover {
+            bguild-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.15);
+        }
+
+        .rite-tile-date {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .rite-tile-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #f5f5f5;
+            margin-bottom: 0.25rem;
+        }
+
+        .rite-tile-time {
+            font-size: 0.8rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .rites-view-all {
+            display: inline-block;
+            margin-top: 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.6);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .rites-view-all:hover {
+            color: var(--gold);
+        }
+
+        .rite-info {
+            flex: 1;
+        }
+
+        .rite-name {
+            font-size: 0.9rem;
+            color: #f5f5f5;
+        }
+
+        .rite-time {
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.5);
+            margin-top: 0.2rem;
+        }
+
+        /* Pending Section */
+        .pending-section {
+            margin-bottom: 2rem;
+        }
+
+        .pending-badge {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.5rem;
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+            bguild: 1px solid rgba(241, 196, 15, 0.3);
+            bguild-radius: 2px;
+            margin-left: 0.5rem;
+        }
+
+
+        /* Application Editor */
+        .app-editor-section {
+            margin-bottom: 2rem;
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-radius: 4px;
+            padding: 1.5rem;
+        }
+
+        .app-editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .agreements-list {
+            margin-bottom: 1rem;
+        }
+
+        .agreement-edit-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .agreement-edit-item textarea {
+            flex: 1;
+            min-height: 60px;
+            padding: 0.75rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 4px;
+            color: #f5f5f5;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .agreement-edit-item textarea:focus {
+            outline: none;
+            bguild-color: var(--gold);
+        }
+
+        .agreement-remove {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            bguild: 1px solid rgba(231, 76, 60, 0.3);
+            color: rgba(231, 76, 60, 0.6);
+            bguild-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .agreement-remove:hover {
+            background: rgba(231, 76, 60, 0.1);
+            bguild-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .add-agreement {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            bguild: 1px dashed rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .add-agreement:hover {
+            background: rgba(201, 162, 39, 0.05);
+            bguild-style: solid;
+            color: var(--gold);
+        }
+
+        .save-app-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            background: rgba(39, 174, 96, 0.15);
+            bguild: 1px solid rgba(39, 174, 96, 0.4);
+            color: #27ae60;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .save-app-btn:hover {
+            background: rgba(39, 174, 96, 0.25);
+            bguild-color: #27ae60;
+        }
+
+        .app-save-status {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .app-save-status.success { color: #27ae60; }
+        .app-save-status.error { color: #e74c3c; }
+
+        /* Seeder Actions */
+        .seeder-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            bguild-top: 1px solid rgba(231, 76, 60, 0.2);
+            text-align: center;
+        }
+
+        .seeder-warning {
+            font-size: 0.8rem;
+            color: rgba(231, 76, 60, 0.6);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer-whisper {
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.15);
+        }
+
+        /* Loading / Error */
+        .loading-state, .error-state {
+            text-align: center;
+            padding: 4rem;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 1.5rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .spaces-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guild-name {
+                font-size: 1.4rem;
+            }
+
+            .guild-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Add Space Button */
+        .space-card-add {
+            background: transparent;
+            bguild: 2px dashed rgba(201, 162, 39, 0.3);
+            bguild-radius: 4px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .space-card-add:hover {
+            bguild-color: var(--guild-color);
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .space-card-add .space-icon {
+            font-size: 1.5rem;
+            color: rgba(201, 162, 39, 0.5);
+        }
+
+        .space-card-add .space-name {
+            color: rgba(201, 162, 39, 0.5);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            bguild-radius: 8px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-label {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 162, 39, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 4px;
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            bguild-color: var(--guild-color);
+        }
+
+        .modal-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--black);
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 4px;
+            color: var(--cream);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            bguild-radius: 4px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: var(--guild-color);
+            bguild: none;
+            color: var(--black);
+        }
+
+        .modal-btn-primary:hover {
+            background: var(--gold);
+        }
+
+        .modal-btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--cream);
+        }
+
+        .modal-btn-secondary:hover {
+            bguild-color: var(--guild-color);
+        }
+
+        .modal-status {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .modal-status.error {
+            color: #e74c3c;
+        }
+
+        .modal-status.success {
+            color: #27ae60;
+        }
+
+        /* Additional spaces container */
+        .additional-spaces {
+            display: contents;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="/" class="header-logo">
+                <img src="/assets/logo.jpg" alt="Skymasons">
+                <span class="header-title" id="header-title">Guild</span>
+            </a>
+            <div class="header-right">
+                <a href="https://brothers.skymasons.xyz/settings/user" title="Edit Profile">
+                    <img src="https://brothers.skymasons.xyz/avatar/guest/32" alt="Profile" class="user-avatar" id="user-avatar">
+                </a>
+                <a href="https://auth.skymasons.xyz/if/flow/sanctum-logout/" class="header-btn">Depart</a>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <a href="https://sanctum.skymasons.xyz/" class="nav-link active">
+                <span class="nav-icon">&#9678;</span>
+                <span>Sanctum</span>
+            </a>
+            <a href="https://palaver.skymasons.xyz/apps/spreed" class="nav-link" id="nav-palaver">
+                <span class="nav-icon">&#11041;</span>
+                <span>Palaver</span>
+            </a>
+            <a href="https://astrologue.skymasons.xyz/apps/calendar" class="nav-link">
+                <span class="nav-icon">&#10022;</span>
+                <span>Astrologue</span>
+            </a>
+            <a href="https://archives.skymasons.xyz/apps/files" class="nav-link">
+                <span class="nav-icon">&#9671;</span>
+                <span>Archives</span>
+            </a>
+            <a href="https://nexus.skymasons.xyz/apps/contacts" class="nav-link" style="display:none">
+                <span class="nav-icon">&#9672;</span>
+                <span>Nexus</span>
+            </a>
+            <a href="https://brothers.skymasons.xyz/apps/contacts" class="nav-link">
+                <span class="nav-icon">&#9876;</span>
+                <span>Brothers</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div id="loading-state" class="loading-state">
+            <p>Loading guild...</p>
+        </div>
+
+        <div id="error-state" class="error-state hidden">
+            <p>Guild not found</p>
+            <a href="guilds.html" class="header-back" style="margin-top: 1rem; display: inline-block;">Browse Guilds</a>
+        </div>
+
+        <div id="guild-content" class="hidden">
+            <!-- Guild Header -->
+            <div class="guild-header">
+                <div class="guild-icon" id="guild-icon"></div>
+                <h1 class="guild-name" id="guild-name"></h1>
+                <div class="guild-desc-wrapper">
+                    <span class="guild-desc" id="guild-desc"></span>
+                    <button class="guild-desc-edit-btn" id="guild-desc-edit-btn" onclick="startEditDescription()">Edit</button>
+                    <div id="guild-desc-edit-form" style="display: none;">
+                        <textarea class="guild-desc-textarea" id="guild-desc-textarea" maxlength="2000"></textarea>
+                        <div class="guild-desc-actions">
+                            <button class="guild-desc-cancel" onclick="cancelEditDescription()">Cancel</button>
+                            <button class="guild-desc-save" onclick="saveDescription()">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="guild-meta">
+                    <div class="guild-meta-item">
+                        <span class="guild-meta-label">Admission:</span>
+                        <span id="guild-admission"></span>
+                    </div>
+                    <div class="guild-meta-item">
+                        <span class="guild-meta-label">Seeder:</span>
+                        <span id="guild-seeder"></span>
+                    </div>
+                    <div class="guild-meta-item">
+                        <span class="guild-meta-label">Members:</span>
+                        <span id="guild-member-count"></span>
+                    </div>
+                    <div class="guild-meta-item" id="category-meta-item">
+                        <span class="guild-meta-label">Category:</span>
+                        <span id="guild-category-display">
+                            <span class="category-badge" id="guild-category"></span>
+                            <button class="category-edit-btn hidden" id="category-edit-btn" onclick="toggleCategoryEdit()">Edit</button>
+                        </span>
+                        <select class="category-edit-select hidden" id="category-select" onchange="saveCategory(this.value)">
+                            <option value="social">Social</option>
+                            <option value="governance">Governance</option>
+                            <option value="events">Events</option>
+                            <option value="collaboration">Collaboration</option>
+                            <option value="study">Study</option>
+                            <option value="practice">Practice</option>
+                            <option value="service">Service</option>
+                            <option value="creative">Creative</option>
+                            <option value="regional">Regional</option>
+                            <option value="discussion">Discussion</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Section (for non-members) -->
+            <div class="action-section" id="action-section">
+                <button class="btn-primary" id="action-btn">Join Guild</button>
+                <p class="action-status" id="action-status"></p>
+            </div>
+
+            <!-- Member Spaces (for members only) -->
+            <div class="spaces-section hidden" id="spaces-section">
+                <h2 class="section-title">Guild Spaces</h2>
+                <div class="spaces-grid" id="spaces-grid">
+                    <a href="#" class="space-card" id="space-chat">
+                        <span class="space-icon">&#11041;</span>
+                        <span class="space-name">Palaver</span>
+                    </a>
+                    <a href="#" class="space-card" id="space-files">
+                        <span class="space-icon">&#9671;</span>
+                        <span class="space-name">Archives</span>
+                    </a>
+                    <div class="additional-spaces" id="additional-spaces"></div>
+                    <button class="space-card-add hidden" id="add-space-btn" onclick="openAddSpaceModal()">
+                        <span class="space-icon">+</span>
+                        <span class="space-name">Add Space</span>
+                    </button>
+                </div>
+
+                <!-- Upcoming Rites -->
+                <div class="rites-section" id="rites-section">
+                    <h3 class="rites-title">Upcoming Rites</h3>
+                    <div class="rites-grid" id="rites-list">
+                        <div class="rites-empty">No upcoming rites scheduled</div>
+                    </div>
+                    <a href="#" class="rites-view-all" id="rites-view-all">View Calendar</a>
+                </div>
+            </div>
+
+            <!-- Pending Applications (for seeder only) -->
+            <div class="pending-section hidden" id="pending-section">
+                <h2 class="section-title">Pending Applications <span class="pending-badge" id="pending-count">0</span></h2>
+                <div class="members-list" id="pending-list"></div>
+            </div>
+
+            <!-- Invite Members (for members only) -->
+            <div class="invite-section hidden" id="invite-section">
+                <div class="invite-header">
+                    <h2 class="section-title">Invite Members</h2>
+                </div>
+                <div class="invite-input-wrapper">
+                    <input type="text" class="invite-input" id="invite-search" placeholder="Search by username...">
+                    <div class="invite-dropdown" id="invite-dropdown"></div>
+                </div>
+                <div class="invite-selected" id="invite-selected"></div>
+                <div class="invite-actions" id="invite-actions" style="display: none;">
+                    <button class="invite-btn" id="invite-btn">Send Invites</button>
+                </div>
+                <p class="invite-status" id="invite-status"></p>
+            </div>
+
+            <!-- Members Section -->
+            <div class="members-section">
+                <div class="members-header">
+                    <h2 class="section-title">Members</h2>
+                </div>
+                <div class="members-list" id="members-list"></div>
+            </div>
+
+            <!-- Member Actions -->
+            <div class="action-section hidden" id="leave-section">
+                <button class="btn-danger" id="leave-btn">Leave Guild</button>
+            </div>
+
+            <!-- Application Form Editor (Seeder only) -->
+            <div class="app-editor-section hidden" id="app-editor-section">
+                <div class="app-editor-header">
+                    <h2 class="section-title">Application Form</h2>
+                </div>
+                <p class="form-hint" style="margin-bottom: 1rem; font-size: 0.85rem; color: rgba(245,245,245,0.4); font-style: italic;">Customize what applicants must agree to when applying</p>
+                
+                <div class="agreements-list" id="agreements-list">
+                    <!-- Agreements will be populated by JS -->
+                </div>
+                
+                <button type="button" class="add-agreement" id="add-agreement-edit">+ Add Agreement</button>
+                
+                <button type="button" class="save-app-btn" id="save-app-btn">Save Application Form</button>
+                <p class="app-save-status hidden" id="app-save-status"></p>
+            </div>
+
+            <!-- Seeder Actions -->
+            <div class="seeder-section hidden" id="seeder-section">
+                <p class="seeder-warning">As the Seeder, you have the power to dissolve this Guild</p>
+                <button class="btn-danger" id="destroy-btn">Destroy Guild</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-whisper">Per aspera ad astra</p>
+    </footer>
+
+    <script>
+        let currentUser = null;
+        let currentGuild = null;
+
+        // Get guild ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const guildId = urlParams.get('id');
+
+        if (!guildId) {
+            showError();
+        }
+
+        // Fetch user info first
+        fetch('/api/userinfo', { credentials: 'include' })
+            .then(r => r.json())
+            .then(data => {
+                currentUser = {
+                    username: data.username,
+                    name: data.name,
+                    groups: data.groups ? data.groups.split('|') : []
+                };
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById("user-avatar").src = "https://brothers.skymasons.xyz/avatar/" + encodeURIComponent(data.username) + "/32";
+                }
+                loadGuild();
+            })
+            .catch(() => {
+                loadGuild();
+            });
+
+        function loadGuild() {
+            fetch(`/api/guilds/${guildId}`, { credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Not found');
+                    return r.json();
+                })
+                .then(guild => {
+                    currentGuild = guild;
+                    renderGuild(guild);
+                })
+                .catch(() => {
+                    showError();
+                });
+        }
+
+        function showError() {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('error-state').classList.remove('hidden');
+        }
+
+        function renderGuild(guild) {
+            // Set CSS variable for guild color
+            if (guild.color) {
+                document.documentElement.style.setProperty('--guild-color', guild.color);
+            }
+
+            // Update header
+            document.getElementById('header-title').textContent = guild.name;
+            document.title = `${guild.name} — Skymasons`;
+
+            // Populate guild header
+            document.getElementById('guild-icon').textContent = guild.icon || '⬡';
+            document.getElementById('guild-name').textContent = guild.name;
+            document.getElementById('guild-desc').textContent = guild.description || '';
+            document.getElementById('guild-admission').textContent = guild.admission === 'open' ? 'Open' : 'Application Required';
+            document.getElementById('guild-seeder').textContent = '@' + guild.seederUid;
+            document.getElementById('guild-member-count').textContent = guild.memberCount || 0;
+
+            // Display category
+            const categoryLabels = {
+                social: 'Social',
+                governance: 'Governance',
+                events: 'Events',
+                collaboration: 'Collaboration',
+                study: 'Study',
+                practice: 'Practice',
+                service: 'Service',
+                creative: 'Creative',
+                regional: 'Regional',
+                discussion: 'Discussion'
+            };
+            const category = guild.category || 'social';
+            document.getElementById('guild-category').textContent = categoryLabels[category] || category;
+            document.getElementById('category-select').value = category;
+
+            const usernameLower = (currentUser?.username || '').toLowerCase();
+            const isSeeder = currentUser && (guild.seederUid || '').toLowerCase() === usernameLower;
+            const isMember = currentUser && guild.members && guild.members.some(function(m) { return m.toLowerCase() === usernameLower; });
+            const isPending = currentUser && guild.pending && guild.pending.some(function(p) { return p.toLowerCase() === usernameLower; });
+
+            // Render action section
+            const actionSection = document.getElementById('action-section');
+            const actionBtn = document.getElementById('action-btn');
+            const actionStatus = document.getElementById('action-status');
+
+            if (isMember || isSeeder) {
+                actionSection.classList.add('hidden');
+                document.getElementById('spaces-section').classList.remove('hidden');
+
+                // Set up space links
+                if (guild.resources) {
+                    if (guild.resources.talkRoom) { document.getElementById('nav-palaver').href = `https://palaver.skymasons.xyz/call/${guild.resources.talkRoom}`; document.getElementById('space-chat').href = `https://palaver.skymasons.xyz/call/${guild.resources.talkRoom}`; } else { document.getElementById('space-chat').style.display = 'none'; }
+
+                    // Link to Guild-specific folder if it exists
+                    const folderName = guild.resources.folderName || guild.name;
+                    if (guild.resources.folderId) {
+                        document.getElementById('space-files').href = `https://archives.skymasons.xyz/apps/files/files?dir=/${encodeURIComponent(folderName)}`;
+                    } else {
+                        document.getElementById('space-files').href = `https://archives.skymasons.xyz/apps/files`;
+                    }
+
+                    document.getElementById('rites-view-all').href = `https://astrologue.skymasons.xyz/apps/calendar`;
+
+                    // Render additional talk rooms
+                    renderAdditionalSpaces(guild);
+                }
+
+                // Show add space button, description edit, and category edit for seeder
+                if (isSeeder) {
+                    document.getElementById('add-space-btn').classList.remove('hidden');
+                    document.getElementById('guild-desc-edit-btn').style.display = 'inline-block';
+                    document.getElementById('category-edit-btn').classList.remove('hidden');
+                }
+
+                // Load upcoming rites
+                loadUpcomingRites(guild);
+
+                // Show leave button for members (not seeder)
+                if (isMember && !isSeeder) {
+                    document.getElementById('leave-section').classList.remove('hidden');
+                }
+
+                // Show invite section for all members
+                document.getElementById('invite-section').classList.remove('hidden');
+                initInviteUI(guild);
+            } else if (isPending) {
+                actionBtn.textContent = 'Application Pending';
+                actionBtn.disabled = true;
+                actionBtn.style.opacity = '0.5';
+                actionBtn.style.cursor = 'not-allowed';
+                actionStatus.textContent = 'Your application is awaiting approval from the Seeder';
+                actionStatus.classList.add('pending');
+            } else {
+                if (guild.admission === 'open') {
+                    actionBtn.textContent = 'Join Guild';
+                    actionBtn.onclick = () => joinGuild();
+                } else {
+                    actionBtn.textContent = 'Apply to Join';
+                    actionBtn.onclick = () => window.location.href = 'apply.html?id=' + guildId;
+                    
+                }
+            }
+
+            // Render pending applications (seeder only)
+            if ((isMember || isSeeder) && guild.pending && guild.pending.length > 0) {
+                document.getElementById('pending-section').classList.remove('hidden');
+                document.getElementById('pending-count').textContent = guild.pending.length;
+                
+                const pendingList = document.getElementById('pending-list');
+                const applications = guild.applications || [];
+                
+                pendingList.innerHTML = guild.pending.map(uid => {
+                    const app = applications.find(a => a.userId === uid);
+                    const msg = app && app.message ? app.message : '';
+                    const dateStr = app && app.appliedAt ? new Date(app.appliedAt).toLocaleDateString() : '';
+                    
+                    return `
+                        <div class="member-item" style="flex-direction: column; align-items: stretch;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div class="member-avatar">${uid.charAt(0).toUpperCase()}</div>
+                                    <div class="member-info">
+                                        <div class="member-name">@${uid}</div>
+                                        ${dateStr ? `<div class="member-role">Applied ${dateStr}</div>` : ''}
+                                    </div>
+                                </div>
+                                <div class="member-actions">
+                                    <button class="member-btn approve" onclick="approveApplication('${uid}')">Approve</button>
+                                    <button class="member-btn reject" onclick="rejectApplication('${uid}')">Reject</button>
+                                </div>
+                            </div>
+                            ${msg ? `<div style="margin-top: 0.75rem; padding: 0.75rem 1rem; background: rgba(0,0,0,0.2); bguild-radius: 4px; font-style: italic; color: rgba(245,245,245,0.8);">"${msg}"</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Render members list
+            const membersList = document.getElementById('members-list');
+            const allMembers = [guild.seederUid, ...(guild.members || []).filter(m => m !== guild.seederUid)];
+            
+            membersList.innerHTML = allMembers.map(uid => `
+                <div class="member-item">
+                    <div class="member-avatar">${uid.charAt(0).toUpperCase()}</div>
+                    <div class="member-info">
+                        <div class="member-name">@${uid}</div>
+                        ${uid === guild.seederUid ? '<div class="member-role">Seeder</div>' : ''}
+                    </div>
+                </div>
+            `).join('');
+
+
+            // Show application editor for all members
+            if (isMember) {
+                document.getElementById('app-editor-section').classList.remove('hidden');
+                loadApplicationForm(guild);
+            }
+
+            // Show seeder controls
+            if (isSeeder) {
+                document.getElementById('seeder-section').classList.remove('hidden');
+            }
+
+            // Show content
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('guild-content').classList.remove('hidden');
+        }
+
+        function joinGuild() {
+            fetch(`/api/guilds/${guildId}/join`, { method: 'POST', credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed');
+                    return r.json();
+                })
+                .then(() => {
+                    location.reload();
+                })
+                .catch(err => {
+                    document.getElementById('action-status').textContent = 'Failed to join. Please try again.';
+                });
+        }
+
+        function applyToGuild() {
+            fetch(`/api/guilds/${guildId}/apply`, { method: 'POST', credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed');
+                    return r.json();
+                })
+                .then(() => {
+                    location.reload();
+                })
+                .catch(err => {
+                    document.getElementById('action-status').textContent = 'Failed to apply. Please try again.';
+                });
+        }
+
+        function approveApplication(uid) {
+            fetch(`/api/guilds/${guildId}/members/${uid}/approve`, { method: 'POST', credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed');
+                    return r.json();
+                })
+                .then(() => {
+                    location.reload();
+                })
+                .catch(err => {
+                    alert('Failed to approve application');
+                });
+        }
+
+        function rejectApplication(uid) {
+            fetch(`/api/guilds/${guildId}/members/${uid}/reject`, { method: 'POST', credentials: 'include' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed');
+                    return r.json();
+                })
+                .then(() => {
+                    location.reload();
+                })
+                .catch(err => {
+                    alert('Failed to reject application');
+                });
+        }
+
+        document.getElementById('leave-btn').onclick = function() {
+            if (confirm('Are you sure you want to leave this Guild?')) {
+                fetch(`/api/guilds/${guildId}/leave`, { method: 'POST', credentials: 'include' })
+                    .then(r => {
+                        if (!r.ok) throw new Error('Failed');
+                        return r.json();
+                    })
+                    .then(() => {
+                        window.location.href = 'guilds.html';
+                    })
+                    .catch(err => {
+                        alert('Failed to leave guild');
+                    });
+            }
+        };
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById("user-avatar").src = "https://brothers.skymasons.xyz/avatar/" + encodeURIComponent(data.username) + "/32";
+                }
+
+        document.getElementById('destroy-btn').onclick = function() {
+            if (confirm('Are you sure you want to DESTROY this Guild? This cannot be undone.')) {
+                if (confirm('This will remove all members and delete all Guild resources. Continue?')) {
+                    fetch(`/api/guilds/${guildId}`, { method: 'DELETE', credentials: 'include' })
+                        .then(r => {
+                            if (!r.ok) throw new Error('Failed');
+                            return r.json();
+                        })
+                        .then(() => {
+                            window.location.href = 'guilds.html';
+                        })
+                        .catch(err => {
+                            alert('Failed to destroy guild');
+                        });
+                }
+            }
+        };
+                // Load user avatar
+                if (data.username) {
+                    document.getElementById("user-avatar").src = "https://brothers.skymasons.xyz/avatar/" + encodeURIComponent(data.username) + "/32";
+                }
+
+        // Invite UI functionality
+        let inviteSelected = [];
+        let searchTimeout = null;
+
+        function initInviteUI(guild) {
+            const inviteSearch = document.getElementById('invite-search');
+            const inviteDropdown = document.getElementById('invite-dropdown');
+            const inviteSelectedContainer = document.getElementById('invite-selected');
+            const inviteActions = document.getElementById('invite-actions');
+            const inviteBtn = document.getElementById('invite-btn');
+            const inviteStatus = document.getElementById('invite-status');
+
+            inviteSearch.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                const query = this.value.trim();
+
+                if (query.length < 2) {
+                    inviteDropdown.classList.remove('active');
+                    return;
+                }
+
+                searchTimeout = setTimeout(() => {
+                    searchUsers(query, guild);
+                }, 300);
+            });
+
+            inviteSearch.addEventListener('focus', function() {
+                if (this.value.trim().length >= 2) {
+                    inviteDropdown.classList.add('active');
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.invite-input-wrapper')) {
+                    inviteDropdown.classList.remove('active');
+                }
+            });
+
+            inviteBtn.addEventListener('click', function() {
+                sendInvites();
+            });
+        }
+
+        async function searchUsers(query, guild) {
+            const inviteDropdown = document.getElementById('invite-dropdown');
+
+            try {
+                const response = await fetch(`/api/users/search?q=${encodeURIComponent(query)}`, { credentials: 'include' });
+                if (!response.ok) throw new Error('Search failed');
+                const users = await response.json();
+
+                // Filter out current members, pending, already selected, and current user (case-insensitive)
+                const filtered = users.filter(function(u) {
+                    var uLower = u.username.toLowerCase();
+                    var inMembers = guild.members.some(function(m) { return m.toLowerCase() === uLower; });
+                    var inPending = (guild.pending || []).some(function(p) { return p.toLowerCase() === uLower; });
+                    var inSelected = inviteSelected.some(function(s) { return s.username.toLowerCase() === uLower; });
+                    var isSelf = currentUser && uLower === currentUser.username.toLowerCase();
+                    return !inMembers && !inPending && !inSelected && !isSelf;
+                });
+
+                if (filtered.length === 0) {
+                    inviteDropdown.innerHTML = '<div class="invite-dropdown-empty">No users found</div>';
+                } else {
+                    inviteDropdown.innerHTML = filtered.map(user => `
+                        <div class="invite-dropdown-item" data-username="${user.username}" data-name="${user.name || user.username}">
+                            <div class="invite-dropdown-item-avatar">${(user.name || user.username).charAt(0)}</div>
+                            <span class="invite-dropdown-item-name">${user.name || user.username}</span>
+                            <span class="invite-dropdown-item-username">@${user.username}</span>
+                        </div>
+                    `).join('');
+
+                    inviteDropdown.querySelectorAll('.invite-dropdown-item').forEach(item => {
+                        item.addEventListener('click', function() {
+                            addToInviteList({
+                                username: this.dataset.username,
+                                name: this.dataset.name
+                            });
+                            document.getElementById('invite-search').value = '';
+                            inviteDropdown.classList.remove('active');
+                        });
+                    });
+                }
+                inviteDropdown.classList.add('active');
+            } catch (err) {
+                inviteDropdown.innerHTML = '<div class="invite-dropdown-empty">Unable to search users</div>';
+                inviteDropdown.classList.add('active');
+            }
+        }
+
+        function addToInviteList(user) {
+            if (inviteSelected.some(u => u.username === user.username)) return;
+            inviteSelected.push(user);
+            renderInviteSelected();
+        }
+
+        function removeFromInviteList(username) {
+            inviteSelected = inviteSelected.filter(u => u.username !== username);
+            renderInviteSelected();
+        }
+
+        function renderInviteSelected() {
+            const container = document.getElementById('invite-selected');
+            const actions = document.getElementById('invite-actions');
+
+            container.innerHTML = inviteSelected.map(user => `
+                <div class="invite-tag">
+                    <span>${user.name}</span>
+                    <button type="button" class="invite-tag-remove" data-username="${user.username}">&times;</button>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('.invite-tag-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    removeFromInviteList(this.dataset.username);
+                });
+            });
+
+            actions.style.display = inviteSelected.length > 0 ? 'flex' : 'none';
+            document.getElementById('invite-status').textContent = '';
+        }
+
+        async function sendInvites() {
+            if (inviteSelected.length === 0) return;
+
+            const inviteBtn = document.getElementById('invite-btn');
+            const inviteStatus = document.getElementById('invite-status');
+
+            inviteBtn.disabled = true;
+            inviteBtn.textContent = 'Sending...';
+            inviteStatus.textContent = '';
+            inviteStatus.className = 'invite-status';
+
+            try {
+                const response = await fetch(`/api/guilds/${guildId}/invite`, {
+                    credentials: 'include',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ members: inviteSelected.map(u => u.username) })
+                });
+
+                if (!response.ok) throw new Error('Failed to send invites');
+
+                const result = await response.json();
+
+                if (result.invited && result.invited.length > 0) {
+                    inviteStatus.textContent = `Successfully invited ${result.invited.length} member(s)`;
+                    inviteStatus.classList.add('success');
+                    inviteSelected = [];
+                    renderInviteSelected();
+
+                    // Reload to show new members
+                    setTimeout(() => location.reload(), 1500);
+                } else if (result.failed && result.failed.length > 0) {
+                    inviteStatus.textContent = `Failed: ${result.failed.map(f => f.reason).join(', ')}`;
+                    inviteStatus.classList.add('error');
+                }
+            } catch (err) {
+                inviteStatus.textContent = 'Failed to send invites. Please try again.';
+                inviteStatus.classList.add('error');
+            } finally {
+                inviteBtn.disabled = false;
+                inviteBtn.textContent = 'Send Invites';
+            }
+        }
+
+        // Application Form Editor
+        function loadApplicationForm(guild) {
+            const list = document.getElementById('agreements-list');
+            const agreements = guild.applicationForm?.agreements || [];
+            
+            list.innerHTML = '';
+            
+            if (agreements.length === 0) {
+                // Add default agreements if none exist
+                const defaults = [
+                    'I agree to uphold the values and principles of the Skymasons, conducting myself with integrity and respect toward all members.',
+                    'I understand that discussions and materials shared within this Guild are confidential.',
+                    'I commit to actively participating in Guild activities.'
+                ];
+                defaults.forEach((text, i) => addAgreementField(text));
+            } else {
+                agreements.forEach(a => addAgreementField(a.text));
+            }
+        }
+        
+        function addAgreementField(text = '') {
+            const list = document.getElementById('agreements-list');
+            const item = document.createElement('div');
+            item.className = 'agreement-edit-item';
+            item.innerHTML = `
+                <textarea placeholder="Agreement text...">${text}</textarea>
+                <button type="button" class="agreement-remove" onclick="removeAgreementField(this)">&times;</button>
+            `;
+            list.appendChild(item);
+        }
+        
+        function removeAgreementField(btn) {
+            const items = document.querySelectorAll('.agreement-edit-item');
+            if (items.length > 1) {
+                btn.closest('.agreement-edit-item').remove();
+            }
+        }
+        
+        document.getElementById('add-agreement-edit')?.addEventListener('click', () => addAgreementField());
+        
+        document.getElementById('save-app-btn')?.addEventListener('click', async () => {
+            const statusEl = document.getElementById('app-save-status');
+            const btn = document.getElementById('save-app-btn');
+            
+            const agreements = [];
+            document.querySelectorAll('.agreement-edit-item textarea').forEach((ta, i) => {
+                const text = ta.value.trim();
+                if (text) {
+                    agreements.push({ id: i + 1, text: text });
+                }
+            });
+            
+            btn.textContent = 'Saving...';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch(`/api/guilds/${guildId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        applicationForm: { agreements: agreements }
+                    })
+                });
+                
+                if (!response.ok) throw new Error('Failed to save');
+                
+                statusEl.textContent = 'Application form saved!';
+                statusEl.className = 'app-save-status success';
+                statusEl.classList.remove('hidden');
+                
+                setTimeout(() => statusEl.classList.add('hidden'), 3000);
+            } catch (err) {
+                statusEl.textContent = 'Failed to save. Please try again.';
+                statusEl.className = 'app-save-status error';
+                statusEl.classList.remove('hidden');
+            }
+            
+            btn.textContent = 'Save Application Form';
+            btn.disabled = false;
+        });
+
+        // Load upcoming rites from calendar
+        async function loadUpcomingRites(guild) {
+            const ritesList = document.getElementById('rites-list');
+            const calendarUri = guild.resources?.calendarUri;
+
+            if (!calendarUri) {
+                return;
+            }
+
+            try {
+                // Fetch events from Nextcloud calendar API
+                const response = await fetch(`/api/calendar/${calendarUri}/events`, { credentials: 'include' });
+
+                if (!response.ok) {
+                    return;
+                }
+
+                const events = await response.json();
+
+                if (events && events.length > 0) {
+                    ritesList.innerHTML = events.slice(0, 6).map(event => {
+                        const startDate = new Date(event.start);
+                        const dayName = startDate.toLocaleDateString('en-US', { weekday: 'short' });
+                        const dateStr = startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        const timeStr = startDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+                        return `
+                            <div class="rite-tile">
+                                <div class="rite-tile-date">${dayName}, ${dateStr}</div>
+                                <div class="rite-tile-name">${event.title}</div>
+                                <div class="rite-tile-time">${timeStr}</div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            } catch (err) {
+                console.log('Could not load rites:', err);
+            }
+        }
+    </script>
+
+    <!-- Add Space Modal -->
+    <div class="modal-overlay" id="add-space-modal">
+        <div class="modal">
+            <h3 class="modal-title">Add New Space</h3>
+            <div class="modal-form-group">
+                <label class="modal-label" for="space-type">Space Type</label>
+                <select class="modal-select" id="space-type">
+                    <option value="palaver">Palaver (Chat Room)</option>
+                </select>
+            </div>
+            <div class="modal-form-group">
+                <label class="modal-label" for="space-name">Space Name</label>
+                <input type="text" class="modal-input" id="space-name" placeholder="e.g., General Discussion">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-secondary" onclick="closeAddSpaceModal()">Cancel</button>
+                <button class="modal-btn modal-btn-primary" id="create-space-btn" onclick="createSpace()">Create</button>
+            </div>
+            <p class="modal-status" id="space-modal-status"></p>
+        </div>
+    </div>
+
+    <script>
+        // Add Space Modal Functions
+        function openAddSpaceModal() {
+            document.getElementById('add-space-modal').classList.add('active');
+            document.getElementById('space-name').value = '';
+            document.getElementById('space-modal-status').textContent = '';
+            document.getElementById('space-modal-status').className = 'modal-status';
+        }
+
+        function closeAddSpaceModal() {
+            document.getElementById('add-space-modal').classList.remove('active');
+        }
+
+        async function createSpace() {
+            const spaceType = document.getElementById('space-type').value;
+            const spaceName = document.getElementById('space-name').value.trim();
+            const statusEl = document.getElementById('space-modal-status');
+            const createBtn = document.getElementById('create-space-btn');
+
+            if (!spaceName) {
+                statusEl.textContent = 'Please enter a space name';
+                statusEl.className = 'modal-status error';
+                return;
+            }
+
+            createBtn.disabled = true;
+            createBtn.textContent = 'Creating...';
+            statusEl.textContent = '';
+
+            try {
+                const response = await fetch(`/api/guilds/${guildId}/spaces`, {
+                    credentials: 'include',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: spaceType,
+                        name: spaceName
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to create space');
+                }
+
+                statusEl.textContent = 'Space created successfully!';
+                statusEl.className = 'modal-status success';
+
+                // Add the new space to the grid
+                if (data.space) {
+                    addSpaceToGrid(data.space);
+                }
+
+                // Close modal after a short delay
+                setTimeout(() => {
+                    closeAddSpaceModal();
+                }, 1000);
+
+            } catch (err) {
+                statusEl.textContent = err.message;
+                statusEl.className = 'modal-status error';
+            }
+
+            createBtn.disabled = false;
+            createBtn.textContent = 'Create';
+        }
+
+        function addSpaceToGrid(space) {
+            const container = document.getElementById('additional-spaces');
+            const spaceHtml = `
+                <a href="https://palaver.skymasons.xyz/call/${space.token}" class="space-card">
+                    <span class="space-icon">&#11041;</span>
+                    <span class="space-name">${space.name}</span>
+                </a>
+            `;
+            container.insertAdjacentHTML('beforeend', spaceHtml);
+        }
+
+        function renderAdditionalSpaces(guild) {
+            const container = document.getElementById('additional-spaces');
+            const additionalRooms = guild.resources?.additionalTalkRooms || [];
+
+            container.innerHTML = additionalRooms.map(room => `
+                <a href="https://palaver.skymasons.xyz/call/${room.token}" class="space-card">
+                    <span class="space-icon">&#11041;</span>
+                    <span class="space-name">${room.name}</span>
+                </a>
+            `).join('');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('add-space-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddSpaceModal();
+            }
+        });
+
+        // Description editing functions
+        function startEditDescription() {
+            const descEl = document.getElementById('guild-desc');
+            const editBtn = document.getElementById('guild-desc-edit-btn');
+            const editForm = document.getElementById('guild-desc-edit-form');
+            const textarea = document.getElementById('guild-desc-textarea');
+
+            textarea.value = descEl.textContent || '';
+            descEl.style.display = 'none';
+            editBtn.style.display = 'none';
+            editForm.style.display = 'block';
+            textarea.focus();
+        }
+
+        function cancelEditDescription() {
+            const descEl = document.getElementById('guild-desc');
+            const editBtn = document.getElementById('guild-desc-edit-btn');
+            const editForm = document.getElementById('guild-desc-edit-form');
+
+            editForm.style.display = 'none';
+            descEl.style.display = 'inline';
+            editBtn.style.display = 'inline-block';
+        }
+
+        async function saveDescription() {
+            const descEl = document.getElementById('guild-desc');
+            const editBtn = document.getElementById('guild-desc-edit-btn');
+            const editForm = document.getElementById('guild-desc-edit-form');
+            const textarea = document.getElementById('guild-desc-textarea');
+            const saveBtn = editForm.querySelector('.guild-desc-save');
+
+            const newDescription = textarea.value.trim();
+
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                const response = await fetch(`/api/guilds/${guildId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ description: newDescription })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to save');
+                }
+
+                // Update the displayed description
+                descEl.textContent = newDescription;
+                editForm.style.display = 'none';
+                descEl.style.display = 'inline';
+                editBtn.style.display = 'inline-block';
+
+            } catch (err) {
+                alert('Failed to save description. Please try again.');
+            }
+
+            saveBtn.textContent = 'Save';
+            saveBtn.disabled = false;
+        }
+
+        // Category editing functions
+        function toggleCategoryEdit() {
+            const categoryBadge = document.getElementById('guild-category');
+            const editBtn = document.getElementById('category-edit-btn');
+            const selectEl = document.getElementById('category-select');
+            const displayEl = document.getElementById('guild-category-display');
+
+            displayEl.classList.add('hidden');
+            selectEl.classList.remove('hidden');
+            selectEl.focus();
+        }
+
+        async function saveCategory(newCategory) {
+            const categoryBadge = document.getElementById('guild-category');
+            const editBtn = document.getElementById('category-edit-btn');
+            const selectEl = document.getElementById('category-select');
+            const displayEl = document.getElementById('guild-category-display');
+
+            const categoryLabels = {
+                social: 'Social',
+                governance: 'Governance',
+                events: 'Events',
+                collaboration: 'Collaboration',
+                study: 'Study',
+                practice: 'Practice',
+                service: 'Service',
+                creative: 'Creative',
+                regional: 'Regional',
+                discussion: 'Discussion'
+            };
+
+            try {
+                const response = await fetch(`/api/guilds/${guildId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category: newCategory })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to save');
+                }
+
+                // Update the displayed category
+                categoryBadge.textContent = categoryLabels[newCategory] || newCategory;
+                selectEl.classList.add('hidden');
+                displayEl.classList.remove('hidden');
+
+            } catch (err) {
+                alert('Failed to save category. Please try again.');
+                selectEl.classList.add('hidden');
+                displayEl.classList.remove('hidden');
+            }
+        }
+
+        // Cancel category edit on blur (with small delay to allow selection)
+        document.getElementById('category-select').addEventListener('blur', function() {
+            setTimeout(() => {
+                this.classList.add('hidden');
+                document.getElementById('guild-category-display').classList.remove('hidden');
+            }, 150);
+        });
+    </script>
+</body>
+</html>

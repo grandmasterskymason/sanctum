@@ -14,78 +14,82 @@
         .chat-wrapper { display: flex; flex-direction: column; }
         .chat-messages { max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; padding: 0.5rem 0; }
         .chat-messages::-webkit-scrollbar { width: 6px; }
-        .chat-messages::-webkit-scrollbar-track { background: var(--black); border-radius: 3px; }
-        .chat-messages::-webkit-scrollbar-thumb { background: var(--gray-dark); border-radius: 3px; }
+        .chat-messages::-webkit-scrollbar-track { background: var(--black); bguild-radius: 3px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--gray-dark); bguild-radius: 3px; }
         .chat-messages::-webkit-scrollbar-thumb:hover { background: var(--gray); }
-        .chat-input-form { display: flex; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--gray-dark); margin-top: 0.75rem; }
-        .chat-input { flex: 1; background: var(--black-light); border: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 1.08rem; border-radius: 4px; }
-        .chat-input:focus { outline: none; border-color: var(--gold); }
-        .chat-send { background: var(--gold); color: var(--black); border: none; padding: 0.5rem 1rem; font-family: inherit; font-size: 1.08rem; cursor: pointer; border-radius: 4px; }
+        .chat-input-form { display: flex; gap: 0.5rem; padding-top: 0.75rem; bguild-top: 1px solid var(--gray-dark); margin-top: 0.75rem; }
+        .chat-input { flex: 1; background: var(--black-light); bguild: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 1.08rem; bguild-radius: 4px; }
+        .chat-input:focus { outline: none; bguild-color: var(--gold); }
+        .chat-send { background: var(--gold); color: var(--black); bguild: none; padding: 0.5rem 1rem; font-family: inherit; font-size: 1.08rem; cursor: pointer; bguild-radius: 4px; }
         .chat-send:hover { background: var(--gold-dim); }
         .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
         .chat-message { font-size: 1.1rem; display: flex; align-items: flex-start; gap: 0.75rem; position: relative; }
-        .chat-message .msg-avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; border: 2px solid var(--gray-dark); }
-        .chat-message .msg-content { flex: 1; background: var(--black-light); border-radius: 12px; border-top-left-radius: 4px; padding: 0.75rem 1rem; border-left: 3px solid var(--gold-dim); position: relative; }
+        .chat-message .msg-avatar { width: 32px; height: 32px; bguild-radius: 50%; flex-shrink: 0; bguild: 2px solid var(--gray-dark); }
+        .chat-message .msg-content { flex: 1; background: var(--black-light); bguild-radius: 12px; bguild-top-left-radius: 4px; padding: 0.75rem 1rem; bguild-left: 3px solid var(--gold-dim); position: relative; }
         .chat-message .msg-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.35rem; }
         .chat-message .author { color: var(--gold); font-size: 1rem; font-weight: 600; }
         .chat-message .time { color: var(--gray); font-size: 0.8rem; }
         .chat-message .text { color: var(--white); font-size: 1.1rem; line-height: 1.5; }
-        .system-message { color: var(--gray-light); font-style: italic; font-size: 0.95rem; padding: 0.5rem 1rem; margin-left: 40px; background: transparent; border-left: 2px solid var(--gray-dark); border-radius: 0; }
+        .system-message { color: var(--gray-light); font-style: italic; font-size: 0.95rem; padding: 0.5rem 1rem; margin-left: 40px; background: transparent; bguild-left: 2px solid var(--gray-dark); bguild-radius: 0; }
 
         /* Reactions - Nextcloud style: small pills below the message bubble */
         .msg-reactions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; margin-left: -2px; }
-        .reaction-pill { display: inline-flex; align-items: center; gap: 3px; background: var(--black); border: 1px solid var(--gray-dark); border-radius: 10px; padding: 2px 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s ease; user-select: none; }
-        .reaction-pill:hover { border-color: var(--gold); background: rgba(201, 162, 39, 0.1); }
-        .reaction-pill.own { border-color: var(--gold); background: rgba(201, 162, 39, 0.15); }
+        .reaction-pill { display: inline-flex; align-items: center; gap: 3px; background: var(--black); bguild: 1px solid var(--gray-dark); bguild-radius: 10px; padding: 2px 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.15s ease; user-select: none; }
+        .reaction-pill:hover { bguild-color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+        .reaction-pill.own { bguild-color: var(--gold); background: rgba(201, 162, 39, 0.15); }
         .reaction-pill .r-emoji { font-size: 0.95rem; line-height: 1; }
         .reaction-pill .r-count { color: var(--gray-light); font-size: 0.75rem; min-width: 8px; text-align: center; }
-        .add-reaction-btn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 20px; background: none; border: 1px dashed var(--gray-dark); border-radius: 10px; color: var(--gray); font-size: 0.75rem; cursor: pointer; transition: all 0.15s ease; opacity: 0; }
+        .add-reaction-btn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 20px; background: none; bguild: 1px dashed var(--gray-dark); bguild-radius: 10px; color: var(--gray); font-size: 0.75rem; cursor: pointer; transition: all 0.15s ease; opacity: 0; }
         .chat-message:hover .add-reaction-btn { opacity: 1; }
-        .add-reaction-btn:hover { border-color: var(--gold); color: var(--gold); border-style: solid; }
+        .add-reaction-btn:hover { bguild-color: var(--gold); color: var(--gold); bguild-style: solid; }
 
         /* Emoji Picker - compact floating panel */
         .emoji-picker-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 999; }
-        .emoji-picker { position: fixed; z-index: 1000; background: var(--black); border: 1px solid var(--gray-dark); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); width: 280px; max-height: 320px; display: flex; flex-direction: column; }
-        .emoji-picker-header { padding: 8px; border-bottom: 1px solid var(--gray-dark); }
-        .emoji-search { width: 100%; background: var(--black-light); border: 1px solid var(--gray-dark); border-radius: 4px; padding: 6px 8px; color: var(--white); font-family: inherit; font-size: 0.85rem; }
-        .emoji-search:focus { outline: none; border-color: var(--gold); }
+        .emoji-picker { position: fixed; z-index: 1000; background: var(--black); bguild: 1px solid var(--gray-dark); bguild-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); width: 280px; max-height: 320px; display: flex; flex-direction: column; }
+        .emoji-picker-header { padding: 8px; bguild-bottom: 1px solid var(--gray-dark); }
+        .emoji-search { width: 100%; background: var(--black-light); bguild: 1px solid var(--gray-dark); bguild-radius: 4px; padding: 6px 8px; color: var(--white); font-family: inherit; font-size: 0.85rem; }
+        .emoji-search:focus { outline: none; bguild-color: var(--gold); }
         .emoji-search::placeholder { color: var(--gray); }
-        .emoji-tabs { display: flex; padding: 4px 8px; gap: 2px; border-bottom: 1px solid var(--gray-dark); overflow-x: auto; }
+        .emoji-tabs { display: flex; padding: 4px 8px; gap: 2px; bguild-bottom: 1px solid var(--gray-dark); overflow-x: auto; }
         .emoji-tabs::-webkit-scrollbar { height: 0; }
-        .emoji-tab { background: none; border: none; padding: 4px 6px; font-size: 1rem; cursor: pointer; border-radius: 4px; opacity: 0.5; transition: all 0.15s; }
+        .emoji-tab { background: none; bguild: none; padding: 4px 6px; font-size: 1rem; cursor: pointer; bguild-radius: 4px; opacity: 0.5; transition: all 0.15s; }
         .emoji-tab:hover { opacity: 0.8; background: rgba(255,255,255,0.05); }
         .emoji-tab.active { opacity: 1; background: rgba(201, 162, 39, 0.2); }
         .emoji-grid-wrap { flex: 1; overflow-y: auto; padding: 8px; }
         .emoji-grid-wrap::-webkit-scrollbar { width: 4px; }
-        .emoji-grid-wrap::-webkit-scrollbar-thumb { background: var(--gray-dark); border-radius: 2px; }
+        .emoji-grid-wrap::-webkit-scrollbar-thumb { background: var(--gray-dark); bguild-radius: 2px; }
         .emoji-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-        .emoji-btn { background: none; border: none; font-size: 1.25rem; padding: 4px; cursor: pointer; border-radius: 4px; transition: all 0.1s; }
+        .emoji-btn { background: none; bguild: none; font-size: 1.25rem; padding: 4px; cursor: pointer; bguild-radius: 4px; transition: all 0.1s; }
         .emoji-btn:hover { background: rgba(201, 162, 39, 0.2); transform: scale(1.15); }
 
         /* Herald announcements - inline banner style */
-        .herald-announcement { text-align: center; padding: 0.75rem 1rem; margin: 0.5rem 0; background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.1), transparent); border-top: 1px solid rgba(201, 162, 39, 0.3); border-bottom: 1px solid rgba(201, 162, 39, 0.3); }
+        .herald-announcement { text-align: center; padding: 0.75rem 1rem; margin: 0.5rem 0; background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.1), transparent); bguild-top: 1px solid rgba(201, 162, 39, 0.3); bguild-bottom: 1px solid rgba(201, 162, 39, 0.3); }
         .herald-announcement .herald-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.25rem; }
         .herald-announcement .herald-text { color: var(--white); font-size: 1rem; font-style: italic; }
         .herald-announcement .herald-time { font-size: 0.75rem; color: var(--gray); margin-top: 0.25rem; }
-        .herald-announcement .herald-action { display: inline-block; margin-top: 0.5rem; padding: 0.4rem 1rem; background: rgba(201, 162, 39, 0.2); border: 1px solid var(--gold); color: var(--gold); font-size: 0.8rem; text-decoration: none; border-radius: 4px; transition: all 0.2s ease; }
+        .herald-announcement .herald-action { display: inline-block; margin-top: 0.5rem; padding: 0.4rem 1rem; background: rgba(201, 162, 39, 0.2); bguild: 1px solid var(--gold); color: var(--gold); font-size: 0.8rem; text-decoration: none; bguild-radius: 4px; transition: all 0.2s ease; }
         .herald-announcement .herald-action:hover { background: var(--gold); color: var(--black); }
         /* Smooth guild reguilding */
-        .guild-item { transition: transform 0.3s ease, background 0.2s, border-color 0.2s; }
+        .guild-item { transition: transform 0.3s ease, background 0.2s, bguild-color 0.2s; }
         .guild-item.animating { transition: transform 0.3s ease; }
+        /* Browse guilds button */
+        .browse-guilds-btn { display: block; text-align: center; padding: 0.6rem 1rem; margin: 0.5rem 0.75rem; background: transparent; border: 1px solid var(--gray-dark); border-radius: 6px; color: var(--gray-light); font-size: 0.85rem; text-decoration: none; transition: all 0.2s ease; }
+        .browse-guilds-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+
         /* User profile in header */
-        .main-header { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; padding: 0.75rem 2rem; border-bottom: 1px solid var(--gray-dark); }
+        .main-header { display: flex; align-items: center; justify-content: flex-end; gap: 1rem; padding: 0.75rem 2rem; bguild-bottom: 1px solid var(--gray-dark); }
         .user-profile { display: flex; align-items: center; gap: 0.75rem; margin-left: auto; }
         .user-profile .user-name { font-size: 0.9rem; color: var(--gray-light); }
-        .user-profile .user-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-dark); cursor: pointer; transition: border-color 0.2s; }
-        .user-profile .user-avatar:hover { border-color: var(--gold); }
+        .user-profile .user-avatar { width: 36px; height: 36px; bguild-radius: 50%; bguild: 2px solid var(--gray-dark); cursor: pointer; transition: bguild-color 0.2s; }
+        .user-profile .user-avatar:hover { bguild-color: var(--gold); }
         .user-profile .logout-btn { color: var(--gray); font-size: 1.1rem; padding: 0.25rem; transition: color 0.2s; }
         .user-profile .logout-btn:hover { color: var(--gold); }
         /* Collapsible panels - override grid layout */
         .panels { display: flex !important; flex-direction: column !important; gap: 0 !important; background: transparent !important; grid-template-columns: none !important; grid-template-rows: none !important; padding: 0.5rem 2rem 2rem !important; }
-        .panel { overflow: hidden; min-height: 0 !important; flex: none !important; background: transparent; border: none; border-top: 1px solid var(--gray-dark); }
-        .panel:last-child { border-bottom: 1px solid var(--gray-dark); }
+        .panel { overflow: hidden; min-height: 0 !important; flex: none !important; background: transparent; bguild: none; bguild-top: 1px solid var(--gray-dark); }
+        .panel:last-child { bguild-bottom: 1px solid var(--gray-dark); }
         .panel-header { display: flex; align-items: center; justify-content: flex-start; padding: 0; position: relative; }
-        .panel-toggle { display: flex; align-items: center; flex-direction: row; gap: 0.75rem; padding: 1rem 0; border: none; background: transparent; cursor: pointer; transition: all 0.3s ease; text-align: left; position: relative; }
+        .panel-toggle { display: flex; align-items: center; flex-direction: row; gap: 0.75rem; padding: 1rem 0; bguild: none; background: transparent; cursor: pointer; transition: all 0.3s ease; text-align: left; position: relative; }
         .panel-toggle h3 { font-size: 1.05rem; font-weight: 400; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin: 0; transition: color 0.3s ease; }
         .panel-toggle:hover h3 { color: var(--white); }
         .panel-toggle .panel-icon { font-size: 1.2rem; color: var(--gold); width: 1.5rem; text-align: center; transition: color 0.3s ease, transform 0.3s ease; }
@@ -103,11 +107,11 @@
         .panel.collapsed .panel-content { display: none; }
         /* Members list override */
         .members-list { display: flex !important; flex-direction: column !important; flex-wrap: nowrap !important; gap: 0 !important; }
-        .members-list .member-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0.5rem; background: transparent; border-radius: 0; border-bottom: 1px solid var(--gray-dark); text-decoration: none; transition: background 0.2s ease, padding-left 0.2s ease; }
-        .members-list .member-item:last-child { border-bottom: none; }
+        .members-list .member-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0.5rem; background: transparent; bguild-radius: 0; bguild-bottom: 1px solid var(--gray-dark); text-decoration: none; transition: background 0.2s ease, padding-left 0.2s ease; }
+        .members-list .member-item:last-child { bguild-bottom: none; }
         .members-list .member-item:hover { background: rgba(201, 162, 39, 0.08); padding-left: 1rem; }
-        .members-list .member-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--gray-dark); transition: border-color 0.2s ease; }
-        .members-list .member-item:hover .member-avatar { border-color: var(--gold); }
+        .members-list .member-avatar { width: 32px; height: 32px; bguild-radius: 50%; bguild: 2px solid var(--gray-dark); transition: bguild-color 0.2s ease; }
+        .members-list .member-item:hover .member-avatar { bguild-color: var(--gold); }
         .members-list .member-name { flex: 1; color: var(--white); font-size: 1rem; }
         .members-list .member-item:hover .member-name { color: var(--gold); }
         .members-list .member-link-icon { color: var(--gray); font-size: 0.9rem; opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; }
@@ -116,21 +120,21 @@
         .archive-container { display: flex; flex-direction: column; gap: 1rem; }
         .archive-toolbar { display: flex; gap: 0.75rem; align-items: stretch; }
         .archive-toolbar .upload-zone { flex: 1; }
-        .new-folder-btn { background: var(--black-light); border: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: all 0.2s ease; white-space: nowrap; }
-        .new-folder-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
-        .upload-zone { border: 2px dashed var(--gray-dark); border-radius: 8px; padding: 1.5rem; text-align: center; transition: border-color 0.3s ease, background 0.3s ease; cursor: pointer; }
-        .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: rgba(201, 162, 39, 0.05); }
+        .new-folder-btn { background: var(--black-light); bguild: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.75rem 1rem; bguild-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.9rem; transition: all 0.2s ease; white-space: nowrap; }
+        .new-folder-btn:hover { bguild-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+        .upload-zone { bguild: 2px dashed var(--gray-dark); bguild-radius: 8px; padding: 1.5rem; text-align: center; transition: bguild-color 0.3s ease, background 0.3s ease; cursor: pointer; }
+        .upload-zone:hover, .upload-zone.drag-over { bguild-color: var(--gold); background: rgba(201, 162, 39, 0.05); }
         .upload-zone-text { color: var(--gray-light); font-size: 0.95rem; }
         .upload-zone-text strong { color: var(--gold); }
         .upload-zone input[type="file"] { display: none; }
         .upload-progress { display: none; margin-top: 0.75rem; }
         .upload-progress.active { display: block; }
-        .upload-progress-bar { height: 4px; background: var(--gray-dark); border-radius: 2px; overflow: hidden; }
+        .upload-progress-bar { height: 4px; background: var(--gray-dark); bguild-radius: 2px; overflow: hidden; }
         .upload-progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s ease; }
         .upload-progress-text { font-size: 0.8rem; color: var(--gray-light); margin-top: 0.5rem; }
         .file-list { display: flex; flex-direction: column; gap: 0; }
-        .file-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--gray-dark); transition: background 0.2s ease, padding-left 0.2s ease; }
-        .file-item:last-child { border-bottom: none; }
+        .file-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0.5rem; bguild-bottom: 1px solid var(--gray-dark); transition: background 0.2s ease, padding-left 0.2s ease; }
+        .file-item:last-child { bguild-bottom: none; }
         .file-item:hover { background: rgba(201, 162, 39, 0.05); padding-left: 1rem; }
         .file-item .file-icon { font-size: 1.3rem; width: 2rem; text-align: center; }
         .file-item .file-info { flex: 1; min-width: 0; }
@@ -139,14 +143,14 @@
         .file-item .file-meta { font-size: 0.8rem; color: var(--gray); }
         .file-item .file-actions { display: flex; gap: 0.5rem; opacity: 0; transition: opacity 0.2s ease; }
         .file-item:hover .file-actions { opacity: 1; }
-        .file-action { background: none; border: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.35rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s ease; }
-        .file-action:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
-        .file-action.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(201, 68, 68, 0.1); }
+        .file-action { background: none; bguild: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.35rem 0.6rem; bguild-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s ease; }
+        .file-action:hover { bguild-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+        .file-action.danger:hover { bguild-color: var(--danger); color: var(--danger); background: rgba(201, 68, 68, 0.1); }
         .files-empty { text-align: center; padding: 2rem; color: var(--gray); }
         /* Breadcrumb navigation */
-        .breadcrumb { display: flex; align-items: center; gap: 0.25rem; padding: 0.75rem 1rem; margin-bottom: 1rem; flex-wrap: wrap; background: var(--black-light); border-radius: 6px; border: 1px solid var(--gray-dark); }
+        .breadcrumb { display: flex; align-items: center; gap: 0.25rem; padding: 0.75rem 1rem; margin-bottom: 1rem; flex-wrap: wrap; background: var(--black-light); bguild-radius: 6px; bguild: 1px solid var(--gray-dark); }
         .breadcrumb-icon { color: var(--gold); font-size: 1rem; margin-right: 0.5rem; }
-        .breadcrumb-item { color: var(--gray-light); font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; padding: 0.3rem 0.6rem; border-radius: 4px; }
+        .breadcrumb-item { color: var(--gray-light); font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; padding: 0.3rem 0.6rem; bguild-radius: 4px; }
         .breadcrumb-item:hover { color: var(--gold); background: rgba(201, 162, 39, 0.15); }
         .breadcrumb-item.current { color: var(--white); cursor: default; font-weight: 500; }
         .breadcrumb-item.current:hover { background: transparent; color: var(--white); }
@@ -154,21 +158,21 @@
         .breadcrumb-sep { color: var(--gray); font-size: 0.75rem; padding: 0 0.15rem; }
         /* Slim icon sidebar */
         .sidebar { width: 60px !important; padding: 0 !important; display: flex; flex-direction: column; align-items: center; overflow: visible !important; }
-        .sidebar-header { padding: 1rem 0 !important; border-bottom: 1px solid var(--gray-dark); width: 100%; display: flex; justify-content: center; }
+        .sidebar-header { padding: 1rem 0 !important; bguild-bottom: 1px solid var(--gray-dark); width: 100%; display: flex; justify-content: center; }
         .sidebar-header h1 { font-size: 1.4rem !important; margin: 0; }
         .sigil-link { display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; }
         .sigil-link:hover { transform: scale(1.05); opacity: 0.9; }
         .sigil-logo { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; image-rendering: -webkit-optimize-contrast; }
         .guilds-list { padding: 0.5rem 0 !important; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; overflow: visible !important; }
         /* Icon-only guild items with tooltip */
-        .guild-item { width: 44px; height: 44px; padding: 0 !important; display: flex; align-items: center; justify-content: center; border-radius: 8px; border-left: none !important; position: relative; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease; }
+        .guild-item { width: 44px; height: 44px; padding: 0 !important; display: flex; align-items: center; justify-content: center; bguild-radius: 8px; bguild-left: none !important; position: relative; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease; }
         .guild-item:hover { background: var(--black-light); transform: scale(1.1); }
         .guild-item.active { background: var(--black-light); box-shadow: inset 0 0 0 2px var(--gold); }
         .guild-icon { font-size: 1.4rem !important; width: auto !important; }
         .guild-name { display: none; }
         .guild-badge { position: absolute; top: 2px; right: 2px; font-size: 0.6rem; padding: 0.1rem 0.3rem; min-width: 14px; text-align: center; }
         /* Tooltip on hover */
-        .guild-item::after { content: attr(data-tooltip); position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 10px; background: var(--black); border: 1px solid var(--gray-dark); color: var(--white); padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, margin-left 0.2s ease; z-index: 1000; }
+        .guild-item::after { content: attr(data-tooltip); position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 10px; background: var(--black); bguild: 1px solid var(--gray-dark); color: var(--white); padding: 0.4rem 0.75rem; bguild-radius: 6px; font-size: 0.9rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, margin-left 0.2s ease; z-index: 1000; }
         .guild-item:hover::after { opacity: 1; margin-left: 15px; }
         /* Folder items are clickable */
         .file-item.is-folder { cursor: pointer; }
@@ -176,7 +180,7 @@
         .file-item.is-folder .file-icon { transition: transform 0.2s ease; }
         .file-item.is-folder:hover .file-icon { transform: scale(1.1); }
         /* Guild Overview */
-        .guild-overview { padding: 1.5rem 2rem; border-bottom: 1px solid var(--gray-dark); text-align: center; }
+        .guild-overview { padding: 1.5rem 2rem; bguild-bottom: 1px solid var(--gray-dark); text-align: center; }
         .guild-overview-icon { font-size: 3rem; line-height: 1; margin-bottom: 0.5rem; }
         .guild-overview-name { font-family: 'Cinzel', 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
         .guild-overview-desc { font-size: 1.05rem; font-style: italic; color: var(--gray-light); max-width: 600px; margin: 0 auto 1rem; line-height: 1.5; }
@@ -184,22 +188,22 @@
         .guild-meta-item { display: flex; align-items: center; gap: 0.4rem; }
         .guild-meta-label { color: var(--gray-dark); }
         .guild-meta-value { color: var(--gray-light); }
-        .guild-meta-badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.2rem 0.5rem; background: rgba(201, 162, 39, 0.15); border: 1px solid rgba(201, 162, 39, 0.3); border-radius: 3px; color: var(--gold); }
+        .guild-meta-badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.2rem 0.5rem; background: rgba(201, 162, 39, 0.15); bguild: 1px solid rgba(201, 162, 39, 0.3); bguild-radius: 3px; color: var(--gold); }
         .guild-overview-link { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
         .guild-overview-link:hover { opacity: 0.8; text-decoration: underline; }
         /* Guild edit button */
         .guild-overview { position: relative; }
-        .guild-edit-btn { position: absolute; top: 1rem; right: 1rem; background: transparent; border: 1px solid var(--gray-dark); color: var(--gray); padding: 0.4rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: none; }
-        .guild-edit-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+        .guild-edit-btn { position: absolute; top: 1rem; right: 1rem; background: transparent; bguild: 1px solid var(--gray-dark); color: var(--gray); padding: 0.4rem 0.75rem; bguild-radius: 4px; font-size: 0.8rem; font-family: inherit; cursor: pointer; transition: all 0.2s ease; display: none; }
+        .guild-edit-btn:hover { bguild-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
         .guild-edit-btn.visible { display: inline-flex; align-items: center; gap: 0.4rem; }
         /* Guild edit form */
-        .guild-edit-form { display: none; padding: 1.5rem 2rem; border-bottom: 1px solid var(--gray-dark); background: var(--black-light); }
+        .guild-edit-form { display: none; padding: 1.5rem 2rem; bguild-bottom: 1px solid var(--gray-dark); background: var(--black-light); }
         .guild-edit-form.active { display: block; }
         .guild-edit-form h3 { font-size: 1rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 400; }
         .edit-field { margin-bottom: 1.25rem; }
         .edit-field label { display: block; font-size: 0.85rem; color: var(--gray-light); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
-        .edit-field input, .edit-field textarea, .edit-field select { width: 100%; background: var(--black); border: 1px solid var(--gray-dark); color: var(--white); padding: 0.6rem 0.75rem; font-family: inherit; font-size: 0.95rem; border-radius: 4px; transition: border-color 0.2s; }
-        .edit-field input:focus, .edit-field textarea:focus, .edit-field select:focus { outline: none; border-color: var(--gold); }
+        .edit-field input, .edit-field textarea, .edit-field select { width: 100%; background: var(--black); bguild: 1px solid var(--gray-dark); color: var(--white); padding: 0.6rem 0.75rem; font-family: inherit; font-size: 0.95rem; bguild-radius: 4px; transition: bguild-color 0.2s; }
+        .edit-field input:focus, .edit-field textarea:focus, .edit-field select:focus { outline: none; bguild-color: var(--gold); }
         .edit-field textarea { min-height: 80px; resize: vertical; }
         .edit-field select { cursor: pointer; }
         .edit-field select option { background: var(--black); color: var(--white); }
@@ -207,10 +211,10 @@
         .edit-field-small { flex: 1; margin-bottom: 0; }
         .edit-field input[type="color"] { padding: 0.25rem; height: 38px; cursor: pointer; }
         .edit-field-small input[type="text"] { text-align: center; font-size: 1.25rem; }
-        .edit-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--gray-dark); }
-        .edit-cancel-btn { background: transparent; border: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.5rem 1rem; border-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
-        .edit-cancel-btn:hover { border-color: var(--gray-light); color: var(--white); }
-        .edit-save-btn { background: var(--gold); border: none; color: var(--black); padding: 0.5rem 1.25rem; border-radius: 4px; font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .edit-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; bguild-top: 1px solid var(--gray-dark); }
+        .edit-cancel-btn { background: transparent; bguild: 1px solid var(--gray-dark); color: var(--gray-light); padding: 0.5rem 1rem; bguild-radius: 4px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+        .edit-cancel-btn:hover { bguild-color: var(--gray-light); color: var(--white); }
+        .edit-save-btn { background: var(--gold); bguild: none; color: var(--black); padding: 0.5rem 1.25rem; bguild-radius: 4px; font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
         .edit-save-btn:hover { background: var(--gold-light); }
         .edit-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -218,16 +222,16 @@
         .symbol-picker { margin-bottom: 1.25rem; }
         .symbol-picker label { display: block; font-size: 0.85rem; color: var(--gray-light); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
         .symbol-picker-header { display: flex; gap: 0.75rem; margin-bottom: 0.5rem; }
-        .symbol-preview { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--black); border: 1px solid var(--gray-dark); border-radius: 4px; font-size: 1.75rem; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif; }
-        .symbol-block-select { flex: 1; background: var(--black); border: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 0.85rem; border-radius: 4px; cursor: pointer; }
-        .symbol-block-select:focus { outline: none; border-color: var(--gold); }
-        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 0.2rem; max-height: 160px; overflow-y: auto; background: var(--black); border: 1px solid var(--gray-dark); border-radius: 4px; padding: 0.4rem; }
+        .symbol-preview { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--black); bguild: 1px solid var(--gray-dark); bguild-radius: 4px; font-size: 1.75rem; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif; }
+        .symbol-block-select { flex: 1; background: var(--black); bguild: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 0.85rem; bguild-radius: 4px; cursor: pointer; }
+        .symbol-block-select:focus { outline: none; bguild-color: var(--gold); }
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 0.2rem; max-height: 160px; overflow-y: auto; background: var(--black); bguild: 1px solid var(--gray-dark); bguild-radius: 4px; padding: 0.4rem; }
         .symbol-grid::-webkit-scrollbar { width: 6px; }
         .symbol-grid::-webkit-scrollbar-track { background: var(--black); }
-        .symbol-grid::-webkit-scrollbar-thumb { background: var(--gray-dark); border-radius: 3px; }
-        .symbol-item { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid transparent; border-radius: 4px; font-size: 1.1rem; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif; cursor: pointer; transition: all 0.15s; color: var(--white); }
-        .symbol-item:hover { border-color: rgba(201, 162, 39, 0.5); background: rgba(201, 162, 39, 0.1); }
-        .symbol-item.selected { border-color: var(--gold); background: rgba(201, 162, 39, 0.2); }
+        .symbol-grid::-webkit-scrollbar-thumb { background: var(--gray-dark); bguild-radius: 3px; }
+        .symbol-item { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: transparent; bguild: 1px solid transparent; bguild-radius: 4px; font-size: 1.1rem; font-family: "Noto Sans Symbols 2", "Segoe UI Symbol", sans-serif; cursor: pointer; transition: all 0.15s; color: var(--white); }
+        .symbol-item:hover { bguild-color: rgba(201, 162, 39, 0.5); background: rgba(201, 162, 39, 0.1); }
+        .symbol-item.selected { bguild-color: var(--gold); background: rgba(201, 162, 39, 0.2); }
 
         /* Agreements Builder */
         .agreements-section { margin-bottom: 1.25rem; }
@@ -235,46 +239,28 @@
         .agreements-hint { font-size: 0.75rem; color: var(--gray); margin-bottom: 0.75rem; }
         .agreements-list { margin-bottom: 0.75rem; }
         .agreement-item { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; align-items: flex-start; }
-        .agreement-item textarea { flex: 1; min-height: 60px; background: var(--black); border: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 0.85rem; border-radius: 4px; resize: vertical; }
-        .agreement-item textarea:focus { outline: none; border-color: var(--gold); }
-        .agreement-remove { width: 28px; height: 28px; background: transparent; border: 1px solid rgba(231, 76, 60, 0.3); color: rgba(231, 76, 60, 0.6); border-radius: 4px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-        .agreement-remove:hover { background: rgba(231, 76, 60, 0.1); border-color: #e74c3c; color: #e74c3c; }
-        .add-agreement { background: transparent; border: 1px dashed rgba(201, 162, 39, 0.4); color: var(--gold); padding: 0.5rem 1rem; border-radius: 4px; font-family: inherit; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s; }
-        .add-agreement:hover { background: rgba(201, 162, 39, 0.05); border-color: var(--gold); border-style: solid; }
+        .agreement-item textarea { flex: 1; min-height: 60px; background: var(--black); bguild: 1px solid var(--gray-dark); color: var(--white); padding: 0.5rem 0.75rem; font-family: inherit; font-size: 0.85rem; bguild-radius: 4px; resize: vertical; }
+        .agreement-item textarea:focus { outline: none; bguild-color: var(--gold); }
+        .agreement-remove { width: 28px; height: 28px; background: transparent; bguild: 1px solid rgba(231, 76, 60, 0.3); color: rgba(231, 76, 60, 0.6); bguild-radius: 4px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+        .agreement-remove:hover { background: rgba(231, 76, 60, 0.1); bguild-color: #e74c3c; color: #e74c3c; }
+        .add-agreement { background: transparent; bguild: 1px dashed rgba(201, 162, 39, 0.4); color: var(--gold); padding: 0.5rem 1rem; bguild-radius: 4px; font-family: inherit; font-size: 0.75rem; letter-spacing: 0.05em; cursor: pointer; transition: all 0.15s; }
+        .add-agreement:hover { background: rgba(201, 162, 39, 0.05); bguild-color: var(--gold); bguild-style: solid; }
         .edit-status { font-size: 0.85rem; color: var(--gold); margin-top: 0.75rem; text-align: right; }
         .edit-status.error { color: #e74c3c; }
         /* Deck/Tasks styling */
         .deck-board { display: flex; flex-direction: column; gap: 0.5rem; }
-        .deck-card { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; background: var(--black-light); border-left: 3px solid var(--gold); border-radius: 0 4px 4px 0; transition: all 0.2s ease; }
+        .deck-card { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; background: var(--black-light); bguild-left: 3px solid var(--gold); bguild-radius: 0 4px 4px 0; transition: all 0.2s ease; }
         .deck-card:hover { background: rgba(201, 162, 39, 0.1); padding-left: 1rem; }
         .deck-card-title { flex: 1; color: var(--white); font-size: 0.95rem; }
         .deck-card-due { font-size: 0.75rem; color: var(--gray); }
         .deck-card-due.overdue { color: #e74c3c; }
         .deck-card-labels { display: flex; gap: 0.25rem; }
-        .deck-label { width: 8px; height: 8px; border-radius: 50%; }
-        .deck-stack-name { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--gray-dark); }
-        /* Panel add button */
+        .deck-label { width: 8px; height: 8px; bguild-radius: 50%; }
+        .deck-stack-name { font-size: 0.8rem; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem; padding-bottom: 0.25rem; bguild-bottom: 1px solid var(--gray-dark); }
+        /* Panel actions & add button */
         .panel-actions { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
         .panel-add-btn { width: 24px; height: 24px; border-radius: 4px; border: 1px solid var(--gray-dark); background: transparent; color: var(--gray); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; line-height: 1; }
         .panel-add-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 162, 39, 0.1); }
-
-        /* Scrolls styling */
-        .scrolls-container { padding: 0.5rem 0; }
-        .scrolls-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding: 0 0.25rem; }
-        .scrolls-count { font-size: 0.8rem; color: var(--gray); }
-        .scrolls-empty { text-align: center; padding: 2rem 1rem; color: var(--gray); font-size: 0.9rem; }
-        .scrolls-list { display: flex; flex-direction: column; gap: 0.5rem; }
-        .scroll-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--black-light); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent; }
-        .scroll-item:hover { background: rgba(201, 162, 39, 0.08); border-color: var(--gray-dark); }
-        .scroll-type-icon { font-size: 1.25rem; }
-        .scroll-info { flex: 1; min-width: 0; }
-        .scroll-title { color: var(--white); font-size: 0.9rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .scroll-meta { font-size: 0.75rem; color: var(--gray); }
-        .scroll-actions { display: flex; gap: 0.25rem; opacity: 0; transition: opacity 0.2s; }
-        .scroll-item:hover .scroll-actions { opacity: 1; }
-        .scroll-action { background: none; border: 1px solid var(--gray-dark); color: var(--gray); width: 28px; height: 28px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .scroll-action:hover { border-color: var(--gold); color: var(--gold); }
-        .scroll-action.danger:hover { border-color: #c44; color: #c44; }
 
         /* Modal styles */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
@@ -300,9 +286,27 @@
         .meta-sep { opacity: 0.5; }
         .scroll-view-content { color: var(--gray-light); line-height: 1.6; white-space: pre-wrap; }
 
+        /* Scrolls styling */
+        .scrolls-container { padding: 0.5rem 0; }
+        .scrolls-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; padding: 0 0.25rem; }
+        .scrolls-count { font-size: 0.8rem; color: var(--gray); }
+        .scrolls-empty { text-align: center; padding: 2rem 1rem; color: var(--gray); font-size: 0.9rem; }
+        .scrolls-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .scroll-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--black-light); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent; }
+        .scroll-item:hover { background: rgba(201, 162, 39, 0.08); border-color: var(--gray-dark); }
+        .scroll-type-icon { font-size: 1.25rem; }
+        .scroll-info { flex: 1; min-width: 0; }
+        .scroll-title { color: var(--white); font-size: 0.9rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .scroll-meta { font-size: 0.75rem; color: var(--gray); }
+        .scroll-actions { display: flex; gap: 0.25rem; opacity: 0; transition: opacity 0.2s; }
+        .scroll-item:hover .scroll-actions { opacity: 1; }
+        .scroll-action { background: none; border: 1px solid var(--gray-dark); color: var(--gray); width: 28px; height: 28px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .scroll-action:hover { border-color: var(--gold); color: var(--gold); }
+        .scroll-action.danger:hover { border-color: #c44; color: #c44; }
+
         /* Forms styling */
         .forms-list { display: flex; flex-direction: column; gap: 0.5rem; }
-        .form-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--black-light); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+        .form-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: var(--black-light); bguild-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
         .form-item:hover { background: rgba(201, 162, 39, 0.1); transform: translateX(4px); }
         .form-icon { font-size: 1.2rem; color: var(--gold); }
         .form-info { flex: 1; }
@@ -316,6 +320,7 @@
     <div class="app">
         <aside class="sidebar">
             <header class="sidebar-header"><a href="https://skymasons.xyz/" class="sigil-link" title="Brotherhood"><img src="/assets/logo.jpg" alt="Skymasons" class="sigil-logo"></a></header>
+            <a href="guilds.html" class="browse-guilds-btn" title="Browse All Guilds">☰ All Guilds</a>
             <nav class="guilds-list" id="guilds-list"><div class="loading">⋯</div></nav>
         </aside>
         <main class="main">
@@ -420,19 +425,6 @@
         </main>
     </div>
     <script src="js/app.js"></script>
-    <script>
-    // Alias orders to guilds for terminology consistency
-    State.guilds = [];
-    State.currentGuild = null;
-    const originalStateInit = State.init;
-    State.init = async function() {
-        const result = await originalStateInit.call(this);
-        this.guilds = this.orders || [];
-        return result;
-    };
-    State.getUserGuilds = function() { return this.getUserOrders(); };
-    State.getGuildById = function(id) { return this.getOrderById(id); };
-    </script>
     <script>
 // Emoji data for picker
 const EMOJI_CATEGORIES = {
@@ -794,50 +786,121 @@ function initEditForm() {
     });
 }
 
+function initScrollModal() {
+    const modal = UI.$("#scroll-modal");
+    const viewModal = UI.$("#scroll-view-modal");
+    const form = UI.$("#scroll-form");
+    const addBtn = UI.$("#add-scroll-btn");
+    const closeBtn = UI.$("#scroll-modal-close");
+    const cancelBtn = UI.$("#scroll-cancel");
+    const viewCloseBtn = UI.$("#scroll-view-close");
+
+    const openModal = () => {
+        delete modal.dataset.editId;
+        form.reset();
+        modal.classList.add("active");
+    };
+    const closeModal = () => {
+        modal.classList.remove("active");
+        delete modal.dataset.editId;
+        form.reset();
+    };
+    const closeViewModal = () => viewModal.classList.remove("active");
+
+    addBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+
+    viewCloseBtn.addEventListener("click", closeViewModal);
+    viewModal.addEventListener("click", (e) => { if (e.target === viewModal) closeViewModal(); });
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const guildId = App.currentGuildId;
+        if (!guildId) return;
+        
+        const data = {
+            title: UI.$("#scroll-title").value,
+            type: UI.$("#scroll-type").value,
+            content: UI.$("#scroll-content").value
+        };
+        
+        if (modal.dataset.editId) {
+            ScrollsManager.updateScroll(guildId, modal.dataset.editId, data);
+        } else {
+            ScrollsManager.createScroll(guildId, data);
+        }
+        
+        closeModal();
+        App.loadForms(State.currentGuild);
+    });
+}
 
 const ScrollsManager = {
     STORAGE_KEY: "sanctum_scrolls",
+
     getScrolls(guildId) {
         const all = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || "{}");
         return all[guildId] || [];
     },
+
     saveScrolls(guildId, scrolls) {
         const all = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || "{}");
         all[guildId] = scrolls;
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify(all));
     },
+
     createScroll(guildId, data) {
         const scrolls = this.getScrolls(guildId);
-        const scroll = { id: Date.now().toString(), title: data.title, type: data.type, content: data.content, created: new Date().toISOString() };
+        const scroll = {
+            id: Date.now().toString(),
+            title: data.title,
+            type: data.type,
+            content: data.content,
+            created: new Date().toISOString(),
+            updated: new Date().toISOString()
+        };
         scrolls.unshift(scroll);
         this.saveScrolls(guildId, scrolls);
         return scroll;
     },
+
     getScroll(guildId, scrollId) {
-        return this.getScrolls(guildId).find(s => s.id === scrollId);
+        const scrolls = this.getScrolls(guildId);
+        return scrolls.find(s => s.id === scrollId);
     },
+
     updateScroll(guildId, scrollId, data) {
         const scrolls = this.getScrolls(guildId);
-        const idx = scrolls.findIndex(s => s.id === scrollId);
-        if (idx !== -1) { scrolls[idx] = { ...scrolls[idx], ...data }; this.saveScrolls(guildId, scrolls); }
+        const index = scrolls.findIndex(s => s.id === scrollId);
+        if (index \!== -1) {
+            scrolls[index] = { ...scrolls[index], ...data, updated: new Date().toISOString() };
+            this.saveScrolls(guildId, scrolls);
+        }
     },
+
     deleteScroll(guildId, scrollId) {
-        if (!confirm("Delete this scroll?")) return;
-        this.saveScrolls(guildId, this.getScrolls(guildId).filter(s => s.id !== scrollId));
+        if (\!confirm("Delete this scroll?")) return;
+        const scrolls = this.getScrolls(guildId).filter(s => s.id \!== scrollId);
+        this.saveScrolls(guildId, scrolls);
         App.loadForms(State.currentGuild);
     },
+
     viewScroll(guildId, scrollId) {
         const scroll = this.getScroll(guildId, scrollId);
-        if (!scroll) return;
-        UI.$("#scroll-view-modal").classList.add("active");
+        if (\!scroll) return;
+        const modal = UI.$("#scroll-view-modal");
         UI.$("#view-scroll-title").textContent = scroll.title;
         UI.$("#view-scroll-type").textContent = this.getTypeIcon(scroll.type) + " " + this.getTypeName(scroll.type);
         UI.$("#view-scroll-date").textContent = UI.formatDate(scroll.created);
         UI.$("#view-scroll-content").textContent = scroll.content || "(No content)";
+        modal.classList.add("active");
     },
+
     editScroll(guildId, scrollId) {
         const scroll = this.getScroll(guildId, scrollId);
-        if (!scroll) return;
+        if (\!scroll) return;
         const modal = UI.$("#scroll-modal");
         UI.$("#scroll-title").value = scroll.title;
         UI.$("#scroll-type").value = scroll.type;
@@ -845,34 +908,17 @@ const ScrollsManager = {
         modal.dataset.editId = scrollId;
         modal.classList.add("active");
     },
-    getTypeIcon(type) { return { petition: "📜", poll: "📊", inquiry: "❓", announcement: "📢" }[type] || "📄"; },
-    getTypeName(type) { return { petition: "Petition", poll: "Poll", inquiry: "Inquiry", announcement: "Announcement" }[type] || "Scroll"; }
-};
 
-function initScrollModal() {
-    const modal = UI.$("#scroll-modal");
-    const viewModal = UI.$("#scroll-view-modal");
-    const form = UI.$("#scroll-form");
-    const addBtn = UI.$("#add-scroll-btn");
-    const closeModal = () => { modal.classList.remove("active"); delete modal.dataset.editId; form.reset(); };
-    const closeViewModal = () => viewModal.classList.remove("active");
-    addBtn.addEventListener("click", () => { delete modal.dataset.editId; form.reset(); modal.classList.add("active"); });
-    UI.$("#scroll-modal-close").addEventListener("click", closeModal);
-    UI.$("#scroll-cancel").addEventListener("click", closeModal);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-    UI.$("#scroll-view-close").addEventListener("click", closeViewModal);
-    viewModal.addEventListener("click", (e) => { if (e.target === viewModal) closeViewModal(); });
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const guildId = App.currentGuildId;
-        if (!guildId) return;
-        const data = { title: UI.$("#scroll-title").value, type: UI.$("#scroll-type").value, content: UI.$("#scroll-content").value };
-        if (modal.dataset.editId) ScrollsManager.updateScroll(guildId, modal.dataset.editId, data);
-        else ScrollsManager.createScroll(guildId, data);
-        closeModal();
-        App.loadForms(State.currentGuild);
-    });
-}
+    getTypeIcon(type) {
+        const icons = { petition: "📜", poll: "📊", inquiry: "❓", announcement: "📢" };
+        return icons[type] || "📄";
+    },
+
+    getTypeName(type) {
+        const names = { petition: "Petition", poll: "Poll", inquiry: "Inquiry", announcement: "Announcement" };
+        return names[type] || "Scroll";
+    }
+};
 
 const App = {
     currentGuildId: null,
@@ -1280,24 +1326,33 @@ const App = {
         const container = UI.$("#forms-content");
         const guildId = guild.id;
         const scrolls = ScrollsManager.getScrolls(guildId);
+        
         container.innerHTML = `
             <div class="scrolls-container">
-                <div class="scrolls-toolbar"><span class="scrolls-count">${scrolls.length} scroll${scrolls.length !== 1 ? "s" : ""}</span></div>
-                ${scrolls.length === 0 ? "<div class=\"scrolls-empty\">No scrolls yet. Click + to create one.</div>" : 
-                `<div class="scrolls-list">${scrolls.map(scroll => `
-                    <div class="scroll-item" data-id="${scroll.id}">
-                        <span class="scroll-type-icon">${ScrollsManager.getTypeIcon(scroll.type)}</span>
-                        <div class="scroll-info">
-                            <span class="scroll-title">${UI.escapeHtml(scroll.title)}</span>
-                            <span class="scroll-meta">${ScrollsManager.getTypeName(scroll.type)} • ${UI.formatDate(scroll.created)}</span>
-                        </div>
-                        <div class="scroll-actions">
-                            <button class="scroll-action" data-action="view" title="View">👁</button>
-                            <button class="scroll-action" data-action="edit" title="Edit">✎</button>
-                            <button class="scroll-action danger" data-action="delete" title="Delete">✕</button>
-                        </div>
-                    </div>`).join("")}</div>`}
-            </div>`;
+                <div class="scrolls-toolbar">
+                    <span class="scrolls-count">${scrolls.length} scroll${scrolls.length !== 1 ? "s" : ""}</span>
+                </div>
+                ${scrolls.length === 0 ? 
+                    "<div class=\"scrolls-empty\">No scrolls yet. Click + to create one.</div>" : 
+                    `<div class=\"scrolls-list\">
+                        ${scrolls.map(scroll => `
+                            <div class=\"scroll-item\" data-id=\"${scroll.id}\">
+                                <span class=\"scroll-type-icon\">${ScrollsManager.getTypeIcon(scroll.type)}</span>
+                                <div class=\"scroll-info\">
+                                    <span class=\"scroll-title\">${UI.escapeHtml(scroll.title)}</span>
+                                    <span class=\"scroll-meta\">${ScrollsManager.getTypeName(scroll.type)} • ${UI.formatDate(scroll.created)}</span>
+                                </div>
+                                <div class=\"scroll-actions\">
+                                    <button class=\"scroll-action\" data-action=\"view\" title=\"View\">👁</button>
+                                    <button class=\"scroll-action\" data-action=\"edit\" title=\"Edit\">✎</button>
+                                    <button class=\"scroll-action danger\" data-action=\"delete\" title=\"Delete\">✕</button>
+                                </div>
+                            </div>
+                        `).join("")}
+                    </div>`
+                }
+            </div>
+        `;
         this.setupScrollActions(guildId);
     },
 
@@ -1306,10 +1361,11 @@ const App = {
             btn.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const item = btn.closest(".scroll-item");
+                const scrollId = item.dataset.id;
                 const action = btn.dataset.action;
-                if (action === "view") ScrollsManager.viewScroll(guildId, item.dataset.id);
-                else if (action === "edit") ScrollsManager.editScroll(guildId, item.dataset.id);
-                else if (action === "delete") ScrollsManager.deleteScroll(guildId, item.dataset.id);
+                if (action === "view") ScrollsManager.viewScroll(guildId, scrollId);
+                else if (action === "edit") ScrollsManager.editScroll(guildId, scrollId);
+                else if (action === "delete") ScrollsManager.deleteScroll(guildId, scrollId);
             });
         });
         UI.$$(".scroll-item").forEach(item => {
@@ -1319,7 +1375,6 @@ const App = {
             });
         });
     },
-
     async loadFiles(guild, targetFolderId = null, targetFolderName = null) {
         const container = UI.$('#files-content');
         const rootFolderId = guild.resources?.folderId;

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilds — Skymasons</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e6c866;
+            --gold-dim: rgba(201, 162, 39, 0.6);
+            --black: #0a0a0a;
+            --black-deep: #050505;
+            --charcoal: #141414;
+            --smoke: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: bguild-box; }
+        html, body { min-height: 100vh; }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 120%, rgba(201, 162, 39, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 50% -10%, rgba(201, 162, 39, 0.02) 0%, transparent 40%),
+                var(--black-deep);
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            background: var(--black-deep);
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .header-logo img { height: 36px; width: auto; }
+
+        .header-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            bguild-radius: 50%;
+            bguild: 2px solid rgba(201, 162, 39, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            object-fit: cover;
+        }
+
+        .user-avatar:hover {
+            bguild-color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .user-name { color: var(--gold); }
+
+        .header-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .header-btn:hover {
+            background: rgba(201, 162, 39, 0.1);
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            bguild-top: 1px solid rgba(201, 162, 39, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            bguild-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            bguild-bottom-color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            bguild-bottom-color: var(--gold);
+        }
+
+        .nav-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .nav-link:hover .nav-icon { opacity: 1; }
+
+        .main {
+            flex: 1;
+            margin-top: 110px;
+            padding: 2rem 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        .guilds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .guild-card {
+            background: var(--charcoal);
+            bguild: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-radius: 4px;
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .guild-card:hover {
+            bguild-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .guild-icon { font-size: 2.5rem; line-height: 1; }
+
+        .guild-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .guild-desc {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .guild-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.4);
+        }
+
+        .guild-seeder {
+            font-size: 0.7rem;
+            color: rgba(245, 245, 245, 0.35);
+            font-style: italic;
+        }
+
+        .guild-badge {
+            font-family: 'Cinzel', serif;
+            font-size: 0.55rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.75rem;
+            bguild-radius: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .guild-badge.member {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+            bguild: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .guild-badge.pending {
+            background: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+            bguild: 1px solid rgba(241, 196, 15, 0.3);
+        }
+
+        .guild-badge.open {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            bguild: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .guild-badge.closed {
+            background: rgba(155, 89, 182, 0.2);
+            color: #9b59b6;
+            bguild: 1px solid rgba(155, 89, 182, 0.3);
+        }
+
+        .create-card {
+            background: transparent;
+            bguild: 2px dashed rgba(201, 162, 39, 0.3);
+            color: var(--gold-dim);
+            min-height: 200px;
+            justify-content: center;
+        }
+
+        .create-card:hover {
+            background: rgba(201, 162, 39, 0.05);
+            bguild-color: var(--gold);
+            bguild-style: solid;
+            color: var(--gold);
+        }
+
+        .create-icon { font-size: 2rem; opacity: 0.6; }
+
+        .create-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .footer { padding: 2rem; text-align: center; }
+
+        .footer-whisper {
+            font-size: 0.7rem;
+            font-style: italic;
+            letter-spacing: 0.2em;
+            color: rgba(245, 245, 245, 0.15);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: rgba(245, 245, 245, 0.4);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state-icon { font-size: 4rem; opacity: 0.3; margin-bottom: 1rem; }
+        .empty-state-text { font-style: italic; font-size: 1.1rem; }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-tab {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            bguild: 1px solid rgba(201, 162, 39, 0.25);
+            color: var(--gold-dim);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            bguild-radius: 2px;
+        }
+
+        .filter-tab:hover {
+            background: rgba(201, 162, 39, 0.08);
+            bguild-color: rgba(201, 162, 39, 0.5);
+            color: var(--gold);
+        }
+
+        .filter-tab.active {
+            background: rgba(201, 162, 39, 0.15);
+            bguild-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Activity Indicator */
+        .guild-activity {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            color: rgba(245, 245, 245, 0.5);
+        }
+
+        .activity-dot {
+            width: 8px;
+            height: 8px;
+            bguild-radius: 50%;
+            display: inline-block;
+        }
+
+        .activity-dot.active { background: #4ade80; }
+        .activity-dot.moderate { background: #facc15; }
+        .activity-dot.quiet { background: #6b7280; }
+
+        /* Guilds Container */
+        .guilds-container {
+            min-height: 200px;
+        }
+
+        /* Create Card at Bottom */
+        .create-section {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .create-section .create-card {
+            max-width: 220px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar { flex-wrap: wrap; }
+            .nav-link { padding: 0.6rem 1rem; font-size: 0.6rem; }
+            .main { padding: 1.5rem; margin-top: 130px; }
+            .guilds-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 1.4rem; }
+            .header-top { padding: 0.75rem 1rem; }
+            .user-info { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="/" class="header-logo">
+                <img src="/assets/logo.jpg" alt="Skymasons">
+                <span class="header-title">The Sanctum</span>
+            </a>
+            <div class="header-right">
+                <span class="user-info">Welcome, <span class="user-name" id="user-name">Brother</span></span>
+                <a href="https://brothers.skymasons.xyz/settings/user" title="Edit Profile">
+                    <img src="https://brothers.skymasons.xyz/avatar/guest/32" alt="Profile" class="user-avatar" id="user-avatar">
+                </a>
+                <a href="https://auth.skymasons.xyz/if/flow/sanctum-logout/" class="header-btn">Depart</a>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <a href="https://sanctum.skymasons.xyz/" class="nav-link active">
+                <span class="nav-icon">&#9678;</span>
+                <span>Sanctum</span>
+            </a>
+            <a href="https://palaver.skymasons.xyz/apps/spreed" class="nav-link">
+                <span class="nav-icon">&#11041;</span>
+                <span>Palaver</span>
+            </a>
+            <a href="https://astrologue.skymasons.xyz/apps/calendar" class="nav-link">
+                <span class="nav-icon">&#10022;</span>
+                <span>Astrologue</span>
+            </a>
+            <a href="https://archives.skymasons.xyz/apps/files" class="nav-link">
+                <span class="nav-icon">&#9671;</span>
+                <span>Archives</span>
+            </a>
+            <a href="https://nexus.skymasons.xyz/apps/contacts" class="nav-link" style="display:none">
+                <span class="nav-icon">&#9672;</span>
+                <span>Nexus</span>
+            </a>
+            <a href="https://brothers.skymasons.xyz/apps/contacts" class="nav-link">
+                <span class="nav-icon">&#9876;</span>
+                <span>Brothers</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Discover Guilds</h1>
+            <p class="page-subtitle">Find and join brotherhoods within the Skymasons</p>
+        </div>
+
+        <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-tab active" data-category="all">All</button>
+            <button class="filter-tab" data-category="social">Social</button>
+            <button class="filter-tab" data-category="governance">Governance</button>
+            <button class="filter-tab" data-category="events">Events</button>
+            <button class="filter-tab" data-category="collaboration">Collaboration</button>
+            <button class="filter-tab" data-category="study">Study</button>
+            <button class="filter-tab" data-category="practice">Practice</button>
+            <button class="filter-tab" data-category="service">Service</button>
+            <button class="filter-tab" data-category="creative">Creative</button>
+            <button class="filter-tab" data-category="regional">Regional</button>
+            <button class="filter-tab" data-category="discussion">Discussion</button>
+            <button class="filter-tab" data-category="open">Open to Join</button>
+        </div>
+
+        <div class="guilds-container" id="guilds-container">
+            <!-- Guilds will be populated by JavaScript -->
+        </div>
+
+        <div class="create-section">
+            <a href="create-guild.html" class="guild-card create-card">
+                <span class="create-icon">+</span>
+                <span class="create-text">Seed New Guild</span>
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-whisper">Per aspera ad astra</p>
+    </footer>
+
+    <script>
+        let currentUser = null;
+        let allGuilds = [];
+        let currentFilter = 'all';
+
+        const categoryLabels = {
+            social: 'Social',
+            governance: 'Governance',
+            events: 'Events',
+            collaboration: 'Collaboration',
+            study: 'Study',
+            practice: 'Practice',
+            service: 'Service',
+            creative: 'Creative',
+            regional: 'Regional',
+            discussion: 'Discussion'
+        };
+
+        const categoryGuild = ['social', 'governance', 'events', 'collaboration', 'study', 'practice', 'service', 'creative', 'regional', 'discussion'];
+
+        fetch('/api/userinfo', { credentials: 'include' })
+            .then(r => r.json())
+            .then(data => {
+                if (data.name) {
+                    document.getElementById("user-name").textContent = data.name;
+                } else if (data.username) {
+                    document.getElementById("user-name").textContent = data.username;
+                }
+                currentUser = {
+                    username: data.username,
+                    name: data.name,
+                    groups: data.groups ? data.groups.split('|') : []
+                };
+                if (data.username) {
+                    document.getElementById('user-avatar').src = 'https://brothers.skymasons.xyz/avatar/' + encodeURIComponent(data.username) + '/32';
+                }
+                loadAllGuilds();
+            })
+            .catch(() => {
+                loadAllGuilds();
+            });
+
+        // Filter tab click handlers
+        document.getElementById('filter-tabs').addEventListener('click', function(e) {
+            if (e.target.classList.contains('filter-tab')) {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.category;
+                renderGuilds();
+            }
+        });
+
+        function getActivityLevel(guild) {
+            const memberCount = guild.memberCount || 0;
+            if (memberCount >= 10) return 'active';
+            if (memberCount >= 3) return 'moderate';
+            return 'quiet';
+        }
+
+        function getActivityLabel(level) {
+            if (level === 'active') return 'Active';
+            if (level === 'moderate') return 'Growing';
+            return 'Quiet';
+        }
+
+        function groupGuildsByCategory(guilds) {
+            const groups = {};
+            guilds.forEach(guild => {
+                const cat = guild.category || 'social';
+                if (!groups[cat]) groups[cat] = [];
+                groups[cat].push(guild);
+            });
+            return groups;
+        }
+
+        function renderGuildCard(guild) {
+            const usernameLower = (currentUser?.username || '').toLowerCase();
+            const isMember = guild.members && currentUser && guild.members.some(m => m.toLowerCase() === usernameLower);
+            const isPending = guild.pending && currentUser && guild.pending.some(p => p.toLowerCase() === usernameLower);
+            const isSeeder = (guild.seederUid || '').toLowerCase() === usernameLower;
+
+            let badgeHtml = '';
+            if (isMember || isSeeder) {
+                badgeHtml = '<span class="guild-badge member">Enter</span>';
+            } else if (isPending) {
+                badgeHtml = '<span class="guild-badge pending">Pending</span>';
+            } else if (guild.admission === 'open') {
+                badgeHtml = '<span class="guild-badge open">Join</span>';
+            } else {
+                badgeHtml = '<span class="guild-badge closed">Apply</span>';
+            }
+
+            const activityLevel = getActivityLevel(guild);
+            const activityLabel = getActivityLabel(activityLevel);
+
+            const colorStyle = guild.color ? 'bguild-color: ' + guild.color + '30;' : '';
+            const iconColor = guild.color || 'var(--gold)';
+
+            return '<a href="guild.html?id=' + guild.id + '" class="guild-card" style="' + colorStyle + '">' +
+                '<span class="guild-icon" style="color: ' + iconColor + '">' + (guild.icon || '&#9672;') + '</span>' +
+                '<span class="guild-name">' + guild.name + '</span>' +
+                '<span class="guild-desc">' + (guild.description || '').substring(0, 100) + '</span>' +
+                '<div class="guild-meta">' +
+                    '<span>' + (guild.memberCount || 0) + ' members</span>' +
+                    '<span class="guild-activity"><span class="activity-dot ' + activityLevel + '"></span> ' + activityLabel + '</span>' +
+                '</div>' +
+                '<span class="guild-seeder">Seeded by @' + (guild.seederUid || 'unknown') + '</span>' +
+                badgeHtml +
+            '</a>';
+        }
+
+        function renderGuilds() {
+            const container = document.getElementById('guilds-container');
+
+            if (allGuilds.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#9678;</div><p class="empty-state-text">No Guilds have been seeded yet. Be the first!</p></div>';
+                return;
+            }
+
+            let filteredGuilds = allGuilds;
+
+            // Special filter: "open" shows only open admission guilds
+            if (currentFilter === 'open') {
+                filteredGuilds = allGuilds.filter(o => o.admission === 'open');
+
+                if (filteredGuilds.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#9678;</div><p class="empty-state-text">No open Guilds at the moment</p></div>';
+                    return;
+                }
+
+                // Render as flat grid for open filter
+                container.innerHTML = '<div class="guilds-grid">' + filteredGuilds.map(renderGuildCard).join('') + '</div>';
+                return;
+            }
+
+            // Category filter or all
+            if (currentFilter !== 'all') {
+                filteredGuilds = allGuilds.filter(o => (o.category || 'social') === currentFilter);
+
+                if (filteredGuilds.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#9678;</div><p class="empty-state-text">No Guilds in this category yet</p></div>';
+                    return;
+                }
+
+                // Render as flat grid for single category
+                container.innerHTML = '<div class="guilds-grid">' + filteredGuilds.map(renderGuildCard).join('') + '</div>';
+                return;
+            }
+
+            // "All" filter - group by category
+            const grouped = groupGuildsByCategory(allGuilds);
+            let html = '';
+
+            categoryGuild.forEach(category => {
+                const categoryGuilds = grouped[category];
+                if (categoryGuilds && categoryGuilds.length > 0) {
+                    html += '<section class="category-section">' +
+                        '<h2 class="category-title">' + categoryLabels[category] + '</h2>' +
+                        '<div class="guilds-grid">' +
+                        categoryGuilds.map(renderGuildCard).join('') +
+                        '</div></section>';
+                }
+            });
+
+            // Check for any guilds in unknown categories
+            Object.keys(grouped).forEach(cat => {
+                if (!categoryGuild.includes(cat) && grouped[cat].length > 0) {
+                    html += '<section class="category-section">' +
+                        '<h2 class="category-title">' + (categoryLabels[cat] || cat) + '</h2>' +
+                        '<div class="guilds-grid">' +
+                        grouped[cat].map(renderGuildCard).join('') +
+                        '</div></section>';
+                }
+            });
+
+            container.innerHTML = html || '<div class="empty-state"><div class="empty-state-icon">&#9678;</div><p class="empty-state-text">No Guilds found</p></div>';
+        }
+
+        function loadAllGuilds() {
+            fetch('/api/guilds', { credentials: 'include' })
+                .then(r => r.json())
+                .then(data => {
+                    allGuilds = data.guilds || [];
+                    renderGuilds();
+                })
+                .catch(err => {
+                    console.log('Could not load guilds:', err);
+                    const container = document.getElementById('guilds-container');
+                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">&#9888;</div><p class="empty-state-text">Could not load guilds. Please try again later.</p></div>';
+                });
+        }
+    </script>
+</body>
+</html>

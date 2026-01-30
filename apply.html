@@ -16,14 +16,14 @@
             --black-deep: #050505;
             --charcoal: #141414;
             --smoke: #1a1a1a;
-            --order-color: #c9a227;
+            --guild-color: #c9a227;
             
         }
 
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: bguild-box;
         }
 
         html, body {
@@ -44,7 +44,7 @@
         .header {
             width: 100%;
             background: var(--black-deep);
-            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.2);
             position: fixed;
             top: 0;
             left: 0;
@@ -83,15 +83,15 @@
         .user-avatar {
             width: 32px;
             height: 32px;
-            border-radius: 50%;
-            border: 2px solid rgba(201, 162, 39, 0.4);
+            bguild-radius: 50%;
+            bguild: 2px solid rgba(201, 162, 39, 0.4);
             cursor: pointer;
             transition: all 0.2s ease;
             object-fit: cover;
         }
 
         .user-avatar:hover {
-            border-color: var(--gold);
+            bguild-color: var(--gold);
             box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
         }
 
@@ -108,17 +108,17 @@
             text-transform: uppercase;
             padding: 0.5rem 1rem;
             background: transparent;
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
             color: var(--gold-dim);
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s ease;
-            border-radius: 2px;
+            bguild-radius: 2px;
         }
 
         .header-btn:hover {
             background: rgba(201, 162, 39, 0.1);
-            border-color: var(--gold);
+            bguild-color: var(--gold);
             color: var(--gold);
         }
 
@@ -127,7 +127,7 @@
             display: flex;
             justify-content: center;
             gap: 0;
-            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            bguild-top: 1px solid rgba(201, 162, 39, 0.1);
             background: rgba(0, 0, 0, 0.3);
         }
 
@@ -143,18 +143,18 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             transition: all 0.2s ease;
-            border-bottom: 2px solid transparent;
+            bguild-bottom: 2px solid transparent;
         }
 
         .nav-link:hover {
             color: var(--gold);
             background: rgba(201, 162, 39, 0.05);
-            border-bottom-color: var(--gold);
+            bguild-bottom-color: var(--gold);
         }
 
         .nav-link.active {
             color: var(--gold);
-            border-bottom-color: var(--gold);
+            bguild-bottom-color: var(--gold);
         }
 
         .nav-icon {
@@ -177,14 +177,14 @@
             text-align: center;
             margin-bottom: 2.5rem;
             padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-bottom: 1px solid rgba(201, 162, 39, 0.15);
         }
 
-        .order-icon {
+        .guild-icon {
             font-size: 3rem;
             line-height: 1;
             margin-bottom: 1rem;
-            color: var(--order-color);
+            color: var(--guild-color);
         }
 
         .apply-title {
@@ -204,8 +204,8 @@
 
         .application-form {
             background: var(--charcoal);
-            border: 1px solid rgba(201, 162, 39, 0.15);
-            border-radius: 4px;
+            bguild: 1px solid rgba(201, 162, 39, 0.15);
+            bguild-radius: 4px;
             padding: 2rem;
         }
 
@@ -233,20 +233,20 @@
             gap: 1rem;
             padding: 1rem;
             background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(201, 162, 39, 0.1);
-            border-radius: 4px;
+            bguild: 1px solid rgba(201, 162, 39, 0.1);
+            bguild-radius: 4px;
             margin-bottom: 0.75rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .agreement-item:hover {
-            border-color: rgba(201, 162, 39, 0.3);
+            bguild-color: rgba(201, 162, 39, 0.3);
             background: rgba(201, 162, 39, 0.05);
         }
 
         .agreement-item.checked {
-            border-color: rgba(39, 174, 96, 0.4);
+            bguild-color: rgba(39, 174, 96, 0.4);
             background: rgba(39, 174, 96, 0.05);
         }
 
@@ -254,8 +254,8 @@
             width: 20px;
             height: 20px;
             min-width: 20px;
-            border: 2px solid rgba(201, 162, 39, 0.4);
-            border-radius: 3px;
+            bguild: 2px solid rgba(201, 162, 39, 0.4);
+            bguild-radius: 3px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -265,7 +265,7 @@
 
         .agreement-item.checked .agreement-checkbox {
             background: rgba(39, 174, 96, 0.3);
-            border-color: #27ae60;
+            bguild-color: #27ae60;
         }
 
         .agreement-checkbox::after {
@@ -293,8 +293,8 @@
             min-height: 120px;
             padding: 1rem;
             background: var(--black);
-            border: 1px solid rgba(201, 162, 39, 0.2);
-            border-radius: 4px;
+            bguild: 1px solid rgba(201, 162, 39, 0.2);
+            bguild-radius: 4px;
             color: #f5f5f5;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1rem;
@@ -303,7 +303,7 @@
 
         .message-field:focus {
             outline: none;
-            border-color: var(--gold);
+            bguild-color: var(--gold);
         }
 
         .message-field::placeholder {
@@ -317,7 +317,7 @@
             align-items: center;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(201, 162, 39, 0.1);
+            bguild-top: 1px solid rgba(201, 162, 39, 0.1);
         }
 
         .btn-cancel {
@@ -327,16 +327,16 @@
             text-transform: uppercase;
             padding: 0.75rem 1.5rem;
             background: transparent;
-            border: 1px solid rgba(201, 162, 39, 0.3);
+            bguild: 1px solid rgba(201, 162, 39, 0.3);
             color: var(--gold-dim);
             text-decoration: none;
             transition: all 0.2s ease;
-            border-radius: 2px;
+            bguild-radius: 2px;
         }
 
         .btn-cancel:hover {
             background: rgba(201, 162, 39, 0.1);
-            border-color: var(--gold);
+            bguild-color: var(--gold);
             color: var(--gold);
         }
 
@@ -347,11 +347,11 @@
             text-transform: uppercase;
             padding: 0.85rem 2rem;
             background: rgba(201, 162, 39, 0.15);
-            border: 1px solid var(--order-color);
-            color: var(--order-color);
+            bguild: 1px solid var(--guild-color);
+            color: var(--guild-color);
             cursor: pointer;
             transition: all 0.2s ease;
-            border-radius: 2px;
+            bguild-radius: 2px;
         }
 
         .btn-submit:hover:not(:disabled) {
@@ -368,18 +368,18 @@
             text-align: center;
             font-size: 0.9rem;
             padding: 0.75rem;
-            border-radius: 4px;
+            bguild-radius: 4px;
         }
 
         .status-message.success {
             background: rgba(39, 174, 96, 0.1);
-            border: 1px solid rgba(39, 174, 96, 0.3);
+            bguild: 1px solid rgba(39, 174, 96, 0.3);
             color: #27ae60;
         }
 
         .status-message.error {
             background: rgba(231, 76, 60, 0.1);
-            border: 1px solid rgba(231, 76, 60, 0.3);
+            bguild: 1px solid rgba(231, 76, 60, 0.3);
             color: #e74c3c;
         }
 
@@ -478,14 +478,14 @@
         </div>
 
         <div id="error-state" class="error-state hidden">
-            <p>Order not found</p>
-            <a href="orders.html" class="header-back" style="margin-top: 1rem; display: inline-block;">Browse Orders</a>
+            <p>Guild not found</p>
+            <a href="guilds.html" class="header-back" style="margin-top: 1rem; display: inline-block;">Browse Guilds</a>
         </div>
 
         <div id="apply-content" class="hidden">
             <div class="apply-header">
-                <div class="order-icon" id="order-icon"></div>
-                <h1 class="apply-title">Apply to <span id="order-name"></span></h1>
+                <div class="guild-icon" id="guild-icon"></div>
+                <h1 class="apply-title">Apply to <span id="guild-name"></span></h1>
                 <p class="apply-subtitle">Complete the following to submit your application</p>
             </div>
 
@@ -498,8 +498,8 @@
                 </div>
 
                 <div class="form-section">
-                    <h2 class="section-title">Message to the Order (Optional)</h2>
-                    <textarea class="message-field" id="application-message" placeholder="Share why you wish to join this Order, or any message for its members..."></textarea>
+                    <h2 class="section-title">Message to the Guild (Optional)</h2>
+                    <textarea class="message-field" id="application-message" placeholder="Share why you wish to join this Guild, or any message for its members..."></textarea>
                 </div>
 
                 <div class="form-actions">
@@ -518,20 +518,20 @@
 
     <script>
         let currentUser = null;
-        let currentOrder = null;
+        let currentGuild = null;
         let agreements = {};
 
-        // Get order ID from URL
+        // Get guild ID from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const orderId = urlParams.get('id');
+        const guildId = urlParams.get('id');
 
-        if (!orderId) {
+        if (!guildId) {
             showError();
         }
 
         // Set up back links
         // back-link removed - element doesn't exist
-        document.getElementById('cancel-btn').href = `order.html?id=${orderId}`;
+        document.getElementById('cancel-btn').href = `guild.html?id=${guildId}`;
 
         // Fetch user info first
         fetch('/api/userinfo', { credentials: 'include' })
@@ -546,33 +546,33 @@
                 if (data.username) {
                     document.getElementById('user-avatar').src = 'https://brothers.skymasons.xyz/avatar/' + encodeURIComponent(data.username) + '/32';
                 }
-                loadOrder();
+                loadGuild();
             })
             .catch(() => {
-                loadOrder();
+                loadGuild();
             });
 
-        function loadOrder() {
-            fetch(`/api/orders/${orderId}`, { credentials: 'include' })
+        function loadGuild() {
+            fetch(`/api/guilds/${guildId}`, { credentials: 'include' })
                 .then(r => {
                     if (!r.ok) throw new Error('Not found');
                     return r.json();
                 })
-                .then(order => {
-                    currentOrder = order;
+                .then(guild => {
+                    currentGuild = guild;
                     
                     // Check if already member or pending (case-insensitive)
                     const usernameLower = (currentUser?.username || '').toLowerCase();
-                    const isMember = order.members && currentUser && order.members.some(function(m) { return m.toLowerCase() === usernameLower; });
-                    const isPending = order.pending && currentUser && order.pending.some(function(p) { return p.toLowerCase() === usernameLower; });
+                    const isMember = guild.members && currentUser && guild.members.some(function(m) { return m.toLowerCase() === usernameLower; });
+                    const isPending = guild.pending && currentUser && guild.pending.some(function(p) { return p.toLowerCase() === usernameLower; });
                     
                     if (isMember || isPending) {
-                        // Redirect back to order page
-                        window.location.href = `order.html?id=${orderId}`;
+                        // Redirect back to guild page
+                        window.location.href = `guild.html?id=${guildId}`;
                         return;
                     }
                     
-                    renderApplication(order);
+                    renderApplication(guild);
                 })
                 .catch(() => {
                     showError();
@@ -584,26 +584,26 @@
             document.getElementById('error-state').classList.remove('hidden');
         }
 
-        function renderApplication(order) {
-            // Set order color
-            if (order.color) {
-                document.documentElement.style.setProperty('--order-color', order.color);
+        function renderApplication(guild) {
+            // Set guild color
+            if (guild.color) {
+                document.documentElement.style.setProperty('--guild-color', guild.color);
             }
 
-            document.getElementById('order-icon').textContent = order.icon || '⬡';
-            document.getElementById('order-name').textContent = order.name;
-            document.title = `Apply to ${order.name} — Skymasons`;
+            document.getElementById('guild-icon').textContent = guild.icon || '⬡';
+            document.getElementById('guild-name').textContent = guild.name;
+            document.title = `Apply to ${guild.name} — Skymasons`;
 
             // Load custom agreements or use defaults
-            const customAgreements = order.applicationForm?.agreements || [];
+            const customAgreements = guild.applicationForm?.agreements || [];
             const container = document.getElementById('agreements-container');
             
             if (customAgreements.length === 0) {
                 // Use default agreements
                 const defaults = [
                     { id: 1, text: 'I agree to uphold the values and principles of the Skymasons, conducting myself with integrity and respect toward all members.' },
-                    { id: 2, text: 'I understand that discussions and materials shared within this Order are confidential and shall not be shared outside the brotherhood.' },
-                    { id: 3, text: 'I commit to actively participating in Order activities and contributing to the collective growth of the brotherhood.' }
+                    { id: 2, text: 'I understand that discussions and materials shared within this Guild are confidential and shall not be shared outside the brotherhood.' },
+                    { id: 3, text: 'I commit to actively participating in Guild activities and contributing to the collective growth of the brotherhood.' }
                 ];
                 defaults.forEach(a => {
                     agreements['agreement_' + a.id] = false;
@@ -656,7 +656,7 @@
             submitBtn.textContent = 'Submitting...';
             
             try {
-                const response = await fetch(`/api/orders/${orderId}/apply`, {
+                const response = await fetch(`/api/guilds/${guildId}/apply`, {
                     credentials: 'include',
                     method: 'POST',
                     headers: {
