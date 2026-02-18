@@ -1,0 +1,27 @@
+services:
+  app:
+    image: node:20-alpine
+    working_dir: /app
+    command: node server.js
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./.next/standalone:/app
+      - ./.next/static:/app/.next/static
+      - ./public:/app/public
+    environment:
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - NEXTCLOUD_INTERNAL_URL=http://nextcloud:80
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - caddy_default
+      - nextcloud_nextcloud_network
+
+networks:
+  caddy_default:
+    external: true
+  nextcloud_nextcloud_network:
+    external: true

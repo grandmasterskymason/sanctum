@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-gold: #c9a227;
+  --color-gold-dim: #a68620;
+  --color-black-deep: #0a0a0a;
+  --color-black: #111111;
+  --color-black-light: #1a1a1a;
+  --color-gray-dark: #2a2a2a;
+  --color-gray: #666666;
+  --color-gray-light: #999999;
+  --color-white: #f0f0f0;
+  --color-white-dim: #cccccc;
+  --color-danger: #dc5050;
+  --color-success: #50c878;
+
+  /* Fonts */
+  --font-display: var(--font-display-face), serif;
+  --font-body: var(--font-body-face), Georgia, serif;
+
+  /* Animations */
+  --animate-fade-in: fadeIn 0.4s ease;
+  --animate-slide-in: slideIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Guild-color utilities — runtime CSS var, can't go in @theme */
+@utility text-guild {
+  color: rgb(var(--guild-color));
+}
+
+@utility bg-guild {
+  background-color: rgb(var(--guild-color));
+}
+
+@utility border-guild {
+  border-color: rgb(var(--guild-color));
+}
+
+@utility shadow-guild {
+  --tw-shadow-color: rgb(var(--guild-color));
+}
+
+@layer base {
+  :root {
+    /* Core palette as RGB triplets for runtime use */
+    --gold: 201 162 39;
+    --gold-dim: 166 134 32;
+
+    --black-deep: 10 10 10;
+    --black: 17 17 17;
+    --black-light: 26 26 26;
+
+    --gray-dark: 42 42 42;
+    --gray: 102 102 102;
+    --gray-light: 153 153 153;
+
+    --white: 240 240 240;
+    --white-dim: 204 204 204;
+
+    --danger: 220 80 80;
+    --success: 80 200 120;
+
+    /* Dynamic Guild color - overridden per Guild */
+    --guild-color: var(--gold);
+
+    /* Semantic tokens */
+    --background: var(--black-deep);
+    --foreground: var(--white);
+    --muted: var(--gray);
+    --muted-foreground: var(--gray-light);
+    --border: var(--gray-dark);
+    --accent: var(--gold);
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-black-deep text-white antialiased;
+    font-family: var(--font-body-face), Georgia, serif;
+  }
+}
+
+/* Atmospheric background texture */
+.atmosphere {
+  position: relative;
+}
+
+.atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(var(--guild-color) / 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Golden glow line effect */
+.glow-line {
+  position: relative;
+}
+
+.glow-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--guild-color)) 50%, transparent 100%);
+  opacity: 0.4;
+  filter: blur(1px);
+}
+
+/* Ornate border effect */
+.ornate-border {
+  position: relative;
+}
+
+.ornate-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(rgb(var(--black-light)), rgb(var(--black-light))) padding-box,
+              linear-gradient(135deg, rgb(var(--guild-color) / 0.3) 0%, transparent 50%, rgb(var(--guild-color) / 0.3) 100%) border-box;
+  pointer-events: none;
+}
+
+/* Scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgb(var(--black));
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--gray-dark));
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--gray));
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid rgb(var(--guild-color));
+  outline-offset: 2px;
+}
+
+/* Ornate corner flourishes */
+.ornate-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ornate-corner::before,
+.ornate-corner::after {
+  content: '';
+  position: absolute;
+  background: rgb(var(--guild-color) / 0.5);
+}
+
+.ornate-corner::before {
+  /* Horizontal arm */
+  width: 16px;
+  height: 1px;
+}
+
+.ornate-corner::after {
+  /* Vertical arm */
+  width: 1px;
+  height: 16px;
+}
+
+.ornate-corner-tl {
+  top: -1px;
+  left: -1px;
+}
+.ornate-corner-tl::before { top: 0; left: 0; }
+.ornate-corner-tl::after { top: 0; left: 0; }
+
+.ornate-corner-tr {
+  top: -1px;
+  right: -1px;
+}
+.ornate-corner-tr::before { top: 0; right: 0; }
+.ornate-corner-tr::after { top: 0; right: 0; }
+
+.ornate-corner-bl {
+  bottom: -1px;
+  left: -1px;
+}
+.ornate-corner-bl::before { bottom: 0; left: 0; }
+.ornate-corner-bl::after { bottom: 0; left: 0; }
+
+.ornate-corner-br {
+  bottom: -1px;
+  right: -1px;
+}
+.ornate-corner-br::before { bottom: 0; right: 0; }
+.ornate-corner-br::after { bottom: 0; right: 0; }

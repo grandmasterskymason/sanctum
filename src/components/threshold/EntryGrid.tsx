@@ -1,0 +1,118 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { MessageCircle, Calendar, Target, FileText, Archive, Users, Video } from "lucide-react"
+import { EntryTile } from "./EntryTile"
+import { staggerContainer, staggerItem } from "@/components/shell"
+import type { Guild } from "@/types/guild"
+import type { ChamberNotifications } from "@/lib/notifications"
+
+interface EntryGridProps {
+  guildId: string
+  guild?: Guild
+  notifications?: ChamberNotifications
+}
+
+export function EntryGrid({ guildId, guild, notifications }: EntryGridProps) {
+  // Build chambers based on available resources
+  const chambers: Array<{
+    id: string
+    icon: typeof MessageCircle
+    title: string
+    description: string
+    badge?: number
+    external?: boolean
+    href?: string
+  }> = []
+
+  // Pulse (Talk) - always show if talkRoom exists
+  if (guild?.resources.talkRoom) {
+    chambers.push({
+      id: "pulse",
+      icon: MessageCircle,
+      title: "The Pulse",
+      description: "Whispers in the cove",
+      badge: notifications?.pulse,
+    })
+  }
+
+  // Chamber (Jitsi) - always available
+  chambers.push({
+    id: "chamber",
+    icon: Video,
+    title: "The Chamber",
+    description: "Enter the meeting hall",
+    external: true,
+    href: `https://meet.talitamoss.info/${guildId}`,
+  })
+
+  // Rites (Calendar) - show if calendarUri exists
+  if (guild?.resources.calendarUri) {
+    chambers.push({
+      id: "rites",
+      icon: Calendar,
+      title: "Rites",
+      description: "Upcoming gatherings",
+      badge: notifications?.rites,
+    })
+  }
+
+  // Quests (Deck) - show if deckBoardId exists
+  if (guild?.resources.deckBoardId) {
+    chambers.push({
+      id: "quests",
+      icon: Target,
+      title: "Quests",
+      description: "Active endeavors",
+      badge: notifications?.quests,
+    })
+  }
+
+  // Scrolls (Forms) - always available
+  chambers.push({
+    id: "scrolls",
+    icon: FileText,
+    title: "Scrolls",
+    description: "Inquiries & forms",
+  })
+
+  // Archive (Files) - show if folderId exists
+  if (guild?.resources.folderId) {
+    chambers.push({
+      id: "archive",
+      icon: Archive,
+      title: "Archive",
+      description: "Shared knowledge",
+    })
+  }
+
+  // Brotherhood - always show
+  chambers.push({
+    id: "brotherhood",
+    icon: Users,
+    title: "Brothers",
+    description: `${guild?.memberCount || 0} members`,
+  })
+
+  return (
+    <motion.div
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      variants={staggerContainer}
+      initial="initial"
+      animate="animate"
+    >
+      {chambers.map((chamber) => (
+        <motion.div key={chamber.id} variants={staggerItem}>
+          <EntryTile
+            href={chamber.href || `/guild/${guildId}/${chamber.id}`}
+            icon={chamber.icon}
+            title={chamber.title}
+            description={chamber.description}
+            badge={chamber.badge}
+            external={chamber.external}
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  )
+}

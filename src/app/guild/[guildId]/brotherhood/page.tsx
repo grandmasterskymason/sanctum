@@ -1,0 +1,98 @@
+import { Users, UserPlus, ExternalLink } from "lucide-react"
+import { ChamberHeader, Card, CardTitle } from "@/components/shared"
+import { getGuild } from "@/lib/guilds"
+import { notFound } from "next/navigation"
+import Link from "next/link"
+
+interface BrotherhoodPageProps {
+  params: Promise<{ guildId: string }>
+}
+
+function MemberCard({ username, isSeeder }: { username: string; isSeeder: boolean }) {
+  return (
+    <Card>
+      <div className="flex items-center gap-4">
+        <img
+          src={`/api/avatar/${username}/48`}
+          alt={username}
+          className="h-12 w-12 flex-shrink-0 rounded-full"
+        />
+        <div className="min-w-0 flex-1">
+          <CardTitle className={isSeeder ? "text-gold group-hover:text-gold" : undefined}>
+            {username}
+          </CardTitle>
+          {isSeeder && (
+            <p className="text-sm text-gold/70">Seeder</p>
+          )}
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+export default async function BrotherhoodPage({ params }: BrotherhoodPageProps) {
+  const { guildId } = await params
+  const guild = await getGuild(guildId)
+
+  if (!guild) {
+    notFound()
+  }
+
+  // Sort members: seeder first, then alphabetically
+  const sortedMembers = [...guild.members].sort((a, b) => {
+    if (a === guild.seederUid) return -1
+    if (b === guild.seederUid) return 1
+    return a.localeCompare(b)
+  })
+
+  return (
+    <div className="flex h-full flex-col p-6 lg:p-8">
+      <ChamberHeader
+        backHref={`/guild/${guildId}`}
+        icon={<Users className="h-10 w-10 text-guild" />}
+        title="Brothers"
+        subtitle={`${guild.memberCount} members of ${guild.name}`}
+      />
+
+      <div className="mb-6 flex flex-wrap gap-3">
+        <Link
+          href="/settings"
+          className="inline-flex items-center gap-2 rounded-lg bg-guild px-4 py-2 text-sm font-medium text-black-deep transition-colors hover:bg-guild/80"
+        >
+          <UserPlus className="h-4 w-4" />
+          Invite Someone
+        </Link>
+        <a
+          href="https://brothers.skymasons.xyz/apps/contacts/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-lg border border-gray-dark px-4 py-2 text-sm text-gray transition-colors hover:border-guild/50 hover:text-guild"
+        >
+          <ExternalLink className="h-4 w-4" />
+          Open Contacts
+        </a>
+      </div>
+
+      <div className="flex-1">
+        {guild.pending.length > 0 && (
+          <div className="mb-6 rounded-lg border border-guild/30 bg-guild/5 p-4">
+            <h3 className="font-medium text-guild">Pending Applications</h3>
+            <p className="mt-1 text-sm text-gray">
+              {guild.pending.length} {guild.pending.length === 1 ? "seeker" : "seekers"} awaiting approval
+            </p>
+          </div>
+        )}
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {sortedMembers.map((username) => (
+            <MemberCard
+              key={username}
+              username={username}
+              isSeeder={username === guild.seederUid}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
