@@ -9,6 +9,7 @@ export interface Guild {
   members: string[]
   pending: string[]
   memberCount: number
+  category?: string
   createdAt: string
   circleId: string
   applicationForm?: {

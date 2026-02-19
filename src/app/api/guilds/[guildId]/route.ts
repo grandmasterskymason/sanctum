@@ -53,29 +53,43 @@ function ncRequest(method: string, path: string, authHeaders: Record<string, str
   })
 }
 
-export async function GET() {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ guildId: string }> }
+) {
   const auth = await getAuthHeaders()
   if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  const { guildId } = await params
 
   try {
-    const data = await ncRequest("GET", "/apps/skymasonsnav/api/orders", auth)
-    return NextResponse.json(data.orders || data)
-  } catch (error) {
-    console.error("Failed to fetch guilds:", error)
-    return NextResponse.json({ error: "Failed to fetch guilds" }, { status: 500 })
-  }
-}
+    const url = new URL(request.url)
+    const action = url.searchParams.get("action")
+    
+    if (!action) {
+      return NextResponse.json({ error: "Action required" }, { status: 400 })
+    }
 
-export async function POST(request: NextRequest) {
-  const auth = await getAuthHeaders()
-  if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    let path = ""
+    let body: string | undefined
 
-  try {
-    const body = await request.json()
-    const data = await ncRequest("POST", "/apps/skymasonsnav/api/orders", auth, JSON.stringify(body))
+    switch (action) {
+      case "join":
+        path = `/apps/skymasonsnav/api/orders/${guildId}/join`
+        break
+      case "apply":
+        path = `/apps/skymasonsnav/api/orders/${guildId}/apply`
+        break
+      case "leave":
+        path = `/apps/skymasonsnav/api/orders/${guildId}/leave`
+        break
+      default:
+        return NextResponse.json({ error: "Invalid action" }, { status: 400 })
+    }
+
+    const data = await ncRequest("POST", path, auth, body)
     return NextResponse.json(data)
   } catch (error) {
-    console.error("Failed to create guild:", error)
-    return NextResponse.json({ error: "Failed to create guild" }, { status: 500 })
+    console.error(`Failed guild action:`, error)
+    return NextResponse.json({ error: "Action failed" }, { status: 500 })
   }
 }

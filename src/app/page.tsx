@@ -1,11 +1,10 @@
-import { redirect } from "next/navigation"
-import { getUserGuilds } from "@/lib/guilds"
 import { getUser } from "@/lib/auth"
+import { getGuilds, getUserGuilds } from "@/lib/guilds"
+import { HomePage } from "@/components/home/HomePage"
 
 export default async function Home() {
   const user = await getUser()
-  
-  // If not authenticated, the auth proxy will handle redirect
+
   if (!user) {
     return (
       <div className="flex h-full items-center justify-center">
@@ -14,18 +13,59 @@ export default async function Home() {
     )
   }
 
-  const guilds = await getUserGuilds()
+  const [allGuilds, userGuilds] = await Promise.all([
+    getGuilds(),
+    getUserGuilds(),
+  ])
 
-  // Redirect to first guild if available
-  if (guilds.length > 0) {
-    redirect(`/guild/${guilds[0].id}`)
+  // Auto-join mandatory guilds the user isn't a member of yet
+  const username = user.username?.toLowerCase() || ""
+  for (const guild of allGuilds) {
+    if (
+      guild.admission === "mandatory" &&
+      !guild.members.some((m: string) => m.toLowerCase() === username)
+    ) {
+      try {
+        const { headers: h } = await import("next/headers")
+        const headersList = await h()
+        const authUser = headersList.get("x-authentik-username")
+        const authGroups = headersList.get("x-authentik-groups")
+        const authName = headersList.get("x-authentik-name")
+        if (authUser) {
+          const { postToNextcloud } = await import("@/lib/api")
+          await postToNextcloud("/apps/skymasonsnav/api/orders/" + guild.id + "/join", {}, {
+            headers: {
+              "X-Authentik-Username": authUser,
+              "X-Authentik-Groups": authGroups || "",
+              "X-Authentik-Name": authName || "",
+            },
+          })
+        }
+      } catch {
+        // Ignore join failures
+      }
+    }
   }
 
-  // No guilds - show message
+  // Collect upcoming events across all user guilds
+  const eventsData: Array<{ guildId: string; guildName: string; guildColor: string; calendarUri: string }> = []
+  for (const guild of userGuilds) {
+    if (guild.resources.calendarUri) {
+      eventsData.push({
+        guildId: guild.id,
+        guildName: guild.name,
+        guildColor: guild.color,
+        calendarUri: guild.resources.calendarUri,
+      })
+    }
+  }
+
   return (
-    <div className="flex h-full flex-col items-center justify-center p-6 text-center">
-      <p className="text-lg text-white">Welcome, {user.name}</p>
-      <p className="mt-2 text-gray">You are not a member of any guilds yet.</p>
-    </div>
+    <HomePage
+      user={user}
+      allGuilds={allGuilds}
+      userGuilds={userGuilds}
+      guildCalendars={eventsData}
+    />
   )
 }
