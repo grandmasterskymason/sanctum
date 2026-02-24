@@ -68,7 +68,7 @@ export function GuildTile({ guild, username, isMember, isPinned, onTogglePin }: 
 
       {/* Name */}
       <h3
-        className="text-center font-display text-sm font-semibold tracking-wide transition-colors group-hover:text-white"
+        className="text-center font-display text-xs font-semibold tracking-wide transition-colors group-hover:text-white"
         style={{ color: guildColor }}
       >
         {guild.name}

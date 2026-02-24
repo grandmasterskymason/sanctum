@@ -115,10 +115,10 @@ export function HomePage({ user, allGuilds, userGuilds, guildCalendars }: HomePa
               <Calendar className="h-4 w-4 text-gold" />
             </div>
             <div>
-              <h2 className="font-display text-base font-medium tracking-wide text-white">
+              <h2 className="font-display text-lg font-medium tracking-wide text-white">
                 Upcoming Rites
               </h2>
-              <p className="text-[10px] uppercase tracking-widest text-gray">Across all your guilds</p>
+              <p className="text-xs uppercase tracking-widest text-gray">Across all your guilds</p>
             </div>
           </div>
           {loadingEvents ? (
@@ -153,7 +153,7 @@ export function HomePage({ user, allGuilds, userGuilds, guildCalendars }: HomePa
                 <h2 className="font-display text-base font-medium tracking-wide text-white">
                   The Guilds
                 </h2>
-                <p className="text-[10px] uppercase tracking-widest text-gray">Brotherhoods of the order</p>
+                <p className="text-xs uppercase tracking-widest text-gray">Brotherhoods of the order</p>
               </div>
             </div>
             <button

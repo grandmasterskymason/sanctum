@@ -85,7 +85,7 @@
 }
 
 @layer base {
-  body {
+body {
     @apply bg-black-deep text-white antialiased;
     font-family: var(--font-body-face), Georgia, serif;
   }
