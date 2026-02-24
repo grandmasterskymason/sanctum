@@ -93,3 +93,26 @@ export async function POST(
     return NextResponse.json({ error: "Action failed" }, { status: 500 })
   }
 }
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ guildId: string }> }
+) {
+  const auth = await getAuthHeaders()
+  if (!auth) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  const { guildId } = await params
+
+  try {
+    const body = await request.json()
+    const data = await ncRequest(
+      "PUT",
+      `/apps/skymasonsnav/api/orders/${guildId}`,
+      auth,
+      JSON.stringify(body)
+    )
+    return NextResponse.json(data)
+  } catch (error) {
+    console.error("Failed to update guild:", error)
+    return NextResponse.json({ error: "Failed to update guild" }, { status: 500 })
+  }
+}

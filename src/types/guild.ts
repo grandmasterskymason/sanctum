@@ -10,6 +10,8 @@ export interface Guild {
   pending: string[]
   memberCount: number
   category?: string
+  patternIntegrity?: string
+  evolutionaryPurpose?: string
   createdAt: string
   circleId: string
   applicationForm?: {

@@ -142,7 +142,7 @@ function SidebarItem({ guild, isActive }: SidebarItemProps) {
             transition={{ type: "spring", stiffness: 400, damping: 28 }}
           />
         )}
-        <span style={{ color: guild.color }}>{guild.icon}</span>
+        <span style={{ color: guild.color }}>{guild.icon?.startsWith("data:") ? <img src={guild.icon} alt="" className="h-5 w-5 object-contain" /> : guild.icon}</span>
       </Link>
 
       {/* Tooltip */}
