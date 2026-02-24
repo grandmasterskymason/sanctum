@@ -45,7 +45,6 @@ export default async function ThresholdPage({ params }: ThresholdPageProps) {
     ? `/guild/${guildId}/scrolls`
     : `/guild/${guildId}/pulse`
 
-  console.log("[EDIT DEBUG] username:", user?.username, "seederUid:", guild.seederUid)
   const isSeeder = !!(user?.username && guild.seederUid &&
     user.username.toLowerCase() === guild.seederUid.toLowerCase())
 

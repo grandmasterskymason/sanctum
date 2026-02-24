@@ -15,6 +15,7 @@ interface GuildCalendar {
   guildId: string
   guildName: string
   guildColor: string
+  guildIcon: string
   calendarUri: string
 }
 
@@ -26,6 +27,7 @@ interface UpcomingEvent {
   guildId: string
   guildName: string
   guildColor: string
+  guildIcon: string
 }
 
 interface HomePageProps {
@@ -62,6 +64,7 @@ export function HomePage({ user, allGuilds, userGuilds, guildCalendars }: HomePa
             guildId: gc.guildId,
             guildName: gc.guildName,
             guildColor: gc.guildColor,
+            guildIcon: gc.guildIcon,
           }))
         })
       )
@@ -249,52 +252,38 @@ function EventCard({ event }: { event: UpcomingEvent }) {
   const tomorrow = new Date(now)
   tomorrow.setDate(tomorrow.getDate() + 1)
   const isTomorrow = date.toDateString() === tomorrow.toDateString()
-  const isPast = date.getTime() <= now.getTime()
-
-  const countdown = useCountdown(date)
 
   const dayLabel = isToday
     ? "Today"
     : isTomorrow
     ? "Tomorrow"
-    : date.toLocaleDateString("en-AU", { weekday: "short", month: "short", day: "numeric" })
+    : date.toLocaleDateString("en-AU", { weekday: "short", day: "numeric" })
 
   const timeLabel = date.toLocaleTimeString("en-AU", { hour: "numeric", minute: "2-digit", hour12: true })
+
+  const guildColor = event.guildColor || "#c9a227"
 
   return (
     <Link
       href={`/guild/${event.guildId}/rites`}
-      className="ornate-border group relative min-w-[220px] shrink-0 overflow-hidden rounded-lg bg-gradient-to-b from-black-light to-black p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/5"
+      className="group flex shrink-0 flex-col items-center rounded-lg border border-gray-dark bg-black-light/50 px-4 py-4 transition-all hover:border-gray hover:bg-black-light"
     >
-      <div className="ornate-corner ornate-corner-tl" />
-      <div className="ornate-corner ornate-corner-tr" />
-      <div className="relative z-10">
-        <div className="mb-3 flex items-center gap-2">
-          <div
-            className="h-1.5 w-1.5 rounded-full shadow-sm"
-            style={{ backgroundColor: event.guildColor || "#c9a227", boxShadow: `0 0 6px ${event.guildColor || "#c9a227"}40` }}
-          />
-          <span className="text-[10px] font-medium uppercase tracking-widest text-gray">
-            {event.guildName}
-          </span>
-        </div>
-        <h3 className="font-display text-sm font-medium tracking-wide text-white group-hover:text-gold">
-          {event.title}
-        </h3>
-        <div className="mt-2 flex items-center gap-1.5 text-[11px] text-gray">
-          <Clock className="h-3 w-3" />
-          <span className={isToday ? "font-medium text-gold" : ""}>
-            {dayLabel}, {timeLabel}
-          </span>
-        </div>
-        {countdown && !isPast && (
-          <div className="mt-1.5 text-[10px] font-medium tracking-wide text-gold-dim">
-            in {countdown}
-          </div>
+      <div
+        className="mb-2.5 text-3xl"
+        style={{ color: guildColor }}
+      >
+        {event.guildIcon?.startsWith("data:") ? (
+          <img src={event.guildIcon} alt="" className="h-8 w-8 object-contain" />
+        ) : (
+          event.guildIcon || "\u2B21"
         )}
       </div>
-      {/* Subtle glow on hover */}
-      <div className="pointer-events-none absolute inset-0 rounded-lg bg-gold/0 transition-colors group-hover:bg-gold/[0.02]" />
+      <span className={`text-xs font-medium ${isToday ? "text-gold" : "text-white"}`}>
+        {dayLabel}
+      </span>
+      <span className="text-[11px] text-gray">
+        {timeLabel}
+      </span>
     </Link>
   )
 }

@@ -48,13 +48,14 @@ export default async function Home() {
   }
 
   // Collect upcoming events across all user guilds
-  const eventsData: Array<{ guildId: string; guildName: string; guildColor: string; calendarUri: string }> = []
+  const eventsData: Array<{ guildId: string; guildName: string; guildColor: string; guildIcon: string; calendarUri: string }> = []
   for (const guild of userGuilds) {
     if (guild.resources.calendarUri) {
       eventsData.push({
         guildId: guild.id,
         guildName: guild.name,
         guildColor: guild.color,
+        guildIcon: guild.icon,
         calendarUri: guild.resources.calendarUri,
       })
     }
